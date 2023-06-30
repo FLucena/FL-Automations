@@ -27,7 +27,7 @@
             </li>
             <li>
               <button class="btn" onclick="">
-                <i class="fa-solid fa-language"></i>
+                <i id="lang" class="fa-solid fa-language"></i>
               </button>
             </li>
           </ul>
@@ -70,7 +70,7 @@
             Experience the magic of streaming with a sleek and user-friendly interface, offering a wide range of movies and shows.
           </p>
           <button>
-            <a href="https://react-game-rock-paper-scissors.vercel.app/">Live Preview</a>
+            <a href="https://react-game-rock-paper-scissors.vercel.app/" target="_blank">Live Preview</a>
           </button>
         </div>
         <div class="projects-div flex div-2">
@@ -83,7 +83,7 @@
             Modern dentist website providing exceptional personalized treatments.
           </p>
           <button>
-            <a href="https://dental-start.vercel.app/">Live Preview</a>
+            <a href="https://dental-start.vercel.app/" target="_blank">Live Preview</a>
           </button>
         </div>
         <div class="projects-div flex div-3">
@@ -97,7 +97,7 @@
             Engaging rock-paper-scissors game. Enjoy addictive gameplay.
           </p>
           <button>
-            <a href="https://react-game-rock-paper-scissors.vercel.app/">Live Preview</a>
+            <a href="https://react-game-rock-paper-scissors.vercel.app/" target="_blank">Live Preview</a>
           </button>
         </div>
       </section>
@@ -110,10 +110,6 @@
           <p>
             My name is Francisco. I specialize in workflow optimization and process automation. My passion for new technologies and quantitative background has led me to create smart data processing solutions over the last 10 years. Have you ever dreamed of starting a day, hitting a button, and having all your recurring tasks already processed by the time you get your first cup of coffee? I’m here to help and I will never let you go unless you are fully satisfied and willing to come back for your next project! I look forward to making all your automation-based dreams come true. Cheers!
           </p>
-          <div class="btns">
-            <button>Download CV</button>
-            <button>Contact Me</button>
-          </div>
         </div>
         <div class="about-two">
           <img src="./Images/About/1.png" alt="" />
@@ -126,21 +122,21 @@
         <div class="box flex">
           <div>
             <i class="fa-solid fa-user"></i>
-            <input type="text" placeholder="Name.." />
+            <input type="text" id="name" placeholder="Name.." />
           </div>
           <div>
             <i class="fa-solid fa-envelope"></i>
-            <input type="email" placeholder="Email.." />
+            <input type="email" id="email" placeholder="Email.." />
           </div>
           <textarea
             name=""
-            id=""
+            id="message"
             cols="60"
             rows="5"
             placeholder="Enter your Message here...."
           ></textarea>
           <div>
-            <input type="submit" class="send" value="Send" />
+            <input type="submit" class="send" value="Send" onclick="sendEmail()" />
           </div>
         </div>
       </section>
@@ -152,6 +148,7 @@
         var element = document.body;
         element.classList.toggle("light_mode");
         document.getElementById("moon").classList.toggle('fa-light fa-moon');
+        document.getElementById("lang").classList.toggle('fa-light fa-language');
       }
       var typed = new Typed(".auto", {
         strings: ["Francisco", "a Data Analyst", "a Developer", "a Pythonista"],
@@ -176,5 +173,21 @@
         ></a>
       </div>
     </footer>
+    <script>
+      function sendEmail() {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var message = document.getElementById("message").value;
+    
+        var subject = "Contact Form Submission";
+        var body = "Name: " + name + "\nEmail: " + email + "\nMessage: " + message;
+    
+        var mailtoLink = "mailto:flautomationsok@gmail.com" +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(body);
+    
+        window.location.href = mailtoLink;
+      }
+    </script>
   </body>
 </html>

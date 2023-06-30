@@ -276,9 +276,6 @@ a {
     margin: 0 10px;
 }
 
-.btns{
-    margin: 15px 0;
-}
 .btns button{
     background-color: var(--color-text-secondary);
     padding: 8px 17px;
