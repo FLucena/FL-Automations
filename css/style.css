@@ -98,7 +98,7 @@ nav ul li a{
     color: var(--color-text-primary)
 }
 nav ul li a:hover{
-    color: #a2b9bc;
+    color: white;
 }
 
 .container .main{
@@ -272,12 +272,15 @@ a {
     width: 400px;
 }
 .btn {
-    background-color: var(--color-text-primary);
     margin: 0 10px;
+    background-color: var(--color-background);
+}
+
+.btn:hover {
+    background-color: var(--color-text-secondary);
 }
 
 .btns button{
-    background-color: var(--color-text-secondary);
     padding: 8px 17px;
     font-size:18px;
     font-weight: 600;
@@ -287,6 +290,7 @@ a {
     outline: none;
     border: none;
 }
+
 .btns button:hover{
     transform: scale(1.02);
 }
