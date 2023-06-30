@@ -187,7 +187,7 @@ a {
 
 .projects-div{
     width:300px;
-    height: 360px;
+    height: 400px;
     position: absolute;
     z-index: 100;
     flex-direction: column;
@@ -195,6 +195,7 @@ a {
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     transition: all 0.2s ease-out;
+    padding: 2vh;
 }
 .projects-div:hover{
     transform: rotate(10deg);
