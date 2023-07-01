@@ -17,7 +17,6 @@
         <nav>
           <ul class="flex">
             <li><a href="#about">About</a></li>
-            <li><a href="#contact">Service</a></li>
             <li><a href="#project">Portfolio</a></li>
             <li><a href="#contact">Contact Me</a></li>
             <li>
@@ -70,7 +69,7 @@
             Experience the magic of streaming with a sleek and user-friendly interface, offering a wide range of movies and shows.
           </p>
           <button>
-            <a href="https://react-game-rock-paper-scissors.vercel.app/" target="_blank">Live Preview</a>
+            <a href="https://netflix-clone-flucena.vercel.app/" target="_blank" class="live-preview">Live Preview</a>
           </button>
         </div>
         <div class="projects-div flex div-2">
@@ -83,7 +82,7 @@
             Modern dentist website providing exceptional personalized treatments.
           </p>
           <button>
-            <a href="https://dental-start.vercel.app/" target="_blank">Live Preview</a>
+            <a href="https://dental-start.vercel.app/" target="_blank" class="live-preview">Live Preview</a>
           </button>
         </div>
         <div class="projects-div flex div-3">
@@ -97,13 +96,13 @@
             Engaging rock-paper-scissors game. Enjoy addictive gameplay.
           </p>
           <button>
-            <a href="https://react-game-rock-paper-scissors.vercel.app/" target="_blank">Live Preview</a>
+            <a href="https://react-game-rock-paper-scissors.vercel.app/" target="_blank" class="live-preview">Live Preview</a>
           </button>
         </div>
       </section>
       <br /><br />
 
-      <section class="about flex" id="about">
+      <section class="about flex" id="about" style="padding-top: 20vh;">
         <div class="about-one">
           <h1>About me</h1>
           <span>Francisco</span>
@@ -147,8 +146,11 @@
       function switchMode() {
         var element = document.body;
         element.classList.toggle("light_mode");
-        document.getElementById("moon").classList.toggle('fa-light fa-moon');
-        document.getElementById("lang").classList.toggle('fa-light fa-moon');
+        var liveLinks = document.querySelectorAll(".live-preview");
+        for (var i = 0; i < liveLinks.length; i++) {
+          liveLinks[i].classList.toggle('dark-text');
+        }
+
       }
       var typed = new Typed(".auto", {
         strings: ["Francisco", "a Data Analyst", "a Developer", "a Pythonista"],
