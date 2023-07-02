@@ -51,36 +51,6 @@ body {
     --color-btn: #1E1E1E;
 }
 
-.flex {
-    display: flex;
-    align-items: center;
-}
-
-.container{
-    width: 100%;
-    overflow-x: hidden;
-}
-.container header{
-    min-height: 20vh;
-    padding: 10px 10px;
-    justify-content: space-between;
-}
-header .logo{
-    font-size: 3vw;
-    margin-left: 5%;
-}
-.logo span{
-    color: var(--color-text-secondary);
-    font-size: 70px;
-    position: absolute;
-    top: -10px;
-}
-header nav{
-    width: 60%;
-}
-nav #search{
-    width: 20%;
-}
 #search i{
     position: absolute;
     color: #a2b9bc;
@@ -98,25 +68,6 @@ nav input{
     font-size: 16px;
     height: 30px;
     width: 100%;
-}
-header nav ul{
-    justify-content: right;
-    width: 100%;
-    margin-bottom: 0;
-}
-nav ul li{
-    list-style: none;
-}
-nav ul li a{
-    text-decoration: none;
-    font-size: 14px;
-    padding: 20px 15px;
-    font-weight:500;
-    color: var(--color-text-primary);  
-}
-nav ul li a:hover{
-    color: var(--color-text-secondary);
-    transition: color 0.3s ease;
 }
 
 .container .main{
@@ -180,15 +131,18 @@ a {
     line-height: 49px;
     font-weight: 800;
 }
+
 .projects h1 span{
     color: var(--color-text-secondary);
 }
+
 .projects p{
     width: 35%;
     font-size: 14px;
     font-weight: 400;
     padding-top: 20px;
 }
+
 .projects .button{
     background-color: #a2b9bc;
     padding: 9px 25px;
@@ -204,7 +158,6 @@ a {
 
 .projects-div{
     width:300px;
-    height: 400px;
     position: absolute;
     z-index: 100;
     flex-direction: column;
@@ -212,7 +165,7 @@ a {
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     transition: all 0.2s ease-out;
-    padding: 2vh;
+    padding: 5vh;
 }
 .projects-div:hover{
     transform: rotate(10deg);
@@ -288,28 +241,15 @@ a {
     width: 400px;
 }
 .btn {
-    margin: 0 10px;
-    background-color: var(--color-background);
-    color: var(--color-btn)
+    color: var(--color-btn);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 50%;
 }
 
 .btn:hover {
     background-color: var(--color-text-secondary);
-}
-
-.btns button{
-    padding: 8px 17px;
-    font-size:18px;
-    font-weight: 600;
-    margin: 0 10px;
-    cursor: pointer;
-    transition: all ease-out 0.2s;
-    outline: none;
-    border: none;
-}
-
-.btns button:hover{
-    transform: scale(1.02);
 }
 
 .contact{
@@ -366,6 +306,7 @@ a {
     border: 1px solid #a2b9bc;
     outline: none;
     margin-left: 30px;
+    max-width: 90%;
 }
 .send{
     background: linear-gradient(var(--color-background) , var(--color-text-primary));
@@ -427,3 +368,82 @@ footer .social i{
       opacity: 0;
     }
   }
+
+/* Navbar styles */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    margin-bottom: 20vh;
+  }
+  
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    margin-left: 5%;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .logo span{
+        color: var(--color-text-secondary);
+        font-size: 70px;
+        position: absolute;
+        top: -60%;
+    }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  nav ul li {
+    margin-left: 10px;
+  }
+  
+  nav ul li:first-child {
+    margin-left: 0;
+  }
+  
+  nav ul li a:hover {
+    color: var(--color-text-secondary);
+    transition: color 0.3s ease;
+  }
+  
+@media screen and (max-width: 768px) {
+    .nav-container {
+      flex-direction: column;
+    }
+  
+    .logo {
+      margin-bottom: 10px;
+    }
+  
+    nav ul {
+      justify-content: center;
+    }
+  
+    nav ul li {
+      margin: 5px 10px;
+    }
+    .flex {
+        display: flex;
+        flex-direction: column;
+    }
+    .logo {
+        font-size: 20px;
+    }
+    .logo span{
+        color: var(--color-text-secondary);
+        font-size: 70px;
+        position: absolute;
+        top: -40%;
+    }
+}
