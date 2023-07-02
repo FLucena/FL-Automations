@@ -167,37 +167,45 @@ a {
     transition: all 0.2s ease-out;
     padding: 5vh;
 }
+
 .projects-div:hover{
     transform: rotate(10deg);
 }
+
 .div-1{
     top: 250px;
     left: 680px;
 }
+
 .div-2{
-    bottom: -150px;
+    bottom: -450px;
     right: 160px;
 }
+
 .div-3{
     bottom: 50px;
     right: 600px;
 }
+
 .projects-div h3{
     font-size: 23px;
     padding:5px 30px;
     color: #a2b9bc;
     font-family: 'Roboto', sans-serif;
 }
+
 .projects-div p{
     width: 80%;
     margin:0 auto;
     text-align: center;
 }
+
 .projects-div img{
     width: 100px;
     margin: 6px 0;
     border-radius: 50%;
 }
+
 .projects button{
     background-color: transparent;
     cursor: pointer;
@@ -218,28 +226,37 @@ a {
     height: 400px;
     padding: 30px 50px;
     justify-content: center;
+    padding-top: 20vh;
+    margin-top: 40vh;
 }
+
 .about-one{
     padding: 0 60px;
 }
+
 .about-one h1{
     font-size: 50px;
 }
+
 .about-one p{
     padding: 10px 0;
     width: 95%;
     text-align: justify;
 }
+
 .about-one span{
     font-size: 30px;
     color: var(--color-text-secondary);
 }
+
 .about-two{
     width: 40%;
 }
+
 .about-two img{
     width: 400px;
 }
+
 .btn {
     color: var(--color-btn);
     background-color: transparent;
@@ -264,17 +281,21 @@ a {
 .contact h1{
     font-size: 50px;
 }
+
 .contact h1 span{
     color: var(--color-text-secondary);
 }
+
 .contact .box{
     flex-direction: column;
     margin-top: 40px;
 }
+
 .box div{
     width: 40%;
     margin: auto;
 }
+
 .contact .box input{
     width: 90%;
     margin: auto;
@@ -286,9 +307,11 @@ a {
     margin: 10px;
     font-size: 16px;
 }
+
 .box div{
     position: relative;
 }
+
 .box div i{
     position: absolute;
     font-size: 20px;
@@ -296,6 +319,7 @@ a {
     top: 20px;
     left: 30px;
 }
+
 .contact .box textarea{
     margin-top: 20px;
     background-color: transparent;
@@ -308,6 +332,7 @@ a {
     margin-left: 30px;
     max-width: 90%;
 }
+
 .send{
     background: linear-gradient(var(--color-background) , var(--color-text-primary));
     font-size: 19px !important;
@@ -317,17 +342,21 @@ a {
 }
 
 footer{
-    justify-content: space-between;
     padding: 10px 70px;
     background: linear-gradient(var(--color-background) , var(--color-text-primary));
     font-size: 20px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
 footer .social i{
     font-size: 25px;
     margin: 0 3px;
     cursor: pointer;
 }
+
 .social i:hover{
     color: var(--color-text-secondary);
 }
