@@ -446,7 +446,66 @@ footer .social i{
     transition: color 0.3s ease;
   }
   
+
+
+
+
 @media screen and (max-width: 768px) {
+    .about {
+        width: 100%;
+        height: 400px;
+        padding: 30px 50px;
+        justify-content: center;
+        padding-top: 20vh;
+        margin-top: 40vh;
+        margin-bottom: 0;
+    }
+
+    .about-one {
+        padding: 0 60px;
+        margin-bottom: 30px;
+    }
+    .container .main {
+        height: 100vh;
+    }
+    .main-one h1 {
+        font-size: 60px;
+    }
+    .main-one span {
+        font-size: 40px;
+    }
+    .main-one p {
+        font-size: 13px;
+    }
+    .projects p {
+        width: 100%;
+    }
+    .navbar {
+        margin-bottom: 2vh;
+    }
+    .div-1,
+    .div-2,
+    .div-3 {
+        position: static;
+        top: auto;
+        left: auto;
+        bottom: auto;
+        right: auto;
+    }
+    .projects-div {
+        width: 90%;
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    .main {
+        height: auto;
+        padding: 5% 2%;
+        flex-direction: column;
+    }
+    .main-two {
+        display: none;
+    }
     .nav-container {
       flex-direction: column;
     }
@@ -474,5 +533,10 @@ footer .social i{
         font-size: 70px;
         position: absolute;
         top: -40%;
+    }
+    .projects {
+        width: 100%;
+        padding-left: 30px;
+        margin-bottom: 800px;
     }
 }
