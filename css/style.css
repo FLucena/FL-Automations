@@ -539,4 +539,7 @@ footer .social i{
         padding-left: 30px;
         margin-bottom: 800px;
     }
+    .about-one {
+        padding: 0 0;
+    }
 }
