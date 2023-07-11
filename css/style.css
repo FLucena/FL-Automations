@@ -451,6 +451,9 @@ footer .social i{
 
 
 @media screen and (max-width: 768px) {
+    .contact .box input {
+        font-size: 12px;
+    }
     .about {
         width: 100%;
         height: 400px;
@@ -458,7 +461,7 @@ footer .social i{
         justify-content: center;
         padding-top: 20vh;
         margin-top: 40vh;
-        margin-bottom: 0;
+        margin-bottom: 2vh;
     }
 
     .about-one {
@@ -466,13 +469,13 @@ footer .social i{
         margin-bottom: 30px;
     }
     .container .main {
-        height: 100vh;
+        height: 80vh;
     }
     .main-one h1 {
-        font-size: 60px;
+        font-size: 30px;
     }
     .main-one span {
-        font-size: 40px;
+        font-size: 25px;
     }
     .main-one p {
         font-size: 13px;
@@ -482,6 +485,7 @@ footer .social i{
     }
     .navbar {
         margin-bottom: 2vh;
+        font-size: 14px;
     }
     .div-1,
     .div-2,
@@ -536,10 +540,11 @@ footer .social i{
     }
     .projects {
         width: 100%;
-        padding-left: 30px;
-        margin-bottom: 800px;
+        padding: 30px 0;
+        margin-bottom: 620px;
     }
     .about-one {
         padding: 0 0;
+        font-size: 12px;
     }
 }
