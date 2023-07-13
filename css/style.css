@@ -292,12 +292,10 @@ a {
 }
 
 .box div{
-    width: 40%;
     margin: auto;
 }
 
 .contact .box input{
-    width: 90%;
     margin: auto;
     outline: none;
     border: none;
@@ -313,11 +311,10 @@ a {
 }
 
 .box div i{
-    position: absolute;
+    position: relative;
     font-size: 20px;
     color: black;
-    top: 20px;
-    left: 30px;
+    left: 8vh;
 }
 
 .contact .box textarea{
@@ -329,12 +326,10 @@ a {
     border-radius: 20px;
     border: 1px solid #a2b9bc;
     outline: none;
-    margin-left: 30px;
-    max-width: 90%;
 }
 
 .send{
-    background: linear-gradient(var(--color-background) , var(--color-text-primary));
+    background: var(--color-text-secondary);
     font-size: 19px !important;
     font-weight: 600;
     cursor: pointer;
@@ -446,13 +441,13 @@ footer .social i{
     transition: color 0.3s ease;
   }
   
-
-
-
-
 @media screen and (max-width: 768px) {
+    .box div i {
+        left: 8vh;
+        top: 1vh;
+    }
     .contact .box input {
-        font-size: 12px;
+        font-size: 10px;
     }
     .about {
         width: 100%;
