@@ -207,6 +207,7 @@ a {
 }
 
 .projects button{
+    transform: translate(25%, 0%);
     background-color: transparent;
     cursor: pointer;
     color: var(--color-text-primary);
