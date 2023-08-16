@@ -188,6 +188,7 @@ a {
 }
 
 .projects-div h3{
+    margin-top: 20px;
     font-size: 23px;
     padding:5px 30px;
     color: #a2b9bc;
@@ -542,5 +543,8 @@ footer .social i{
     .about-one {
         padding: 0 0;
         font-size: 12px;
+    }
+    .projects button{
+        transform: translate(0, 0%);
     }
 }
