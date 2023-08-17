@@ -24,7 +24,7 @@
         .container {
           max-width: 800px;
           margin: 0 auto;
-          padding: 2rem;
+          padding: 0.5rem;
         }
         .project {
           border: 1px solid #ddd;
@@ -42,9 +42,9 @@
         <div class="logo"> <a href="index.html"> FL Automations </a> <span>.</span></div>
         <nav>
           <ul>
-            <li><a href="#about">Acerca de</a></li>
-            <li><a href="#project">Portafolio</a></li>
-            <li><a href="#contact">Contáctame</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#project">Portfolio</a></li>
+            <li><a href="index.html#contact">Contact Me</a></li>
             <li>
               <button class="btn" onclick="switchMode()">
                 <i id="moon" class="fa-solid fa-moon"></i>
@@ -88,7 +88,16 @@
         <a href="" target="_blank">Learn More</a>
       </div>
     </div>
-
+    <script>
+      function switchMode() {
+        var element = document.body;
+        element.classList.toggle("light_mode");
+        var liveLinks = document.querySelectorAll(".live-preview");
+        for (var i = 0; i < liveLinks.length; i++) {
+          liveLinks[i].classList.toggle('dark-text');
+        }
+      }
+    </script>
     <footer footer class="flex" id="footer">
       <div class="copy">&copy Todos los derechos reservados - 2023 - FL Automations</div>
       <div class="social">

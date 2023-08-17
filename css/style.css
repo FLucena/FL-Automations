@@ -183,7 +183,7 @@ a {
 }
 
 .div-3{
-    bottom: 50px;
+    bottom: 20px;
     right: 600px;
 }
 
@@ -230,7 +230,7 @@ a {
     padding: 30px 50px;
     justify-content: center;
     padding-top: 20vh;
-    margin-top: 40vh;
+    margin-top: 60vh;
 }
 
 .about-one{
@@ -401,7 +401,7 @@ footer .social i{
     background-color: #333;
     color: #fff;
     padding: 10px 0;
-    margin-bottom: 20vh;
+    margin-bottom: 5vw;
   }
   
   .nav-container {
