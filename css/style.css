@@ -13,6 +13,10 @@
     --color-btn: white;
 }
 
+.hyperlink {
+    color: var(--color-text-primary);
+}
+
 .live-preview {
     color: var(--color-btn);
     text-decoration: none;

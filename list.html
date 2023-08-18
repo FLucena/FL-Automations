@@ -65,32 +65,32 @@
       <div class="project">
         <h2>FL Automations</h2>
         <p>A blog with all the apps and proyects I have been working on!</p>
-        <a href="https://flautomations-next.vercel.app/" target="_blank">Learn More</a>
+        <a href="https://flautomations-next.vercel.app/" target="_blank" class="hyperlink">Learn More</a>
       </div>
       <div class="project">
         <h2>Dog Fetcher</h2>
         <p>Discover randomly selected dog photos with our app for searching dog pictures of all breeds.</p>
-        <a href="https://dogfetcher-sigma.vercel.app/" target="_blank">Learn More</a>
+        <a href="https://dogfetcher-sigma.vercel.app/" target="_blank" class="hyperlink">Learn More</a>
       </div>
       <div class="project">
         <h2>Tetris Game</h2>
         <p>Play tetris!</p>
-        <a href="https://tetris-lovat.vercel.app/" target="_blank">Learn More</a>
+        <a href="https://tetris-lovat.vercel.app/" target="_blank" class="hyperlink">Learn More</a>
       </div>
       <div class="project">
         <h2>Dental Start</h2>
         <p>When was the last time you went to the dentist?</p>
-        <a href="https://dental-start.vercel.app/" target="_blank">Learn more</a>
+        <a href="https://dental-start.vercel.app/" target="_blank" class="hyperlink">Learn more</a>
       </div>
       <div class="project">
         <h2>Rock-Paper-Scissors Game!</h2>
         <p>Engaging rock-paper-scissors game. Enjoy addictive gameplay.</p>
-        <a href="https://react-game-rock-paper-scissors.vercel.app/" target="_blank">Learn more</a>
+        <a href="https://react-game-rock-paper-scissors.vercel.app/" target="_blank" class="hyperlink">Learn more</a>
       </div>
       <div class="project">
         <h2>3D App</h2>
         <p>Discover the upcoming websites with a 3D app.</p>
-        <a href="https://threejs-demo-rho.vercel.app/" target="_blank">Learn More</a>
+        <a href="https://threejs-demo-rho.vercel.app/" target="_blank" class="hyperlink">Learn More</a>
       </div>
     </div>
     <script>
@@ -100,6 +100,10 @@
         var liveLinks = document.querySelectorAll(".live-preview");
         for (var i = 0; i < liveLinks.length; i++) {
           liveLinks[i].classList.toggle('dark-text');
+        }
+        var links = document.querySelectorAll(".hyperlink");
+        for (var i = 0; i < links.length; i++) {
+          links[i].classList.toggle('dark-text');
         }
       }
     </script>
