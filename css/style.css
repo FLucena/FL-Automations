@@ -9,6 +9,7 @@
     --color-text-primary: white;
     --color-text-secondary: #a2b9bc;
     --color-background: #1E1E1E;
+    --color-links: white;
     --color-btn: white;
 }
 
@@ -35,6 +36,7 @@
         --color-text-primary: white;
         --color-text-secondary: #a2b9bc;
         --color-background: #1E1E1E;
+        --color-links: #1E1E1E;
         --color-btn: white;
     }
   }
@@ -112,7 +114,7 @@ nav input{
 }
 a {
     text-decoration: none;
-    color: white;
+    color: var(--color-links);
 }
 .main-two img{
     padding: 50px;
@@ -279,6 +281,7 @@ a {
     border-bottom: 1px solid rgba(255, 255, 255, 0.31);
     padding-top: 30px;
     padding-bottom: 70px;
+    margin-top: 150px;
 }
 
 .contact h1{
@@ -313,11 +316,13 @@ a {
     position: relative;
 }
 
-.box div i{
-    position: relative;
+.box div i {
+    position: absolute;
     font-size: 20px;
     color: black;
-    left: 8vh;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .contact .box textarea{
@@ -445,9 +450,12 @@ footer .social i{
   }
   
 @media screen and (max-width: 768px) {
-    .box div i {
-        left: 8vh;
-        top: 1vh;
+    footer{
+        font-size: 10px;
+    }
+    footer .social i{
+        font-size: 14px;
+        margin: 0 3px;
     }
     .contact .box input {
         font-size: 10px;
@@ -458,10 +466,9 @@ footer .social i{
         padding: 30px 50px;
         justify-content: center;
         padding-top: 20vh;
-        margin-top: 70vh;
+        margin-top: 140vw;
         margin-bottom: 2vh;
     }
-
     .about-one {
         padding: 0 60px;
         margin-bottom: 30px;
@@ -483,7 +490,7 @@ footer .social i{
     }
     .navbar {
         margin-bottom: 2vh;
-        font-size: 14px;
+        font-size: 10px;
     }
     .div-1,
     .div-2,
