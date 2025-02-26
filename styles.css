@@ -1,0 +1,58 @@
+/* Modern CSS variables for consistent theming */
+:root {
+  --primary-color: #5e60ce;
+  --secondary-color: #64dfdf;
+  --dark-bg: #1a1a2e;
+  --light-bg: #ffffff;
+  --text-dark: #333333;
+  --text-light: #f8f9fa;
+  --transition: all 0.3s ease;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+  }
+  /* Additional dark mode styles */
+}
+
+/* Modern card component */
+.project-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Simple fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in-element {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Smooth slide-in from bottom */
+@keyframes slideUp {
+  from { 
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-up-element {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+} 
