@@ -513,6 +513,41 @@ footer .social i{
     color: var(--color-text-secondary);
 }
 
+/* Custom Fiverr icon styling */
+.fiverr-icon {
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--color-text-primary);
+    background-color: transparent;
+    padding: 0 5px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+}
+
+.fiverr-icon:hover {
+    color: var(--color-text-secondary);
+}
+
+.fiverr-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    filter: invert(1);
+    transition: filter 0.3s ease;
+}
+
+.light_mode .fiverr-svg {
+    filter: invert(0);
+}
+
+.fiverr-icon:hover .fiverr-svg {
+    filter: invert(80%) sepia(11%) saturate(427%) hue-rotate(143deg) brightness(93%) contrast(87%);
+}
+
 .under {
     width: 45%;
     position: absolute;

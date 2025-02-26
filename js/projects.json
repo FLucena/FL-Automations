@@ -29,7 +29,7 @@
       "es": "Juego atractivo de piedra-papel-tijeras. Disfruta de una jugabilidad adictiva."
     },
     "url": "https://react-game-rock-paper-scissors.vercel.app/",
-    "featured": true,
+    "featured": false,
     "icon": "game"
   },
   {
@@ -40,7 +40,7 @@
       "es": "Una aplicación Streamlit que te permite chatear con el modelo de IA de Cohere. Construida con Python y Streamlit, esta aplicación demuestra las capacidades modernas de conversación con IA."
     },
     "url": "https://cohere-aichat.streamlit.app/",
-    "featured": false
+    "featured": true
   },
   {
     "id": 5,
