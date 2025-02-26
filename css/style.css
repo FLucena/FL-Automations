@@ -973,6 +973,30 @@ nav ul li a:hover {
   color: var(--color-text-secondary);
 }
 
+/* Refresh button styles */
+.refresh-btn {
+  background-color: var(--color-text-secondary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 15px auto;
+}
+
+.refresh-btn:hover {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-text-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
 @media screen and (max-width: 768px) {
   .projects-container {
     grid-template-columns: 1fr;
