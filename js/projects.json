@@ -19,7 +19,7 @@
     },
     "url": "https://dental-start.vercel.app/",
     "featured": true,
-    "icon": "location"
+    "icon": "tooth"
   },
   {
     "id": 3,
@@ -40,7 +40,7 @@
       "es": "Una aplicación Streamlit que te permite chatear con el modelo de IA de Cohere. Construida con Python y Streamlit, esta aplicación demuestra las capacidades modernas de conversación con IA."
     },
     "url": "https://cohere-aichat.streamlit.app/",
-    "featured": true
+    "featured": false
   },
   {
     "id": 5,
@@ -131,5 +131,16 @@
     },
     "url": "https://threejs-demo-rho.vercel.app/",
     "featured": false
+  },
+  {
+    "id": 14,
+    "title": "FinSave",
+    "description": {
+      "en": "FinSave is a platform that helps you save money and achieve your financial goals.",
+      "es": "FinSave es una plataforma que te ayuda a ahorrar dinero y alcanzar tus objetivos financieros."
+    },
+    "url": "https://finsave.vercel.app/",
+    "featured": true,
+    "icon": "computer"
   }
 ] 

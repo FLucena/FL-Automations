@@ -301,10 +301,16 @@ function getIconSVG(iconName) {
       return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
               <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
             </svg>`;
+    case 'tooth':
+      return `<img src="img/tooth.svg" alt="Tooth Icon" class="project-icon tooth-icon" style="width: 24px; height: 24px;">`;
     case 'game':
       return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
               <path fillRule="evenodd" d="M8.128 9.155a3.751 3.751 0 11.713-1.321l1.136.656a.75.75 0 01.222 1.104l-.006.007a.75.75 0 01-1.032.157 1.421 1.421 0 00-.113-.072l-.92-.531zm-4.827-3.53a2.25 2.25 0 013.994 2.063.756.756 0 00-.122.23 2.25 2.25 0 01-3.872-2.293zM13.348 8.272a5.073 5.073 0 00-3.428 3.57c-.101.387-.158.79-.165 1.202a1.415 1.415 0 01-.707 1.201l-.96.554a3.751 3.751 0 10.734 1.309l13.729-7.926a.75.75 0 00-.181-1.374l-.803-.215a5.25 5.25 0 00-2.894.05l-5.325 1.629zm-9.223 7.03a2.25 2.25 0 102.25 3.897 2.25 2.25 0 00-2.25-3.897zM12 12.75a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd" />
               <path d="M16.372 12.615a.75.75 0 01.75 0l5.43 3.135a.75.75 0 01-.182 1.374l-.802.215a5.25 5.25 0 01-2.894-.051l-5.147-1.574a.75.75 0 01-.156-1.367l3-1.732z" />
+            </svg>`;
+    case 'computer':
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+              <path fillRule="evenodd" d="M2.25 5.25a3 3 0 013-3h13.5a3 3 0 013 3V15a3 3 0 01-3 3h-3v.257c0 .597.237 1.17.659 1.591l.621.622a.75.75 0 01-.53 1.28h-9a.75.75 0 01-.53-1.28l.621-.622a2.25 2.25 0 00.659-1.59V18h-3a3 3 0 01-3-3V5.25zm1.5 0v9.75c0 .83.67 1.5 1.5 1.5h13.5c.83 0 1.5-.67 1.5-1.5V5.25c0-.83-.67-1.5-1.5-1.5H5.25c-.83 0-1.5.67-1.5 1.5z" clipRule="evenodd" />
             </svg>`;
     default:
       return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -432,5 +438,54 @@ function sendEmail() {
 
 // Refresh projects - can be called to get new random projects
 function refreshProjects() {
-  displayRandomProjects();
+  const container = document.querySelector('.projects-container');
+  
+  if (container) {
+    // First fade out existing projects
+    const projects = container.querySelectorAll('.project');
+    
+    projects.forEach((project, index) => {
+      setTimeout(() => {
+        project.style.transition = 'all 0.3s ease';
+        project.style.opacity = '0';
+        project.style.transform = 'translateY(20px)';
+      }, index * 50); // Staggered animation
+    });
+    
+    // Then load new projects after animation completes
+    setTimeout(() => {
+      // Create new projects but keep them hidden initially
+      const nonFeaturedProjects = allProjects.filter(project => !project.featured);
+      const randomProjects = getRandomProjects(nonFeaturedProjects, 9);
+      
+      // Clear the container
+      container.innerHTML = '';
+      
+      // Add new projects with opacity 0
+      randomProjects.forEach(project => {
+        const projectHTML = `
+          <div class="project" style="opacity: 0; transform: translateY(20px);">
+            <h2>${project.title}</h2>
+            <p class="lang-en">${project.description.en}</p>
+            <p class="lang-es" style="display: none;">${project.description.es}</p>
+            <a href="${project.url}" target="_blank" class="hyperlink">Learn More</a>
+          </div>
+        `;
+        
+        container.innerHTML += projectHTML;
+      });
+      
+      // Now fade them in with staggered effect
+      const newProjects = container.querySelectorAll('.project');
+      newProjects.forEach((project, index) => {
+        setTimeout(() => {
+          project.style.transition = 'all 0.5s ease';
+          project.style.opacity = '1';
+          project.style.transform = 'translateY(0)';
+        }, index * 100); // Staggered animation
+      });
+    }, 500); // Wait for fade out to complete
+  } else {
+    displayRandomProjects();
+  }
 } 

@@ -972,6 +972,8 @@ nav ul li a:hover {
   text-align: left;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(162, 185, 188, 0.2);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .project:hover {
@@ -1022,6 +1024,7 @@ nav ul li a:hover {
   transition: all 0.3s ease;
   display: block;
   margin: 15px auto;
+  position: relative;
 }
 
 .refresh-btn:hover {
@@ -1030,6 +1033,11 @@ nav ul li a:hover {
   border: 1px solid var(--color-text-secondary);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.refresh-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 @media screen and (max-width: 768px) {
@@ -1044,4 +1052,30 @@ nav ul li a:hover {
   .project-list h1 {
     font-size: 40px;
   }
+}
+
+/* Project icon styling */
+.project-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  width: 24px;
+  height: 24px;
+}
+
+/* For SVG icons that need to match the current text color */
+.project-icon svg {
+  fill: currentColor;
+}
+
+/* Add styles for the tooth icon */
+.tooth-icon {
+  filter: invert(1);
+  width: 220px !important;
+  height: 220px !important;
+  border-radius: 0 !important;
+}
+
+.light_mode .tooth-icon {
+  filter: invert(0);
 }
