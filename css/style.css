@@ -503,14 +503,16 @@ footer{
     justify-content: space-between;
 }
 
-footer .social i{
-    font-size: 25px;
-    margin: 0 3px;
-    cursor: pointer;
+footer .social i {
+  font-size: 25px;
+  margin: 0 3px;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  transition: color 0.3s ease;
 }
 
-.social i:hover{
-    color: var(--color-text-secondary);
+.social i:hover {
+  color: var(--color-text-secondary);
 }
 
 /* Custom Fiverr icon styling */
