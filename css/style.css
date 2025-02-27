@@ -1298,3 +1298,147 @@ nav ul li a:hover {
     font-size: 14px;
   }
 }
+
+/* Fiverr Stats Card */
+.fiverr-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.fiverr-card {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.light_mode .fiverr-card {
+  background: #2a2a2a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fiverr-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.fiverr-card-content {
+  display: flex;
+  padding: 25px;
+  align-items: center;
+}
+
+.fiverr-logo-container {
+  margin-right: 25px;
+  background-color: #1dbf73;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fiverr-card-logo {
+  width: 50px;
+  height: 50px;
+  filter: brightness(0) invert(1);
+}
+
+.fiverr-stats-content {
+  flex: 1;
+}
+
+.fiverr-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.stars {
+  display: flex;
+  margin-right: 10px;
+}
+
+.stars i {
+  color: #ffb33e;
+  font-size: 18px;
+  margin-right: 2px;
+}
+
+.rating-text {
+  font-weight: 600;
+  font-size: 18px;
+  color: #333333;
+}
+
+.light_mode .rating-text {
+  color: #ffffff;
+}
+
+.fiverr-orders {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333333;
+}
+
+.light_mode .fiverr-orders {
+  color: #ffffff;
+}
+
+.fiverr-orders i {
+  color: #1dbf73;
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.fiverr-profile-link {
+  display: inline-flex;
+  align-items: center;
+  color: #1dbf73;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-size: 15px;
+}
+
+.fiverr-profile-link i {
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+.fiverr-profile-link:hover {
+  color: #19a463;
+  text-decoration: underline;
+}
+
+/* Responsive styles for Fiverr card */
+@media screen and (max-width: 768px) {
+  .fiverr-card-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .fiverr-logo-container {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  
+  .fiverr-rating, 
+  .fiverr-orders {
+    justify-content: center;
+  }
+  
+  .fiverr-profile-link {
+    justify-content: center;
+  }
+}
