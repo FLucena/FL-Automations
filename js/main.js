@@ -3,6 +3,20 @@
 // Global variable to store all projects
 let allProjects = [];
 
+// Technology icons for the coin flip
+const techIcons = [
+  { name: 'Next.js', url: 'https://cdn.worldvectorlogo.com/logos/nextjs-2.svg' },
+  { name: 'React', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png' },
+  { name: 'Google Apps Script', url: 'https://www.gstatic.com/images/branding/product/2x/apps_script_48dp.png' },
+  { name: 'Google Sheets', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Google_Sheets_logo_%282014-2020%29.svg/1200px-Google_Sheets_logo_%282014-2020%29.svg.png' },
+  { name: 'JavaScript', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/800px-JavaScript-logo.png' },
+  { name: 'TypeScript', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png' },
+  { name: 'Python', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png' }
+];
+
+let currentTechIconIndex = 0;
+let isFlipped = false;
+
 // Initialize AOS library for animations
 document.addEventListener('DOMContentLoaded', function() {
   if (typeof AOS !== 'undefined') {
@@ -16,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initTypedEn();
   
   // Set up profile image error handling
-  const profileImg = document.querySelector('.profile-image img');
+  const profileImg = document.querySelector('.profile-img');
   if (profileImg) {
     profileImg.onerror = function() {
       console.error('Error loading profile image');
@@ -37,7 +51,150 @@ document.addEventListener('DOMContentLoaded', function() {
       navbar.classList.remove('scrolled');
     }
   });
+  
+  // Initialize the coin flip functionality
+  initCoinFlip();
 });
+
+// Initialize the coin flip functionality
+function initCoinFlip() {
+  const coin = document.querySelector('.coin');
+  const techIcon = document.getElementById('tech-icon');
+  
+  if (!coin || !techIcon) return;
+  
+  // Set initial tech icon
+  updateTechIcon();
+  
+  // Variables for drag functionality
+  let isDragging = false;
+  let startX, startY;
+  let rotateX = 0, rotateY = 0;
+  let lastRotateX = 0, lastRotateY = 0;
+  
+  // Mouse down event
+  coin.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    coin.style.transition = 'none';
+  });
+  
+  // Mouse move event
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    
+    const deltaX = e.clientX - startX;
+    const deltaY = e.clientY - startY;
+    
+    rotateY = lastRotateY + deltaX * 0.5;
+    rotateX = lastRotateX - deltaY * 0.5;
+    
+    // Update coin rotation
+    coin.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    
+    // Check if coin is flipped (showing back face)
+    isFlipped = Math.abs(rotateY % 360) > 90 && Math.abs(rotateY % 360) < 270;
+  });
+  
+  // Mouse up event
+  document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    
+    isDragging = false;
+    lastRotateX = rotateX;
+    lastRotateY = rotateY;
+    
+    // Smooth transition when releasing
+    coin.style.transition = 'transform 0.5s ease';
+    
+    // If the coin is flipped, update the tech icon for next flip
+    if (isFlipped) {
+      // Update tech icon for next flip
+      setTimeout(updateTechIcon, 500);
+    }
+  });
+  
+  // Touch events for mobile
+  coin.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    coin.style.transition = 'none';
+    e.preventDefault();
+  });
+  
+  document.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    
+    const deltaX = e.touches[0].clientX - startX;
+    const deltaY = e.touches[0].clientY - startY;
+    
+    rotateY = lastRotateY + deltaX * 0.5;
+    rotateX = lastRotateX - deltaY * 0.5;
+    
+    // Update coin rotation
+    coin.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    
+    // Check if coin is flipped
+    isFlipped = Math.abs(rotateY % 360) > 90 && Math.abs(rotateY % 360) < 270;
+    
+    e.preventDefault();
+  });
+  
+  document.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    
+    isDragging = false;
+    lastRotateX = rotateX;
+    lastRotateY = rotateY;
+    
+    // Smooth transition when releasing
+    coin.style.transition = 'transform 0.5s ease';
+    
+    // If the coin is flipped, update the tech icon for next flip
+    if (isFlipped) {
+      setTimeout(updateTechIcon, 500);
+    }
+  });
+  
+  // Double click to flip the coin
+  coin.addEventListener('dblclick', () => {
+    coin.style.transition = 'transform 0.8s ease';
+    
+    if (!isFlipped) {
+      // Flip to back
+      rotateY = 180;
+      isFlipped = true;
+    } else {
+      // Flip to front
+      rotateY = 0;
+      isFlipped = false;
+      // Update tech icon for next flip
+      setTimeout(updateTechIcon, 500);
+    }
+    
+    lastRotateY = rotateY;
+    lastRotateX = 0;
+    rotateX = 0;
+    
+    coin.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+}
+
+// Update the tech icon on the back of the coin
+function updateTechIcon() {
+  const techIcon = document.getElementById('tech-icon');
+  if (!techIcon) return;
+  
+  // Get next tech icon
+  currentTechIconIndex = (currentTechIconIndex + 1) % techIcons.length;
+  const icon = techIcons[currentTechIconIndex];
+  
+  // Update the tech icon
+  techIcon.src = icon.url;
+  techIcon.alt = icon.name + ' icon';
+}
 
 // Load projects from JSON file
 function loadProjectsFromJSON() {
