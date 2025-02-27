@@ -209,7 +209,7 @@ a {
     padding: 5vh;
     display: inline-block;
     padding-bottom: 70px;
-    min-height: 300px;
+    min-height: 550px;
 }
 
 .projects-div:hover{
@@ -217,11 +217,14 @@ a {
 }
 
 .projects .project-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-    margin-top: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .div-1, .div-2, .div-3 {
@@ -251,6 +254,17 @@ a {
     width: 100px;
     margin: 6px 0;
     border-radius: 50%;
+}
+
+/* Position project links at the bottom of featured project cards */
+.projects-div .project-links {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    z-index: 10;
 }
 
 .projects button{
@@ -656,6 +670,7 @@ footer .social i {
     margin: 0 auto;
     padding: 0 15px;
     padding-top: 80px;
+    width: 100%;
 }
 
 .nav-container {
@@ -723,8 +738,9 @@ nav ul li a:hover {
         margin-bottom: 80px;
     }
     .about-one {
-        padding: 0 60px;
+        padding: 0 15px;
         margin-bottom: 30px;
+        width: 100%;
     }
     .container .main {
         height: 80vh;
@@ -759,6 +775,8 @@ nav ul li a:hover {
         max-width: 400px;
         margin: 20px auto;
         padding: 20px;
+        padding-bottom: 100px;
+        position: relative;
     }
     .main {
         height: auto;
@@ -819,6 +837,25 @@ nav ul li a:hover {
     .container {
         padding-top: 60px;
     }
+    
+    /* Ensure project links are properly positioned in featured project cards */
+    .projects-div .project-links {
+        position: absolute;
+        bottom: 25px;
+        right: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: calc(100% - 30px);
+        justify-content: flex-end;
+    }
+    
+    /* Make sure project descriptions don't overlap with buttons */
+    .projects-div p {
+        margin-bottom: 15px;
+        font-size: 13px;
+        width: 100%;
+    }
 }
 
 /* Button styles */
@@ -829,16 +866,18 @@ nav ul li a:hover {
 }
 
 .hero {
-  padding: 0;
-  margin-bottom: 30px;
-  margin-top: 160px;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
+  padding: 100px 0 50px;
+  margin-top: 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 .hero .container {
-  gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .hero-content {
@@ -879,224 +918,12 @@ nav ul li a:hover {
 }
 
 .profile-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.highlight {
-  color: var(--color-text-secondary);
-}
-
-/* Hero button styles */
-.hero-cta .btn {
-  padding: 12px 24px;
-  font-size: 16px;
-  border-radius: 6px;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  width: auto;
-  min-width: 150px;
-  text-align: center;
-  margin: 0 10px 10px 0;
-}
-
-.hero-cta .btn-primary {
-  background-color: var(--color-text-secondary);
-  color: white;
-  border: 2px solid var(--color-text-secondary);
-}
-
-.hero-cta .btn-primary:hover {
-  background-color: transparent;
-  color: var(--color-text-secondary);
-}
-
-.hero-cta .btn-outline {
-  background-color: transparent;
-  color: var(--color-text-secondary);
-  border: 2px solid var(--color-text-secondary);
-}
-
-.hero-cta .btn-outline:hover {
-  background-color: var(--color-text-secondary);
-  color: white;
-}
-
-/* Ensure language-specific elements maintain proper display */
-.lang-en, .lang-es {
-  width: auto !important;
-}
-
-/* Project List Section Styles */
-.project-list {
-  width: 100%;
-  padding: 100px 0;
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 150px;
-}
-
-.project-list h1 {
-  font-size: 50px;
-  line-height: 49px;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.project-list h1 span {
-  color: var(--color-text-secondary);
-}
-
-.project-list p {
-  width: 60%;
-  margin: 0 auto;
-  font-size: 16px;
-  margin-bottom: 40px;
-}
-
-.projects-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.project {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  padding: 25px;
-  transition: all 0.3s ease;
-  text-align: left;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(162, 185, 188, 0.2);
-  opacity: 1;
-  transform: translateY(0);
-  position: relative;
-  padding-bottom: 70px;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-}
-
-.project:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  border-color: var(--color-text-secondary);
-}
-
-.project h2 {
-  color: var(--color-text-secondary);
-  font-size: 22px;
-  margin-bottom: 15px;
-  font-weight: 600;
-}
-
-.project p {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  width: 100%;
-  flex-grow: 1;
-}
-
-.project a {
-  display: inline-block;
-  color: var(--color-text-primary);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  border-bottom: 1px solid var(--color-text-secondary);
-  padding-bottom: 2px;
-}
-
-.project a:hover {
-  color: var(--color-text-secondary);
-}
-
-/* Refresh button styles */
-.refresh-btn {
-  background-color: var(--color-text-secondary);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  margin-top: 15px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  display: block;
-  margin: 15px auto;
-  position: relative;
-}
-
-.refresh-btn:hover {
-  background-color: transparent;
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-text-secondary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.refresh-btn:active {
-  transform: scale(0.95);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-@media screen and (max-width: 768px) {
-  .projects-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .project-list p {
-    width: 90%;
-  }
-  
-  .project-list h1 {
-    font-size: 40px;
-  }
-}
-
-/* Project icon styling */
-.project-icon {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 8px;
-  width: 24px;
-  height: 24px;
-}
-
-/* For SVG icons that need to match the current text color */
-.project-icon svg {
-  fill: currentColor;
-}
-
-/* Add styles for the tooth icon */
-.tooth-icon {
-  filter: invert(1);
-  width: 220px !important;
-  height: 220px !important;
-  border-radius: 0 !important;
-}
-
-.light_mode .tooth-icon {
-  filter: invert(0);
-}
-
-/* 3D Coin Flip Effect */
-.profile-image {
   perspective: 1000px;
   width: 400px;
   height: 400px;
   position: relative;
   cursor: grab;
+  max-width: 100%;
 }
 
 .profile-image:active {
@@ -1109,6 +936,7 @@ nav ul li a:hover {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.8s ease;
+  max-width: 100%;
 }
 
 .coin-face {
@@ -1274,12 +1102,16 @@ nav ul li a:hover {
   .hero {
     padding: 40px 0 20px;
     margin-top: 60px;
+    width: 100%;
+    overflow: hidden;
   }
   
   .hero .container {
     flex-direction: column;
     text-align: center;
     padding: 0 15px;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .hero-content {
@@ -1293,181 +1125,61 @@ nav ul li a:hover {
     margin: 0 auto 20px;
     width: 180px;
     height: 180px;
+    max-width: 100%;
+  }
+  
+  .project-cards-container {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+    width: 100%;
+  }
+  
+  .projects h1, 
+  .projects p {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .about-one {
+    padding: 0 0;
+    font-size: 12px;
+  }
+  
+  .projects button{
+    transform: translate(0, 0%);
+  }
+  
+  .container {
+    padding-top: 60px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile-image {
+    width: 150px;
+    height: 150px;
   }
   
   .hero-title {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.2rem;
-  }
-  
-  /* Improved project cards for mobile */
-  .projects-div {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 15px;
-  }
-  
-  .project {
-    width: 100%;
-    margin: 0;
-    padding: 20px;
-    padding-bottom: 70px;
-    height: auto;
-    min-height: 250px;
-    position: relative;
-  }
-  
-  .project h2 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-  }
-  
-  .project p {
-    margin-bottom: 15px;
-  }
-  
-  .project-links {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    display: flex;
-    gap: 10px;
-  }
-  
-  /* Improved Fiverr card for mobile */
-  .fiverr-stats {
-    padding: 10px 15px;
-  }
-  
-  .fiverr-card {
-    max-width: 100%;
-    margin: 0 auto;
-  }
-  
-  .fiverr-card-content {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px 15px;
-  }
-  
-  .fiverr-logo-container {
-    margin: 0 auto 15px;
-  }
-  
-  .fiverr-rating, 
-  .fiverr-orders {
-    justify-content: center;
-  }
-  
-  /* Improved contact section for mobile */
-  .contact .box {
-    padding: 25px 20px;
-    margin: 0 15px;
-  }
-  
-  .contact form {
-    gap: 15px;
-  }
-  
-  .input-container,
-  .textarea-container {
-    width: 100%;
-  }
-  
-  /* Improved footer for mobile */
-  footer {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px 15px;
-    gap: 15px;
-  }
-  
-  /* Improved coin flip for mobile */
-  .coin-container {
-    margin: 30px auto;
-    max-width: 200px;
-  }
-  
-  .coin {
-    width: 180px;
-    height: 180px;
-  }
-  
-  /* Improved about section for mobile */
-  .about-one .container {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .about-one .about-content {
-    order: 2;
-    width: 100%;
-  }
-  
-  .about-one .coin-container {
-    order: 1;
-    margin: 0 auto 30px;
-  }
-  
-  /* Rest of mobile styles */
-  .projects h1, 
-  .project-list h1,
-  .contact h1,
-  .about-one h1 {
     font-size: 1.8rem;
   }
   
-  .project h2 {
-    font-size: 1.3rem;
+  .hero-subtitle {
+    font-size: 1rem;
   }
   
-  /* Additional mobile optimizations */
-  button, 
-  .btn,
-  .refresh-btn,
-  .send {
-    min-height: 44px;
-    min-width: 44px;
+  .container {
+    padding: 0 10px;
+    padding-top: 70px;
   }
   
-  /* Improve readability */
-  p {
-    font-size: 16px;
-    line-height: 1.6;
+  .project, .projects-div {
+    padding: 15px;
+    margin: 10px 0;
   }
   
-  /* Adjust spacing */
-  section {
-    margin: 40px 0;
-    padding: 0;
-  }
-  
-  /* Improve form inputs */
-  input, textarea {
-    font-size: 16px !important; /* Prevents iOS zoom on focus */
-  }
-  
-  /* Adjust coin flip for mobile */
-  .coin {
-    width: 200px;
-    height: 200px;
-  }
-  
-  /* Add overlay for mobile menu */
-  body.menu-open::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 998;
+  .fiverr-card {
+    margin: 0 10px;
   }
 }
 
@@ -1828,5 +1540,262 @@ html {
   /* Improved loading performance */
   img, video {
     content-visibility: auto;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.highlight {
+  color: var(--color-text-secondary);
+}
+
+/* Hero button styles */
+.hero-cta .btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  width: auto;
+  min-width: 150px;
+  text-align: center;
+  margin: 0 10px 10px 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.profile-img, .tech-icon {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.fiverr-card-logo {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Add styles for the tooth icon */
+.tooth-icon {
+  filter: invert(1);
+  border-radius: 0 !important;
+  display: block;
+  margin: 0 auto;
+}
+
+.projects-div .tooth-icon {
+  width: 230px !important;
+  height: 230px !important;
+  margin: 0 auto 15px;
+}
+
+.light_mode .tooth-icon {
+  filter: invert(0);
+}
+
+/* Project icon styling */
+.project-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  width: 24px;
+  height: 24px;
+}
+
+/* For SVG icons that need to match the current text color */
+.project-icon svg {
+  fill: currentColor;
+}
+
+/* Project List Section Styles */
+.project-list {
+  width: 100%;
+  padding: 100px 0;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 150px;
+}
+
+.project-list h1 {
+  font-size: 50px;
+  line-height: 49px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.project-list h1 span {
+  color: var(--color-text-secondary);
+}
+
+.project-list p {
+  width: 60%;
+  margin: 0 auto;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.project {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 25px;
+  transition: all 0.3s ease;
+  text-align: left;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(162, 185, 188, 0.2);
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+  padding-bottom: 70px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: var(--color-text-secondary);
+}
+
+.project h2 {
+  color: var(--color-text-secondary);
+  font-size: 22px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.project p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.project a {
+  display: inline-block;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  border-bottom: 1px solid var(--color-text-secondary);
+  padding-bottom: 2px;
+}
+
+.project a:hover {
+  color: var(--color-text-secondary);
+}
+
+/* Refresh button styles */
+.refresh-btn {
+  background-color: var(--color-text-secondary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+}
+
+.refresh-btn:hover {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-text-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.refresh-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media screen and (max-width: 768px) {
+  .projects-container {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+    width: 100%;
+  }
+  
+  .project-list p {
+    width: 90%;
+  }
+  
+  .project-list h1 {
+    font-size: 40px;
+  }
+  
+  .project {
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    padding-bottom: 100px;
+    height: auto;
+    box-sizing: border-box;
+  }
+  
+  .project h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  
+  .project p {
+    margin-bottom: 15px;
+    font-size: 13px;
+    width: 100%;
+  }
+  
+  .project-links {
+    position: absolute;
+    bottom: 25px;
+    right: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: calc(100% - 30px);
+    justify-content: flex-end;
+  }
+
+  .project-links button,
+  .project-links a,
+  .project .hyperlink {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px;
+    min-height: 36px;
   }
 }
