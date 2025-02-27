@@ -1270,32 +1270,204 @@ nav ul li a:hover {
 
 /* Responsive adjustments for mobile */
 @media screen and (max-width: 768px) {
-  .project-links {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    justify-content: center;
+  /* Improved hero section for mobile */
+  .hero {
+    padding: 40px 0 20px;
+    margin-top: 60px;
+  }
+  
+  .hero .container {
+    flex-direction: column;
+    text-align: center;
+    padding: 0 15px;
+  }
+  
+  .hero-content {
+    order: 2;
     margin-top: 20px;
     width: 100%;
   }
   
-  .projects-div, .project {
-    padding-bottom: 20px;
+  .profile-image {
+    order: 1;
+    margin: 0 auto 20px;
+    width: 180px;
+    height: 180px;
   }
   
-  .project-links button,
-  .project-links a,
-  .project .hyperlink {
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px;
-    min-height: 36px;
+  .hero-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
   }
   
-  .project-links i,
-  .hyperlink i,
-  .live-preview i {
-    font-size: 14px;
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  /* Improved project cards for mobile */
+  .projects-div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px;
+  }
+  
+  .project {
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    padding-bottom: 70px;
+    height: auto;
+    min-height: 250px;
+    position: relative;
+  }
+  
+  .project h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  
+  .project p {
+    margin-bottom: 15px;
+  }
+  
+  .project-links {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* Improved Fiverr card for mobile */
+  .fiverr-stats {
+    padding: 10px 15px;
+  }
+  
+  .fiverr-card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .fiverr-card-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 15px;
+  }
+  
+  .fiverr-logo-container {
+    margin: 0 auto 15px;
+  }
+  
+  .fiverr-rating, 
+  .fiverr-orders {
+    justify-content: center;
+  }
+  
+  /* Improved contact section for mobile */
+  .contact .box {
+    padding: 25px 20px;
+    margin: 0 15px;
+  }
+  
+  .contact form {
+    gap: 15px;
+  }
+  
+  .input-container,
+  .textarea-container {
+    width: 100%;
+  }
+  
+  /* Improved footer for mobile */
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 15px;
+    gap: 15px;
+  }
+  
+  /* Improved coin flip for mobile */
+  .coin-container {
+    margin: 30px auto;
+    max-width: 200px;
+  }
+  
+  .coin {
+    width: 180px;
+    height: 180px;
+  }
+  
+  /* Improved about section for mobile */
+  .about-one .container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .about-one .about-content {
+    order: 2;
+    width: 100%;
+  }
+  
+  .about-one .coin-container {
+    order: 1;
+    margin: 0 auto 30px;
+  }
+  
+  /* Rest of mobile styles */
+  .projects h1, 
+  .project-list h1,
+  .contact h1,
+  .about-one h1 {
+    font-size: 1.8rem;
+  }
+  
+  .project h2 {
+    font-size: 1.3rem;
+  }
+  
+  /* Additional mobile optimizations */
+  button, 
+  .btn,
+  .refresh-btn,
+  .send {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve readability */
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  /* Adjust spacing */
+  section {
+    margin: 40px 0;
+    padding: 0;
+  }
+  
+  /* Improve form inputs */
+  input, textarea {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+  
+  /* Adjust coin flip for mobile */
+  .coin {
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* Add overlay for mobile menu */
+  body.menu-open::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
   }
 }
 
@@ -1440,5 +1612,221 @@ nav ul li a:hover {
   
   .fiverr-profile-link {
     justify-content: center;
+  }
+}
+
+/* Mobile menu toggle button */
+.mobile-menu-toggle {
+  display: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-toggle i {
+  font-size: 24px;
+  color: var(--color-text-primary);
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-toggle.active i {
+  transform: rotate(90deg);
+}
+
+/* Enhanced mobile styles */
+@media screen and (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .mobile-menu-toggle:active {
+    transform: translateY(-50%) scale(0.95);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .navbar {
+    padding: 10px 0;
+    position: relative;
+  }
+  
+  .nav-container {
+    justify-content: center;
+    position: relative;
+  }
+  
+  .logo {
+    margin: 0;
+    text-align: center;
+  }
+  
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: var(--color-bg-primary);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 999;
+    padding: 80px 20px 20px;
+    overflow-y: auto;
+  }
+  
+  .light_mode nav {
+    background-color: var(--color-bg-secondary);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  nav.mobile-nav-open {
+    right: 0;
+  }
+  
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  nav ul li {
+    width: 100%;
+    margin: 0;
+  }
+  
+  nav ul li a {
+    font-size: 18px;
+    padding: 12px 0;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Improved menu overlay */
+  body.menu-open::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    animation: fadeIn 0.3s ease forwards;
+    backdrop-filter: blur(3px);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Improved touch targets for mobile */
+  .project-links button,
+  .project-links a,
+  .project a.hyperlink,
+  nav ul li a,
+  .btn,
+  .refresh-btn {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Better tap feedback */
+  .project-links button:active,
+  .project a.hyperlink:active,
+  nav ul li a:active,
+  .btn:active,
+  .refresh-btn:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+  
+  /* Improved form elements for mobile */
+  .input-container,
+  .textarea-container {
+    margin-bottom: 16px;
+  }
+  
+  input, textarea, button {
+    font-size: 16px !important; /* Prevent iOS zoom */
+  }
+  
+  /* Improved spacing for mobile sections */
+  section {
+    margin-bottom: 40px;
+    padding: 20px 0;
+  }
+}
+
+/* Smooth scrolling for the entire site */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improved mobile experience */
+@media screen and (max-width: 768px) {
+  /* Prevent content shift when menu opens */
+  body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Improved animations for mobile */
+  [data-aos] {
+    transition-duration: 600ms !important;
+  }
+  
+  /* Improved scrollbar for mobile menu */
+  nav::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  nav::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  
+  /* Improved mobile menu positioning */
+  .mobile-menu-toggle {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+  }
+  
+  /* Improved tap highlight color */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Improved focus states for accessibility */
+  a:focus, button:focus {
+    outline: 2px solid var(--color-text-secondary);
+    outline-offset: 2px;
+  }
+  
+  /* Improved loading performance */
+  img, video {
+    content-visibility: auto;
   }
 }

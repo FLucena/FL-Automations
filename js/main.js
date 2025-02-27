@@ -54,6 +54,41 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Initialize the coin flip functionality
   initCoinFlip();
+  
+  // Mobile menu toggle
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const nav = document.querySelector('nav');
+  
+  if (mobileMenuToggle && nav) {
+    mobileMenuToggle.addEventListener('click', function() {
+      nav.classList.toggle('mobile-nav-open');
+      mobileMenuToggle.classList.toggle('active');
+      document.body.classList.toggle('menu-open');
+    });
+    
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        if (nav.classList.contains('mobile-nav-open')) {
+          nav.classList.remove('mobile-nav-open');
+          mobileMenuToggle.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        }
+      });
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      if (nav.classList.contains('mobile-nav-open') && 
+          !nav.contains(event.target) && 
+          !mobileMenuToggle.contains(event.target)) {
+        nav.classList.remove('mobile-nav-open');
+        mobileMenuToggle.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
+    });
+  }
 });
 
 // Initialize the coin flip functionality
