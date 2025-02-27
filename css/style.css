@@ -197,7 +197,7 @@ a {
     border-radius: 50px;
 }
 
-.projects-div{
+.projects-div {
     width: 300px;
     position: relative;
     z-index: 100;
@@ -208,6 +208,8 @@ a {
     transition: all 0.2s ease-out;
     padding: 5vh;
     display: inline-block;
+    padding-bottom: 70px;
+    min-height: 300px;
 }
 
 .projects-div:hover{
@@ -976,6 +978,11 @@ nav ul li a:hover {
   border: 1px solid rgba(162, 185, 188, 0.2);
   opacity: 1;
   transform: translateY(0);
+  position: relative;
+  padding-bottom: 70px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 .project:hover {
@@ -996,6 +1003,7 @@ nav ul li a:hover {
   line-height: 1.6;
   margin-bottom: 20px;
   width: 100%;
+  flex-grow: 1;
 }
 
 .project a {
@@ -1131,4 +1139,162 @@ nav ul li a:hover {
   width: 70%;
   height: 70%;
   object-fit: contain;
+}
+
+/* Project links container - position at bottom right */
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 0;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+/* Ensure consistent button sizes */
+.project-links button,
+.project-links a,
+.project .hyperlink {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 50% !important;
+}
+
+/* Icon button styles */
+.project-links button {
+  background-color: transparent;
+  border: 1px solid var(--color-text-secondary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  transition: all 0.3s ease;
+  transform: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.project-links button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-text-secondary);
+}
+
+.project-links .live-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  font-size: 16px;
+}
+
+.project-links button:hover .live-preview {
+  color: white;
+}
+
+/* For non-featured projects */
+.project .project-links {
+  justify-content: flex-end;
+  margin-top: 0;
+}
+
+.project .hyperlink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-text-secondary);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  padding: 0;
+  font-size: 16px;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.project .hyperlink:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-text-secondary);
+  color: white;
+  border-bottom: none;
+}
+
+/* Ensure all icon buttons are properly rounded */
+.hyperlink, 
+.live-preview,
+.project-links a,
+.project-links button {
+  border-radius: 50% !important;
+  overflow: hidden;
+}
+
+/* Fix for any border-bottom styling that might interfere with rounded buttons */
+.project a.hyperlink {
+  border-bottom: none;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+}
+
+/* Ensure consistent hover effects */
+.project a.hyperlink:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-text-secondary);
+  color: white;
+}
+
+/* Ensure icons are properly centered and sized */
+.project-links i,
+.hyperlink i,
+.live-preview i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+}
+
+/* Responsive adjustments for mobile */
+@media screen and (max-width: 768px) {
+  .project-links {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .projects-div, .project {
+    padding-bottom: 20px;
+  }
+  
+  .project-links button,
+  .project-links a,
+  .project .hyperlink {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px;
+    min-height: 36px;
+  }
+  
+  .project-links i,
+  .hyperlink i,
+  .live-preview i {
+    font-size: 14px;
+  }
 }

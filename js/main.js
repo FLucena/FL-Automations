@@ -368,9 +368,21 @@ function displayFeaturedProjects() {
         <p class="lang-es" style="display: none;">
           ${project.description.es}
         </p>
-        <button>
-          <a href="${project.url}" target="_blank" class="live-preview">Live Preview</a>
-        </button>
+        <div class="project-links">
+          <button>
+            <a href="${project.url}" target="_blank" class="live-preview" title="Live Preview">
+              <i class="fa-solid fa-eye"></i>
+            </a>
+          </button>
+          <button>
+            <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="live-preview lang-en" title="Suggest Ideas">
+              <i class="fa-solid fa-lightbulb"></i>
+            </a>
+            <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="live-preview lang-es" style="display: none;" title="Sugerir Ideas">
+              <i class="fa-solid fa-lightbulb"></i>
+            </a>
+          </button>
+        </div>
       </div>
     `;
     
@@ -394,7 +406,17 @@ function displayRandomProjects() {
         <h2>${project.title}</h2>
         <p class="lang-en">${project.description.en}</p>
         <p class="lang-es" style="display: none;">${project.description.es}</p>
-        <a href="${project.url}" target="_blank" class="hyperlink">Learn More</a>
+        <div class="project-links">
+          <a href="${project.url}" target="_blank" class="hyperlink" title="Live Preview">
+            <i class="fa-solid fa-eye"></i>
+          </a>
+          <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="hyperlink lang-en" title="Suggest Ideas">
+            <i class="fa-solid fa-lightbulb"></i>
+          </a>
+          <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="hyperlink lang-es" style="display: none;" title="Sugerir Ideas">
+            <i class="fa-solid fa-lightbulb"></i>
+          </a>
+        </div>
       </div>
     `;
     
@@ -625,7 +647,17 @@ function refreshProjects() {
             <h2>${project.title}</h2>
             <p class="lang-en">${project.description.en}</p>
             <p class="lang-es" style="display: none;">${project.description.es}</p>
-            <a href="${project.url}" target="_blank" class="hyperlink">Learn More</a>
+            <div class="project-links">
+              <a href="${project.url}" target="_blank" class="hyperlink" title="Live Preview">
+                <i class="fa-solid fa-eye"></i>
+              </a>
+              <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="hyperlink lang-en" title="Suggest Ideas">
+                <i class="fa-solid fa-lightbulb"></i>
+              </a>
+              <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="hyperlink lang-es" style="display: none;" title="Sugerir Ideas">
+                <i class="fa-solid fa-lightbulb"></i>
+              </a>
+            </div>
           </div>
         `;
         
