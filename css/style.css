@@ -162,7 +162,6 @@ a {
     width: 100%;
     height: auto;
     padding: 100px 0;
-    margin-bottom: 150px;
     overflow: visible;
 }
 .projects h1{
@@ -286,10 +285,9 @@ a {
 .about{
     width: 100%;
     height: auto;
-    padding: 100px 50px;
+    padding: 40px 50px;
     justify-content: center;
     margin-top: 0;
-    margin-bottom: 100px;
 }
 
 .about-one{
@@ -340,9 +338,7 @@ a {
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 100px 0 70px;
-    margin-top: 0;
-    margin-bottom: 100px;
+    padding: 50px 0 10px;
 }
 
 .contact h1 {
@@ -734,8 +730,7 @@ nav ul li a:hover {
         width: 100%;
         height: auto;
         padding: 60px 20px;
-        justify-content: center;
-        margin-bottom: 80px;
+        justify-content: center;;
     }
     .about-one {
         padding: 0 15px;
@@ -818,7 +813,6 @@ nav ul li a:hover {
         width: 100%;
         padding: 60px 0;
         height: auto;
-        margin-bottom: 80px;
         overflow: visible;
     }
     
@@ -1480,7 +1474,6 @@ nav ul li a:hover {
   
   /* Improved spacing for mobile sections */
   section {
-    margin-bottom: 40px;
     padding: 20px 0;
   }
 }
@@ -1626,10 +1619,9 @@ img {
 /* Project List Section Styles */
 .project-list {
   width: 100%;
-  padding: 100px 0;
+  padding: 20px 0;
   text-align: center;
   margin-top: 0;
-  margin-bottom: 150px;
 }
 
 .project-list h1 {
