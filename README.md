@@ -17,13 +17,13 @@ A modern, interactive portfolio website showcasing projects and skills with a re
 
 ## Technologies Used
 
-- HTML5
-- CSS3
-- JavaScript (ES6+)
+- [HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [TailwindCSS](https://tailwindcss.com/)
-- [AOS](https://michalsnik.github.io/aos/) - Animate On Scroll library
-- [Typed.js](https://github.com/mattboldt/typed.js/) - Typing animation
-- [Font Awesome](https://fontawesome.com/) - Icons
+- [Font Awesome](https://fontawesome.com/)
+- [AOS Library](https://michalsnik.github.io/aos/)
+- [Typed.js](https://github.com/mattboldt/typed.js/)
 
 ## Project Structure
 
@@ -75,6 +75,13 @@ The portfolio showcases various projects including:
 - Python applications
 - And more!
 
+## Recent Updates
+
+- Migrated from Bootstrap to Tailwind CSS for more flexible and utility-first styling
+- Consolidated footer styling into a single CSS file for better maintainability
+- Enhanced coin flip component with improved animation and styling
+- Added multilanguage support for English and Spanish
+
 ## Contributing
 
 Contributions are welcome! Feel free to submit a pull request or open an issue.
@@ -87,9 +94,7 @@ Contributions are welcome! Feel free to submit a pull request or open an issue.
 
 ## Contact
 
-Francisco Lucena - [flucena.dev@gmail.com](mailto:flucena.dev@gmail.com)
-
-Project Link: [https://www.flautomations.com.ar/](https://www.flautomations.com.ar/)
+Francisco Lucena - [franciscolucena90@gmail.com](mailto:franciscolucena90@gmail.com)
 
 ## License
 

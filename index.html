@@ -5,15 +5,393 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>FL Automations - Portfolio</title>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+      <!-- Removed Bootstrap in favor of Tailwind -->
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script>
+        // Configure Tailwind theme
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: 'var(--color-primary)',
+                secondary: 'var(--color-secondary)',
+                'bg-dark': 'var(--color-bg-dark)',
+                'text-light': 'var(--color-text-light)',
+                'accent': 'var(--accent-color, #5e60ce)',
+                'text-secondary': 'var(--text-secondary, #999)'
+              },
+              backgroundColor: {
+                'modal-bg': 'rgba(0, 0, 0, 0.85)'
+              }
+            }
+          }
+        }
+      </script>
       <link rel="stylesheet" href="css/main.css">
       <link rel="stylesheet" href="css/contact.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"  />
       <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <link rel="stylesheet" href="css/coin-fix.css">
       <style>
         /* Add scroll-padding to fix anchor links */
         html {
           scroll-padding-top: 100px; /* Adjust based on your navbar height plus some padding */
+        }
+        
+        /* Critical modal styles */
+        .modal {
+          display: none;
+          background-color: rgba(0, 0, 0, 0.85);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+          opacity: 1;
+        }
+        
+        .modal-content {
+          transform: translateY(-30px);
+          transition: transform 0.3s ease;
+        }
+        
+        .modal.show .modal-content {
+          transform: translateY(0);
+        }
+        
+        .modal-left-column, 
+        .modal-right-column {
+          width: 50%;
+          padding: 20px;
+          overflow-y: auto;
+        }
+        
+        /* Filter tag styles */
+        .filter-tag {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          background-color: rgba(255, 255, 255, 0.15);
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          padding: 6px;
+          overflow: hidden;
+          position: relative;
+          margin: 0;
+        }
+
+        .filter-tag img {
+          width: 24px;
+          height: 24px;
+          max-width: 24px;
+          max-height: 24px;
+          object-fit: contain;
+          object-position: center;
+        }
+
+        .filter-icon {
+          width: 24px;
+          height: 24px;
+          max-width: 24px;
+          max-height: 24px;
+          object-fit: contain;
+          object-position: center;
+        }
+
+        .filter-tag:hover {
+          transform: translateY(-3px);
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .filter-tag.active {
+          background-color: var(--accent-color, #5e60ce);
+          color: white;
+          box-shadow: 0 4px 10px rgba(94, 96, 206, 0.3);
+        }
+        
+        /* Tooltip styles */
+        [data-tooltip] {
+          position: relative;
+          cursor: pointer;
+        }
+        
+        [data-tooltip]::after {
+          content: attr(data-tooltip);
+          position: absolute;
+          bottom: -30px;
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 5px 10px;
+          background-color: rgba(0, 0, 0, 0.8);
+          color: white;
+          border-radius: 4px;
+          font-size: 12px;
+          white-space: nowrap;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          z-index: 100;
+          pointer-events: none;
+        }
+        
+        [data-tooltip]:hover::after {
+          opacity: 1;
+          visibility: visible;
+          bottom: -25px;
+        }
+        
+        /* Clear filters button */
+        .clear-filters {
+          margin-top: 10px;
+          padding: 8px 12px;
+          border-radius: 6px;
+          background-color: rgba(255, 255, 255, 0.1);
+          color: rgba(255, 255, 255, 0.8);
+          border: none;
+          font-size: 14px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.3s ease;
+          align-self: flex-start;
+        }
+
+        .clear-filters:not(:disabled):hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .clear-filters:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        
+        /* Fix carousel navigation arrows */
+        .carousel-nav {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: rgba(255, 255, 255, 0.2);
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          z-index: 100;
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-nav:hover {
+          background-color: var(--color-primary, #5e60ce);
+          transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-prev {
+          left: 15px;
+        }
+
+        .carousel-next {
+          right: 15px;
+        }
+        
+        /* Make sure the modal projects container has fixed dimensions */
+        .modal-projects-container {
+          position: relative;
+          padding: 0 80px;
+          min-height: 400px;
+          max-height: 65vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: visible;
+        }
+        
+        /* Fix search box and input overlap */
+        .search-container input {
+          padding-left: 40px !important;
+          background-color: rgba(255, 255, 255, 0.1) !important;
+          color: white !important;
+          border: none !important;
+          width: 100%;
+        }
+        
+        /* Ensure search icon is properly positioned */
+        .search-icon {
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: rgba(255, 255, 255, 0.7);
+          z-index: 10;
+        }
+        
+        /* Make filter tags visible with proper spacing for tech icons */
+        #filter-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          padding: 10px 0;
+        }
+
+        /* Ensure modal project card has proper padding for navigation arrows */
+        .modal-project-card {
+          background-color: rgba(255, 255, 255, 0.05);
+          border-radius: 10px;
+          padding: 30px;
+          width: 100%;
+          max-width: 500px;
+          min-height: 350px;
+          margin: 0 60px;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+          transition: all 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+          .modal-content {
+            flex-direction: column;
+          }
+          
+          .modal-left-column, 
+          .modal-right-column {
+            width: 100%;
+          }
+          
+          .carousel-nav {
+            width: 36px;
+            height: 36px;
+            font-size: 14px;
+          }
+          
+          .carousel-prev {
+            left: 10px;
+          }
+          
+          .carousel-next {
+            right: 10px;
+          }
+          
+          .modal-projects-container {
+            padding: 0 50px;
+            min-height: 300px;
+          }
+          
+          .modal-project-card {
+            margin: 0 40px;
+            padding: 20px;
+          }
+        }
+
+        /* Additional project modal card styles */
+        .modal-project-card {
+          background-color: rgba(255, 255, 255, 0.05);
+          border-radius: 10px;
+          padding: 30px;
+          width: 100%;
+          max-width: 500px;
+          min-height: 350px;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+          transition: all 0.5s ease;
+        }
+
+        .modal-project-title {
+          font-size: 1.8rem;
+          font-weight: 600;
+          margin-bottom: 15px;
+          color: white;
+        }
+
+        .modal-project-description {
+          margin-bottom: 20px;
+          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.8);
+        }
+
+        .tech-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-bottom: 20px;
+        }
+
+        /* Tech tags in project cards */
+        .tech-tags .tech-tag {
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 30px;
+          padding: 5px 12px;
+          font-size: 0.9rem;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          color: rgba(255, 255, 255, 0.9);
+          height: auto;
+          width: auto;
+          cursor: default;
+        }
+
+        .tech-tags .tech-tag:hover {
+          transform: none;
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-icon-small {
+          width: 18px;
+          height: 18px;
+          object-fit: contain;
+        }
+
+        .modal-project-links {
+          display: flex;
+          gap: 15px;
+          margin-top: 20px;
+        }
+
+        .modal-project-links a {
+          background-color: rgba(255, 255, 255, 0.1);
+          color: white;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+        }
+
+        .modal-project-links a:hover {
+          background-color: var(--color-primary);
+          transform: translateY(-3px);
+        }
+
+        /* Animation classes */
+        .slide-in-right {
+          animation: slideInRight 0.4s forwards;
+        }
+
+        .slide-in-left {
+          animation: slideInLeft 0.4s forwards;
+        }
+
+        @keyframes slideInRight {
+          0% { transform: translateX(50px); opacity: 0; }
+          100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+          0% { transform: translateX(-50px); opacity: 0; }
+          100% { transform: translateX(0); opacity: 1; }
         }
       </style>
   </head>
@@ -47,18 +425,18 @@
       </header>
     </div>
     <main class="container">
-      <section class="hero" data-aos="fade-up" data-aos-duration="1000">
+      <section class="hero flex items-center justify-between" data-aos="fade-up" data-aos-duration="1000">
         <div class="container hero-container">
           <div class="hero-content">
-            <h1 class="hero-title lang-en">Hi, I'm <span class="highlight">Francisco</span></h1>
-            <h1 class="hero-title lang-es" style="display: none;">Hola, soy <span class="highlight">Francisco</span></h1>
-            <p class="hero-subtitle lang-en">I create <span class="typing-text-en"></span></p>
-            <p class="hero-subtitle lang-es" style="display: none;">Yo creo <span class="typing-text-es"></span></p>
-            <div class="hero-cta">
-              <a href="cv.pdf" download class="btn download-btn lang-en" aria-label="Download resume">
+            <h1 class="hero-title text-4xl md:text-5xl font-bold mb-4 lang-en">Hi, I'm <span class="highlight">Francisco</span></h1>
+            <h1 class="hero-title text-4xl md:text-5xl font-bold mb-4 lang-es" style="display: none;">Hola, soy <span class="highlight">Francisco</span></h1>
+            <p class="hero-subtitle text-xl md:text-2xl mb-6 lang-en">I create <span class="typing-text-en"></span></p>
+            <p class="hero-subtitle text-xl md:text-2xl mb-6 lang-es" style="display: none;">Yo creo <span class="typing-text-es"></span></p>
+            <div class="hero-cta flex gap-4">
+              <a href="cv.pdf" download class="btn download-btn inline-flex items-center gap-2 lang-en" aria-label="Download resume">
                 <i class="fa-solid fa-download"></i> Download CV
               </a>
-              <a href="cv.pdf" download class="btn download-btn lang-es" style="display: none;" aria-label="Descargar curriculum">
+              <a href="cv.pdf" download class="btn download-btn inline-flex items-center gap-2 lang-es" style="display: none;" aria-label="Descargar curriculum">
                 <i class="fa-solid fa-download"></i> Descargar CV
               </a>
             </div>
@@ -76,9 +454,10 @@
         </div>
         
         <!-- Scroll indicator button -->
-        <div class="scroll-indicator" role="button" tabindex="0" aria-label="Scroll to about section">
+        <div class="scroll-indicator flex flex-col items-center justify-center" role="button" tabindex="0" aria-label="Scroll to about section">
           <div class="scroll-arrow scroll-arrow-down">
             <i class="fa-solid fa-chevron-down"></i>
+            <i class="fa-solid fa-chevron-up"></i>
           </div>
           <span class="scroll-text lang-en">Scroll down</span>
           <span class="scroll-text lang-es" style="display: none;">Desplácese hacia abajo</span>
@@ -145,11 +524,11 @@
         <h1 class="lang-es" style="display: none;">Proyectos <br /><span>Destacados</span></h1>
         <p class="lang-en">
           Welcome to my projects section! Discover innovative websites including e-commerce, blog, social network, online learning, and portfolio sites.
-          <a href="#" id="view-all-projects" class="view-all-link lang-en"><strong>View all projects</strong></a>
+          <a href="#" id="view-all-projects" class="view-all-link lang-en inline-block text-primary hover:underline"><strong>View all projects</strong></a>
         </p>
         <p class="lang-es" style="display: none;">
           ¡Bienvenido a mi sección de proyectos! Descubre sitios web innovadores que incluyen comercio electrónico, blogs, redes sociales, aprendizaje en línea y sitios de portafolio.
-          <a href="#" id="view-all-projects-es" class="view-all-link lang-es" style="display: none;"><strong>Ver todos los proyectos</strong></a>
+          <a href="#" id="view-all-projects-es" class="view-all-link lang-es inline-block text-primary hover:underline"><strong>Ver todos los proyectos</strong></a>
         </p>
         <div class="project-cards-container">
           <!-- Featured projects will be loaded dynamically from projects.json -->
@@ -158,29 +537,33 @@
       <br />
 
       <!-- Projects Modal -->
-      <div id="projects-modal" class="modal">
-        <div class="modal-content">
+      <div id="projects-modal" class="modal fixed top-0 left-0 w-full h-full z-50">
+        <div class="modal-content bg-bg-dark text-text-light flex flex-row rounded-lg shadow-lg overflow-hidden max-h-[90vh] w-[90%] max-w-6xl mx-auto my-[5vh] transform transition-all duration-300">
           <div class="modal-left-column">
-            <div class="modal-header">
-              <h2 class="lang-en">All Projects</h2>
-              <h2 class="lang-es" style="display: none;">Todos los Proyectos</h2>
-              <span class="close-modal">&times;</span>
+            <div class="modal-header flex justify-between items-center p-5 border-b border-gray-700">
+              <h2 class="text-2xl font-semibold lang-en">All Projects</h2>
+              <h2 class="text-2xl font-semibold lang-es" style="display: none;">Todos los Proyectos</h2>
+              <span class="close-modal text-2xl font-bold cursor-pointer hover:text-primary transition-colors">&times;</span>
             </div>
             
-            <div class="modal-search-filter">
-              <div class="search-area">
-                <div class="search-container">
-                  <input type="text" id="project-search" class="lang-en" placeholder="Search projects...">
-                  <input type="text" id="project-search-es" class="lang-es" style="display: none;" placeholder="Buscar proyectos...">
-                  <i class="fa-solid fa-search search-icon"></i>
+            <div class="modal-search-filter flex flex-col p-5 gap-4 bg-opacity-10 bg-white rounded-lg">
+              <div class="search-area flex flex-col gap-3 w-full">
+                <div class="search-container relative">
+                  <input type="text" id="project-search" class="lang-en w-full p-3 pl-10 bg-opacity-10 bg-white rounded-lg" placeholder="Search projects...">
+                  <input type="text" id="project-search-es" class="lang-es w-full p-3 pl-10 bg-opacity-10 bg-white rounded-lg" style="display: none;" placeholder="Buscar proyectos...">
+                  <i class="fa-solid fa-search search-icon absolute left-3 top-1/2 transform -translate-y-1/2 opacity-70"></i>
                 </div>
-                <!-- Clear filters button will be added here via JavaScript -->
+                <button class="clear-filters" disabled>
+                  <i class="fa-solid fa-xmark"></i> 
+                  <span class="lang-en">Clear Filters</span>
+                  <span class="lang-es" style="display: none;">Limpiar Filtros</span>
+                </button>
               </div>
               
-              <div class="filter-container">
-                <span class="filter-label lang-en">Filter by:</span>
-                <span class="filter-label lang-es" style="display: none;">Filtrar por:</span>
-                <div class="filter-tags-container" id="filter-tags">
+              <div class="filter-container flex flex-col w-full gap-3">
+                <span class="filter-label font-semibold opacity-80 lang-en">Filter by:</span>
+                <span class="filter-label font-semibold opacity-80 lang-es" style="display: none;">Filtrar por:</span>
+                <div class="filter-tags-container flex flex-wrap gap-2 w-full" id="filter-tags">
                   <!-- Tags will be populated dynamically -->
                 </div>
               </div>
@@ -188,7 +571,7 @@
           </div>
           
           <div class="modal-right-column">
-            <div class="modal-projects-container" id="modal-projects">
+            <div class="modal-projects-container relative p-10 min-h-[400px] flex items-center justify-center overflow-visible" id="modal-projects">
               <!-- Projects will be loaded dynamically -->
             </div>
           </div>
@@ -235,24 +618,493 @@
       </section>
     </main>
 
-    <footer class="flex" id="footer">
-      <div class="copy lang-en">&copy All rights reserved - 2025 - FL Automations</div>
-      <div class="copy lang-es" style="display: none;">&copy Todos los derechos reservados - 2025 - FL Automations</div>
-      <div class="social">
-        <a href="https://github.com/FLucena" target="_blank"
-          ><i class="fa-brands fa-github"></i
-        ></a>
-        <a href="https://www.linkedin.com/in/franciscoivanlucena/" target="_blank"
-          ><i class="fa-brands fa-linkedin"></i
-        ></a>
-        <a href="https://www.fiverr.com/franciscoluc118" target="_blank" class="fiverr-icon"
-          ><img src="img/fiverr.svg" alt="Fiverr" class="fiverr-svg">
-        </a>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-main">
+          <!-- About Widget -->
+          <div class="footer-widget">
+            <a href="#" class="footer-logo">
+              <span class="logo-icon"><i class="fa-solid fa-code"></i></span>
+              <span class="logo-text">FL Automations</span>
+            </a>
+            <p class="footer-text lang-en">Specialist in web development and process automation with 10 years of experience creating intelligent solutions and streamlined workflows.</p>
+            <p class="footer-text lang-es" style="display: none;">Especialista en desarrollo web y automatización de procesos con 10 años de experiencia creando soluciones inteligentes y flujos de trabajo optimizados.</p>
+            <div class="footer-social">
+              <a href="https://github.com/FLucena" target="_blank" class="footer-social-link" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/franciscoivanlucena/" target="_blank" class="footer-social-link" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links Widget -->
+          <div class="footer-widget">
+            <h3 class="footer-widget-title lang-en">Quick Links</h3>
+            <h3 class="footer-widget-title lang-es" style="display: none;">Enlaces Rápidos</h3>
+            <div class="footer-links">
+              <div class="footer-links-item">
+                <a href="#about" class="footer-link lang-en">About</a>
+                <a href="#about" class="footer-link lang-es" style="display: none;">Sobre mí</a>
+              </div>
+              <div class="footer-links-item">
+                <a href="#project" class="footer-link lang-en">Portfolio</a>
+                <a href="#project" class="footer-link lang-es" style="display: none;">Portafolio</a>
+              </div>
+              <div class="footer-links-item">
+                <a href="#contact" class="footer-link lang-en">Contact</a>
+                <a href="#contact" class="footer-link lang-es" style="display: none;">Contacto</a>
+              </div>
+              <div class="footer-links-item">
+                <a href="cv.pdf" download class="footer-link lang-en">Download CV</a>
+                <a href="cv.pdf" download class="footer-link lang-es" style="display: none;">Descargar CV</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Info Widget -->
+          <div class="footer-widget">
+            <h3 class="footer-widget-title lang-en">Contact Info</h3>
+            <h3 class="footer-widget-title lang-es" style="display: none;">Información de Contacto</h3>
+            <div class="footer-contact-list">
+              <div class="footer-contact-item">
+                <div class="footer-contact-icon">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class="footer-contact-text">
+                  <a href="mailto:franciscolucena90@gmail.com">franciscolucena90@gmail.com</a>
+                </div>
+              </div>
+              <div class="footer-contact-item">
+                <div class="footer-contact-icon">
+                  <i class="fa-solid fa-code-branch"></i>
+                </div>
+                <div class="footer-contact-text lang-en">
+                  Open to freelance & collaboration opportunities
+                </div>
+                <div class="footer-contact-text lang-es" style="display: none;">
+                  Abierto a oportunidades freelance y de colaboración
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <p class="footer-copyright lang-en">
+            &copy; 2025 FL Automations. All rights reserved. Designed with <i class="fa-solid fa-heart" style="color: var(--color-primary);"></i> by <a href="#">Francisco Lucena</a>
+          </p>
+          <p class="footer-copyright lang-es" style="display: none;">
+            &copy; 2025 FL Automations. Todos los derechos reservados. Diseñado con <i class="fa-solid fa-heart" style="color: var(--color-primary);"></i> por <a href="#">Francisco Lucena</a>
+          </p>
+        </div>
       </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="js/main.js"></script>
+    <script>
+      // Direct implementation of modal functions
+      function openModalDirect() {
+        const modal = document.getElementById('projects-modal');
+        if (modal) {
+          // Show modal with animation
+          modal.style.display = 'block';
+          setTimeout(() => {
+            modal.classList.add('show');
+          }, 10);
+          
+          // Prevent body scrolling
+          document.body.style.overflow = 'hidden';
+          
+          // Create tech filter tags if not already created
+          createTechFilterTagsManually();
+          
+          // Display example project
+          displayExampleProject();
+        }
+      }
+      
+      function closeModalDirect() {
+        const modal = document.getElementById('projects-modal');
+        if (modal) {
+          modal.classList.remove('show');
+          setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }, 300);
+        }
+      }
+      
+      // Manual tech filter tags creation
+      function createTechFilterTagsManually() {
+        const filterContainer = document.getElementById('filter-tags');
+        if (!filterContainer) {
+          console.error('Filter container not found!');
+          return;
+        }
+        
+        // Only create if not already done
+        if (filterContainer.children.length > 0) {
+          console.log('Filter tags already created, skipping');
+          return;
+        }
+        
+        console.log('Creating tech filter tags manually');
+        
+        // Tech icon mapping
+        const techIcons = {
+          nextjs: {
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+            name: 'Next.js'
+          },
+          react: {
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+            name: 'React'
+          },
+          javascript: {
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+            name: 'JavaScript'
+          },
+          typescript: {
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+            name: 'TypeScript'
+          },
+          python: {
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+            name: 'Python'
+          },
+          tailwind: {
+            icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png',
+            name: 'TailwindCSS'
+          },
+          html: {
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+            name: 'HTML5'
+          },
+          css: {
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+            name: 'CSS3'
+          }
+        };
+        
+        // Available tech tags
+        const availableTechTags = [
+          'nextjs', 'react', 'javascript', 'typescript', 'python', 
+          'tailwind', 'html', 'css'
+        ];
+        
+        // Create filter tags container content for debugging
+        let htmlContent = '';
+        
+        // Track active tech filters
+        let activeTechFilters = [];
+        
+        // Create tech filter buttons
+        availableTechTags.forEach(tech => {
+          const techInfo = techIcons[tech] || { name: tech, icon: '' };
+          
+          const tagElement = document.createElement('button');
+          tagElement.className = 'filter-tag';
+          tagElement.dataset.tech = tech;
+          tagElement.dataset.tooltip = techInfo.name;
+          
+          // Create image element for the tech icon
+          const imgElement = document.createElement('img');
+          imgElement.src = techInfo.icon;
+          imgElement.alt = techInfo.name;
+          imgElement.loading = 'lazy';
+          imgElement.className = 'filter-icon';
+          
+          // Add fallback in case image doesn't load
+          imgElement.onerror = function() {
+            this.style.display = 'none';
+            tagElement.textContent = techInfo.name.charAt(0);
+          };
+          
+          tagElement.appendChild(imgElement);
+          
+          tagElement.addEventListener('click', function() {
+            this.classList.toggle('active');
+            
+            const tech = this.dataset.tech;
+            if (this.classList.contains('active')) {
+              // Add to filters
+              if (!activeTechFilters.includes(tech)) {
+                activeTechFilters.push(tech);
+              }
+            } else {
+              // Remove from filters
+              activeTechFilters = activeTechFilters.filter(t => t !== tech);
+            }
+            
+            // Update clear button state
+            updateClearButtonState();
+          });
+          
+          filterContainer.appendChild(tagElement);
+          
+          // Build static HTML content for testing
+          htmlContent += `
+            <button class="filter-tag" data-tech="${tech}" data-tooltip="${techInfo.name}">
+              <img src="${techInfo.icon}" alt="${techInfo.name}" loading="lazy" class="filter-icon">
+            </button>
+          `;
+        });
+        
+        // Log static HTML for debugging
+        console.log('Filter tags HTML:', htmlContent);
+        
+        // If no children were added, try again with static HTML
+        if (filterContainer.children.length === 0) {
+          console.warn('Dynamic filter tag creation failed, trying static HTML');
+          filterContainer.innerHTML = htmlContent;
+        }
+        
+        // Log completion
+        console.log('Filter tags created, count:', filterContainer.children.length);
+        
+        // Set up clear filters button
+        const clearButton = document.querySelector('.clear-filters');
+        if (clearButton) {
+          clearButton.addEventListener('click', function() {
+            if (this.disabled) return;
+            
+            // Reset active filters
+            activeTechFilters = [];
+            document.querySelectorAll('.filter-tag').forEach(tag => {
+              tag.classList.remove('active');
+            });
+            
+            // Clear search input
+            const searchInput = document.getElementById('project-search');
+            const searchInputEs = document.getElementById('project-search-es');
+            if (searchInput) searchInput.value = '';
+            if (searchInputEs) searchInputEs.value = '';
+            
+            // Disable clear button
+            this.disabled = true;
+          });
+          
+          // Update clear button state based on active filters
+          function updateClearButtonState() {
+            const searchInput = document.getElementById('project-search');
+            const searchInputEs = document.getElementById('project-search-es');
+            
+            const hasActiveFilters = activeTechFilters.length > 0;
+            const hasSearchText = (searchInput && searchInput.value.trim() !== '') || 
+                                  (searchInputEs && searchInputEs.value.trim() !== '');
+            
+            clearButton.disabled = !(hasActiveFilters || hasSearchText);
+          }
+          
+          // Add listeners to search inputs
+          const searchInput = document.getElementById('project-search');
+          const searchInputEs = document.getElementById('project-search-es');
+          
+          if (searchInput) {
+            searchInput.addEventListener('input', updateClearButtonState);
+          }
+          
+          if (searchInputEs) {
+            searchInputEs.addEventListener('input', updateClearButtonState);
+          }
+        } else {
+          console.error('Clear filters button not found');
+        }
+      }
+      
+      // Display example project in the modal
+      function displayExampleProject() {
+        const projectsContainer = document.getElementById('modal-projects');
+        if (!projectsContainer) return;
+        
+        // Clear existing content
+        projectsContainer.innerHTML = '';
+        
+        // Example project data
+        const exampleProject = {
+          title: "FL Automations",
+          description: {
+            en: "A dynamic portfolio website showcasing web development and automation projects. Built with modern web technologies.",
+            es: "Un sitio web de portafolio dinámico que muestra proyectos de desarrollo web y automatización. Construido con tecnologías web modernas."
+          },
+          technologies: ["nextjs", "react", "javascript", "tailwind"],
+          url: "https://www.flautomations.com.ar/"
+        };
+        
+        // Determine language
+        const isEnglish = document.querySelector('.lang-en').style.display !== 'none';
+        const description = isEnglish ? exampleProject.description.en : exampleProject.description.es;
+        
+        // Create tech tags HTML
+        const techTagsHTML = exampleProject.technologies.map(tech => {
+          const techName = getTechName(tech);
+          const techIcon = getTechIcon(tech);
+          
+          return `
+            <span class="tech-tag" data-tooltip="${techName}">
+              <img src="${techIcon}" alt="${techName}" class="tech-icon-small">
+              <span>${techName}</span>
+            </span>`;
+        }).join('');
+        
+        // Create project card
+        const projectHTML = `
+          <div class="modal-project-card">
+            <h3 class="modal-project-title">${exampleProject.title}</h3>
+            <p class="modal-project-description">${description}</p>
+            <div class="tech-tags">${techTagsHTML}</div>
+            <div class="modal-project-links mt-auto">
+              <a href="${exampleProject.url}" target="_blank" title="Live Preview" aria-label="Visit live project">
+                <i class="fa-solid fa-eye"></i>
+              </a>
+              <a href="mailto:franciscolucena90@gmail.com?subject=Suggestion for ${encodeURIComponent(exampleProject.title)}" title="Suggest Ideas" aria-label="Suggest ideas for this project">
+                <i class="fa-solid fa-lightbulb"></i>
+              </a>
+            </div>
+          </div>
+        `;
+        
+        // Add the project card
+        projectsContainer.innerHTML = projectHTML;
+        
+        // Add navigation buttons
+        addCarouselNavigation(projectsContainer);
+      }
+      
+      // Add carousel navigation buttons
+      function addCarouselNavigation(container) {
+        // Create previous button
+        const prevButton = document.createElement('button');
+        prevButton.className = 'carousel-nav carousel-prev';
+        prevButton.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+        prevButton.setAttribute('aria-label', 'Previous project');
+        
+        // Create next button
+        const nextButton = document.createElement('button');
+        nextButton.className = 'carousel-nav carousel-next';
+        nextButton.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+        nextButton.setAttribute('aria-label', 'Next project');
+        
+        // Add buttons to container
+        container.appendChild(prevButton);
+        container.appendChild(nextButton);
+        
+        // Add click handlers
+        prevButton.addEventListener('click', () => {
+          console.log('Previous project');
+        });
+        
+        nextButton.addEventListener('click', () => {
+          console.log('Next project');
+        });
+      }
+      
+      // Helper function to get tech name
+      function getTechName(tech) {
+        const techMap = {
+          nextjs: 'Next.js',
+          react: 'React',
+          javascript: 'JavaScript',
+          typescript: 'TypeScript',
+          python: 'Python',
+          tailwind: 'TailwindCSS',
+          html: 'HTML5',
+          css: 'CSS3'
+        };
+        
+        return techMap[tech] || tech;
+      }
+      
+      // Helper function to get tech icon
+      function getTechIcon(tech) {
+        const techIconMap = {
+          nextjs: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+          react: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+          javascript: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+          typescript: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+          python: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+          tailwind: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png',
+          html: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+          css: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg'
+        };
+        
+        return techIconMap[tech] || '';
+      }
+      
+      // Add event listeners for the close modal button
+      document.addEventListener('DOMContentLoaded', function() {
+        const closeBtn = document.querySelector('.close-modal');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function() {
+            closeModalDirect();
+          });
+        }
+        
+        // Close modal when clicking outside of content
+        const modal = document.getElementById('projects-modal');
+        if (modal) {
+          modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+              closeModalDirect();
+            }
+          });
+        }
+        
+        // Add Escape key support to close modal
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && modal && modal.style.display === 'block') {
+            closeModalDirect();
+          }
+        });
+      });
+      
+      // Ensure coin flip is initialized after page loads
+      window.addEventListener('load', function() {
+        if (typeof initCoinFlip === 'function') {
+          console.log('Manually initializing coin flip');
+          initCoinFlip();
+        }
+        
+        // Debug modal functionality
+        const viewAllBtn = document.getElementById('view-all-projects');
+        const viewAllBtnEs = document.getElementById('view-all-projects-es');
+        const modal = document.getElementById('projects-modal');
+        
+        if (viewAllBtn) {
+          console.log('View all projects button found');
+          viewAllBtn.addEventListener('click', function(e) {
+            console.log('View all projects button clicked');
+            e.preventDefault();
+            if (typeof openModal === 'function') {
+              console.log('openModal function exists, calling it');
+              openModal();
+            } else {
+              console.log('openModal function not found, using direct implementation');
+              openModalDirect();
+            }
+          });
+        } else {
+          console.error('View all projects button not found');
+        }
+        
+        if (viewAllBtnEs) {
+          console.log('Spanish view all projects button found');
+          viewAllBtnEs.addEventListener('click', function(e) {
+            console.log('Spanish view all projects button clicked');
+            e.preventDefault();
+            if (typeof openModal === 'function') {
+              openModal();
+            } else {
+              openModalDirect();
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>

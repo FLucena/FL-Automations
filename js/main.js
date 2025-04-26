@@ -251,6 +251,7 @@ function initScrollHandler() {
   // Variables to track scroll state
   let isPageTop = true;
   let isScrolling = false;
+  let lastScrollState = true; // true = top, false = scrolled
   
   // Log initial state
   console.log('Scroll indicator found:', scrollIndicator ? 'Yes' : 'No');
@@ -265,22 +266,43 @@ function initScrollHandler() {
     // Update arrow direction and text based on scroll position
     const updateArrowDirection = () => {
       const scrollTop = window.scrollY || window.pageYOffset;
+      const isAtTop = scrollTop < 100;
       
-      // If we're at the top of the page
-      if (scrollTop < 100) {
-        isPageTop = true;
-        scrollArrow.classList.remove('scroll-arrow-up');
-        scrollArrow.classList.add('scroll-arrow-down');
-        scrollIndicator.setAttribute('aria-label', isSpanishMode() ? 'Desplácese a la sección Sobre mí' : 'Scroll to about section');
-        scrollTextEn.textContent = 'Scroll down';
-        scrollTextEs.textContent = 'Desplácese hacia abajo';
-      } else {
-        isPageTop = false;
-        scrollArrow.classList.remove('scroll-arrow-down');
-        scrollArrow.classList.add('scroll-arrow-up');
-        scrollIndicator.setAttribute('aria-label', isSpanishMode() ? 'Volver al inicio' : 'Back to top');
-        scrollTextEn.textContent = 'Back to top';
-        scrollTextEs.textContent = 'Volver arriba';
+      // Only update if the state has changed
+      if (isAtTop !== lastScrollState) {
+        console.log('Scroll state changed:', isAtTop ? 'top' : 'scrolled');
+        
+        // Start fade transition
+        scrollArrow.style.opacity = '0.5';
+        
+        // After brief fade out, change the arrow class and fade back in
+        setTimeout(() => {
+          if (isAtTop) {
+            // If we're at the top of the page
+            isPageTop = true;
+            scrollArrow.classList.remove('scroll-arrow-up');
+            scrollArrow.classList.add('scroll-arrow-down');
+            scrollIndicator.setAttribute('aria-label', isSpanishMode() ? 'Desplácese a la sección Sobre mí' : 'Scroll to about section');
+            scrollTextEn.textContent = 'Scroll down';
+            scrollTextEs.textContent = 'Desplácese hacia abajo';
+          } else {
+            // If we're scrolled down
+            isPageTop = false;
+            scrollArrow.classList.remove('scroll-arrow-down');
+            scrollArrow.classList.add('scroll-arrow-up');
+            scrollIndicator.setAttribute('aria-label', isSpanishMode() ? 'Volver al inicio' : 'Back to top');
+            scrollTextEn.textContent = 'Back to top';
+            scrollTextEs.textContent = 'Volver arriba';
+          }
+          
+          // Fade back in
+          setTimeout(() => {
+            scrollArrow.style.opacity = '1';
+          }, 50);
+        }, 150);
+        
+        // Update the last state
+        lastScrollState = isAtTop;
       }
     };
     
@@ -1201,10 +1223,10 @@ function displayFeaturedProjects() {
           <a href="${project.url}" target="_blank" class="live-preview" title="Live Preview" aria-label="Visit live project">
             <i class="fa-solid fa-eye"></i>
           </a>
-          <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="live-preview lang-en" title="Suggest Ideas" aria-label="Suggest ideas for this project">
+          <a href="mailto:franciscolucena90@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="live-preview lang-en" title="Suggest Ideas" aria-label="Suggest ideas for this project">
             <i class="fa-solid fa-lightbulb"></i>
           </a>
-          <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="live-preview lang-es" style="display: none;" title="Sugerir Ideas" aria-label="Sugerir ideas para este proyecto">
+          <a href="mailto:franciscolucena90@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="live-preview lang-es" style="display: none;" title="Sugerir Ideas" aria-label="Sugerir ideas para este proyecto">
             <i class="fa-solid fa-lightbulb"></i>
           </a>
         </div>
@@ -1317,6 +1339,16 @@ function toggleLanguage() {
       else if (el.tagName === 'A' && el.closest('nav')) {
         el.style.display = el.style.display === 'none' ? 'inline-block' : 'none';
       }
+      // Special handling for footer elements
+      else if (el.closest('.footer')) {
+        if (el.classList.contains('footer-widget-title')) {
+          el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        } else if (el.tagName === 'A' && el.classList.contains('footer-link')) {
+          el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        } else {
+          el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+      }
       else {
         el.style.display = el.style.display === 'none' ? 'block' : 'none';
       }
@@ -1332,6 +1364,16 @@ function toggleLanguage() {
       // Special handling for navigation links
       else if (el.tagName === 'A' && el.closest('nav')) {
         el.style.display = el.style.display === 'none' ? 'inline-block' : 'none';
+      }
+      // Special handling for footer elements
+      else if (el.closest('.footer')) {
+        if (el.classList.contains('footer-widget-title')) {
+          el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        } else if (el.tagName === 'A' && el.classList.contains('footer-link')) {
+          el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        } else {
+          el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
       }
       else {
         el.style.display = el.style.display === 'none' ? 'block' : 'none';
@@ -1370,6 +1412,13 @@ function toggleLanguage() {
   
   // Update language display in modal if it's open
   updateLanguageDisplayInModal();
+  
+  // Update placeholder text in footer newsletter based on language
+  const newsletterInput = document.querySelector('.footer-newsletter-input');
+  if (newsletterInput) {
+    const isSpanish = document.querySelector('.lang-en').style.display === 'none';
+    newsletterInput.placeholder = isSpanish ? 'Correo electrónico' : 'Email address';
+  }
 }
 
 // Variables for typed.js instances
@@ -1624,10 +1673,10 @@ function displayPaginatedProjects(animationClass = '') {
         <a href="${currentProject.url}" target="_blank" title="Live Preview" aria-label="Visit live project">
           <i class="fa-solid fa-eye"></i>
         </a>
-        <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(currentProject.title)}" class="lang-en" title="Suggest Ideas" aria-label="Suggest ideas for this project">
+        <a href="mailto:franciscolucena90@gmail.com?subject=Suggestion for ${encodeURIComponent(currentProject.title)}" class="lang-en" title="Suggest Ideas" aria-label="Suggest ideas for this project">
           <i class="fa-solid fa-lightbulb"></i>
         </a>
-        <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(currentProject.title)}" class="lang-es" style="display: none;" title="Sugerir Ideas" aria-label="Sugerir ideas para este proyecto">
+        <a href="mailto:franciscolucena90@gmail.com?subject=Sugerencia para ${encodeURIComponent(currentProject.title)}" class="lang-es" style="display: none;" title="Sugerir Ideas" aria-label="Sugerir ideas para este proyecto">
           <i class="fa-solid fa-lightbulb"></i>
         </a>
       </div>
@@ -1659,4 +1708,286 @@ function displayPaginatedProjects(animationClass = '') {
   
   // Make sure language display matches current state
   updateLanguageDisplayInModal();
-} 
+}
+
+// Initialize newsletter form
+function initNewsletterForm() {
+  const newsletterForm = document.querySelector('.footer-newsletter-form');
+  
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      subscribeToNewsletter(e);
+    });
+  }
+}
+
+// Handle newsletter subscription
+function subscribeToNewsletter(event) {
+  event.preventDefault();
+  
+  // Get form element and email input
+  const form = event.target;
+  const emailInput = form.querySelector('.footer-newsletter-input');
+  const email = emailInput.value.trim();
+  const isEnglish = document.querySelector('.lang-en').style.display !== 'none';
+  
+  // Validate email
+  if (!email || !isValidEmail(email)) {
+    // Show error state
+    emailInput.classList.add('error');
+    
+    // Add error message if it doesn't exist
+    let errorMessage = form.querySelector('.newsletter-error');
+    if (!errorMessage) {
+      errorMessage = document.createElement('div');
+      errorMessage.className = 'newsletter-error';
+      errorMessage.style.color = '#ff6b6b';
+      errorMessage.style.fontSize = '0.85rem';
+      errorMessage.style.marginTop = '0.5rem';
+      form.appendChild(errorMessage);
+    }
+    
+    errorMessage.textContent = isEnglish ? 
+      'Please enter a valid email address.' : 
+      'Por favor, introduce una dirección de correo válida.';
+    
+    return;
+  }
+  
+  // Clear any previous error state
+  emailInput.classList.remove('error');
+  const errorMessage = form.querySelector('.newsletter-error');
+  if (errorMessage) errorMessage.remove();
+  
+  // Show loading state
+  const submitButton = form.querySelector('.footer-newsletter-button');
+  const originalHtml = submitButton.innerHTML;
+  submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+  submitButton.disabled = true;
+  emailInput.disabled = true;
+  
+  // Simulate API call with timeout
+  setTimeout(() => {
+    try {
+      // Simulate successful subscription
+      
+      // Show success message
+      let successMessage = form.querySelector('.newsletter-success');
+      if (!successMessage) {
+        successMessage = document.createElement('div');
+        successMessage.className = 'newsletter-success';
+        successMessage.style.color = '#4ed164';
+        successMessage.style.fontSize = '0.85rem';
+        successMessage.style.marginTop = '0.5rem';
+        form.appendChild(successMessage);
+      }
+      
+      successMessage.textContent = isEnglish ? 
+        'Thank you for subscribing!' : 
+        '¡Gracias por suscribirte!';
+      
+      // Reset form
+      emailInput.value = '';
+      
+      // Reset button
+      submitButton.innerHTML = originalHtml;
+      submitButton.disabled = false;
+      emailInput.disabled = false;
+      
+      // Remove success message after 5 seconds
+      setTimeout(() => {
+        if (successMessage.parentNode) {
+          successMessage.remove();
+        }
+      }, 5000);
+      
+    } catch (error) {
+      // Show error message
+      let errorMsg = form.querySelector('.newsletter-error');
+      if (!errorMsg) {
+        errorMsg = document.createElement('div');
+        errorMsg.className = 'newsletter-error';
+        errorMsg.style.color = '#ff6b6b';
+        errorMsg.style.fontSize = '0.85rem';
+        errorMsg.style.marginTop = '0.5rem';
+        form.appendChild(errorMsg);
+      }
+      
+      errorMsg.textContent = isEnglish ? 
+        'An error occurred. Please try again later.' : 
+        'Ocurrió un error. Por favor, inténtalo más tarde.';
+      
+      // Reset button
+      submitButton.innerHTML = originalHtml;
+      submitButton.disabled = false;
+      emailInput.disabled = false;
+    }
+  }, 1500);
+}
+
+// Function to create tech filter tags manually
+function createTechFilterTagsManually() {
+  console.log("Creating tech filter tags manually");
+  const filterContainer = document.getElementById('filter-tags');
+  
+  if (!filterContainer) {
+    console.error("Filter container not found!");
+    return;
+  }
+  
+  // Check if filter tags already exist
+  if (filterContainer.children.length > 0) {
+    console.log("Filter tags already exist, skipping creation");
+    return;
+  }
+
+  console.log("No existing filter tags found, creating them now");
+  
+  // Tech stack data
+  const techStacks = [
+    { name: 'HTML', icon: 'img/tech/html.png' },
+    { name: 'CSS', icon: 'img/tech/css.png' },
+    { name: 'JavaScript', icon: 'img/tech/javascript.png' },
+    { name: 'TypeScript', icon: 'img/tech/typescript.png' },
+    { name: 'React', icon: 'img/tech/react.png' },
+    { name: 'Vue', icon: 'img/tech/vue.png' },
+    { name: 'Angular', icon: 'img/tech/angular.png' },
+    { name: 'Node.js', icon: 'img/tech/nodejs.png' },
+    { name: 'Python', icon: 'img/tech/python.png' },
+    { name: 'PHP', icon: 'img/tech/php.png' },
+    { name: 'WordPress', icon: 'img/tech/wordpress.png' },
+    { name: 'Laravel', icon: 'img/tech/laravel.png' },
+    { name: 'Bootstrap', icon: 'img/tech/bootstrap.png' },
+    { name: 'Tailwind', icon: 'img/tech/tailwind.png' },
+    { name: 'MySQL', icon: 'img/tech/mysql.png' },
+    { name: 'MongoDB', icon: 'img/tech/mongodb.png' }
+  ];
+
+  // Create filter tags HTML
+  let htmlContent = '';
+  techStacks.forEach(tech => {
+    htmlContent += `
+      <div class="filter-tag" data-tech="${tech.name.toLowerCase()}" data-tooltip="${tech.name}">
+        <img class="filter-icon" src="${tech.icon}" alt="${tech.name} icon">
+      </div>
+    `;
+  });
+
+  // Add clear filters button
+  htmlContent += `<button class="clear-filters" id="clear-filters" disabled>Clear Filters</button>`;
+  
+  console.log("Generated HTML:", htmlContent);
+  
+  // Insert the HTML into the filter container
+  filterContainer.innerHTML = htmlContent;
+  
+  // Add event listeners to filter tags
+  const filterTags = document.querySelectorAll('.filter-tag');
+  filterTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      tag.classList.toggle('active');
+      filterProjects();
+      updateClearFiltersButton();
+    });
+  });
+  
+  // Add event listener to clear filters button
+  const clearFiltersBtn = document.getElementById('clear-filters');
+  if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener('click', clearFilters);
+  }
+  
+  // Add event listeners to search inputs
+  const searchInputs = document.querySelectorAll('.search-container input');
+  searchInputs.forEach(input => {
+    input.addEventListener('input', () => {
+      filterProjects();
+      updateClearFiltersButton();
+    });
+  });
+  
+  console.log("Tech filter tags created successfully");
+}
+
+// Function to filter projects
+function filterProjects() {
+  const activeFilters = Array.from(document.querySelectorAll('.filter-tag.active')).map(tag => tag.dataset.tech);
+  const searchValue = document.querySelector('.search-container input')?.value.toLowerCase() || '';
+  
+  const projects = document.querySelectorAll('.project-card');
+  
+  projects.forEach(project => {
+    const techStack = project.dataset.techStack?.toLowerCase().split(',') || [];
+    const projectName = project.querySelector('.card-title')?.textContent.toLowerCase() || '';
+    const projectDesc = project.querySelector('.card-text')?.textContent.toLowerCase() || '';
+    
+    const matchesTech = activeFilters.length === 0 || activeFilters.some(filter => techStack.includes(filter));
+    const matchesSearch = searchValue === '' || 
+      projectName.includes(searchValue) || 
+      projectDesc.includes(searchValue);
+    
+    if (matchesTech && matchesSearch) {
+      project.style.display = '';
+    } else {
+      project.style.display = 'none';
+    }
+  });
+  
+  // Update projects counter
+  updateProjectCounter();
+}
+
+// Function to clear filters
+function clearFilters() {
+  // Clear active filters
+  const activeFilters = document.querySelectorAll('.filter-tag.active');
+  activeFilters.forEach(filter => filter.classList.remove('active'));
+  
+  // Clear search input
+  const searchInput = document.querySelector('.search-container input');
+  if (searchInput) {
+    searchInput.value = '';
+  }
+  
+  // Reset projects visibility
+  filterProjects();
+  
+  // Disable clear filters button
+  const clearFiltersBtn = document.getElementById('clear-filters');
+  if (clearFiltersBtn) {
+    clearFiltersBtn.disabled = true;
+  }
+}
+
+// Function to update clear filters button state
+function updateClearFiltersButton() {
+  const activeFilters = document.querySelectorAll('.filter-tag.active');
+  const searchValue = document.querySelector('.search-container input')?.value || '';
+  
+  const clearFiltersBtn = document.getElementById('clear-filters');
+  if (clearFiltersBtn) {
+    clearFiltersBtn.disabled = activeFilters.length === 0 && searchValue === '';
+  }
+}
+
+// Function to update project counter
+function updateProjectCounter() {
+  const visibleProjects = document.querySelectorAll('.project-card[style="display: ;"], .project-card:not([style])').length;
+  const totalProjects = document.querySelectorAll('.project-card').length;
+  
+  const counterElement = document.getElementById('projects-counter');
+  if (counterElement) {
+    counterElement.textContent = `Showing ${visibleProjects} of ${totalProjects} projects`;
+  }
+}
+
+// Initialize filter tags when document is ready
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOMContentLoaded triggered");
+  createTechFilterTagsManually();
+  
+  // Initial update of project counter
+  updateProjectCounter();
+});
+  

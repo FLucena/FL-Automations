@@ -1,0 +1,154 @@
+/* Project modal styling */
+.project-modal .modal-content {
+  background-color: var(--bg-color);
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.project-modal .carousel-control-prev,
+.project-modal .carousel-control-next {
+  width: 10%;
+  opacity: 0.8;
+  z-index: 30;
+}
+
+.project-modal .carousel-control-prev-icon,
+.project-modal .carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 1.5rem;
+}
+
+/* Ensure arrows don't overlap with content */
+.project-modal .carousel-inner {
+  padding: 0 2rem;
+}
+
+/* Ensure arrows don't collide with project container */
+.project-modal .carousel-control-prev {
+  left: -10px;
+}
+
+.project-modal .carousel-control-next {
+  right: -10px;
+}
+
+/* Fix search input and button */
+.search-container {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 0.75rem 3rem 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.search-container button {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.search-container button:hover {
+  opacity: 1;
+}
+
+/* Tech Filter Tags */
+#filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.filter-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.filter-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filter-tag.active {
+  border-color: var(--primary-color);
+  background-color: rgba(var(--primary-rgb), 0.1);
+}
+
+.filter-tag img.filter-icon {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.filter-tag::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.filter-tag:hover::after {
+  opacity: 1;
+  visibility: visible;
+  bottom: -1.5rem;
+}
+
+.clear-filters {
+  margin-left: auto;
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+}
+
+.clear-filters:not(:disabled):hover {
+  opacity: 1;
+  background-color: rgba(var(--primary-rgb), 0.1);
+}
+
+.clear-filters:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+} 

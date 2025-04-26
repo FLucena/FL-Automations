@@ -1,0 +1,121 @@
+/**
+ * Coin flip CSS fixes - Override Bootstrap and other framework styles
+ * to ensure proper 3D transforms
+ */
+
+/* Reset box-sizing for elements within the profile image */
+.profile-image *,
+.profile-image *::before,
+.profile-image *::after {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure profile image is properly displayed */
+.profile-image {
+  position: relative !important;
+  width: 300px !important;
+  height: 300px !important;
+  perspective: 1000px !important;
+  margin: 0 auto !important;
+  z-index: 10 !important;
+  display: block !important;
+}
+
+/* Coin container styling */
+.coin {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform-style: preserve-3d !important;
+  transition: transform 0.5s ease !important;
+  cursor: pointer !important;
+  z-index: 15 !important;
+}
+
+/* Faces of the coin */
+.coin-face {
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+  backface-visibility: hidden !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Front face styling */
+.coin-front {
+  z-index: 2 !important;
+  transform: rotateY(0deg) !important;
+  background-color: #f5f5f5 !important;
+}
+
+/* Back face styling */
+.coin-back {
+  transform: rotateY(180deg) !important;
+  background-color: #ffffff !important;
+  z-index: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Profile image styling */
+.profile-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  display: block !important;
+}
+
+/* Tech icon on back of coin */
+.tech-icon {
+  max-width: 60% !important;
+  max-height: 60% !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+/* Reset all Tailwind and Bootstrap transform styles that might interfere */
+.profile-image *,
+.coin,
+.coin-face,
+.coin-front,
+.coin-back {
+  transform-style: preserve-3d !important;
+}
+
+/* Ensure tooltip works properly */
+[data-tooltip] {
+  position: relative !important;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip) !important;
+  position: absolute !important;
+  bottom: -30px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  padding: 4px 8px !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  color: white !important;
+  border-radius: 4px !important;
+  font-size: 12px !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.3s, visibility 0.3s !important;
+  white-space: nowrap !important;
+  z-index: 100 !important;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
