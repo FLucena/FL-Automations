@@ -36,10 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('Error loading profile image');
       this.src = 'https://via.placeholder.com/300x300?text=Francisco';
     };
-    
-    profileImg.onload = function() {
-      console.log('Profile image loaded successfully');
-    };
   }
   
   // Handle navbar scroll effect
@@ -55,46 +51,75 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize the coin flip functionality
   initCoinFlip();
   
-  // Mobile menu toggle
+  // Mobile menu toggle - Updated to fix passive event issues
+  initMobileMenu();
+});
+
+// Initialize mobile menu functionality
+function initMobileMenu() {
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const nav = document.querySelector('nav');
   
-  if (mobileMenuToggle && nav) {
-    mobileMenuToggle.addEventListener('click', function() {
-      nav.classList.toggle('mobile-nav-open');
-      mobileMenuToggle.classList.toggle('active');
-      document.body.classList.toggle('menu-open');
-    });
-    
-    // Close mobile menu when clicking on a link
-    const navLinks = document.querySelectorAll('nav ul li a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        if (nav.classList.contains('mobile-nav-open')) {
-          nav.classList.remove('mobile-nav-open');
-          mobileMenuToggle.classList.remove('active');
-          document.body.classList.remove('menu-open');
-        }
-      });
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
-      if (nav.classList.contains('mobile-nav-open') && 
-          !nav.contains(event.target) && 
-          !mobileMenuToggle.contains(event.target)) {
-        nav.classList.remove('mobile-nav-open');
-        mobileMenuToggle.classList.remove('active');
-        document.body.classList.remove('menu-open');
+  if (!mobileMenuToggle || !nav) return;
+  
+  // Toggle mobile menu on click
+  mobileMenuToggle.addEventListener('click', function(e) {
+    toggleMobileMenu(nav, mobileMenuToggle);
+  });
+  
+  // Add keyboard accessibility for the mobile menu toggle
+  mobileMenuToggle.addEventListener('keydown', function(e) {
+    // Toggle on Enter or Space key
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMobileMenu(nav, mobileMenuToggle);
+    }
+  });
+  
+  // Close mobile menu when clicking on a link
+  const navLinks = document.querySelectorAll('nav ul li a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      if (nav.classList.contains('mobile-nav-open')) {
+        toggleMobileMenu(nav, mobileMenuToggle, false);
       }
     });
+  });
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+    // Don't process if menu is already closed
+    if (!nav.classList.contains('mobile-nav-open')) return;
+    
+    // Check if click is outside menu and toggle
+    if (!nav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+      toggleMobileMenu(nav, mobileMenuToggle, false);
+    }
+  });
+  
+  // Helper function to toggle mobile menu state
+  function toggleMobileMenu(nav, toggle, forceState) {
+    const newState = forceState !== undefined ? forceState : !nav.classList.contains('mobile-nav-open');
+    
+    if (newState) {
+      nav.classList.add('mobile-nav-open');
+      toggle.classList.add('active');
+      document.body.classList.add('menu-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      nav.classList.remove('mobile-nav-open');
+      toggle.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
   }
-});
+}
 
 // Initialize the coin flip functionality
 function initCoinFlip() {
   const coin = document.querySelector('.coin');
   const techIcon = document.getElementById('tech-icon');
+  const profileImg = document.querySelector('.profile-img');
   
   if (!coin || !techIcon) return;
   
@@ -106,9 +131,25 @@ function initCoinFlip() {
   let startX, startY;
   let rotateX = 0, rotateY = 0;
   let lastRotateX = 0, lastRotateY = 0;
+  let returnToOriginalTimeout;
+  let isFlipped = false;
+  
+  // Prevent browser's default image dragging behavior
+  if (profileImg) {
+    profileImg.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+  }
+  
+  // Prevent default drag on the coin and its children
+  coin.addEventListener('dragstart', (e) => {
+    e.preventDefault();
+  });
   
   // Mouse down event
   coin.addEventListener('mousedown', (e) => {
+    e.preventDefault(); // Prevent default browser drag behavior
+    clearTimeout(returnToOriginalTimeout);
     isDragging = true;
     startX = e.clientX;
     startY = e.clientY;
@@ -147,20 +188,43 @@ function initCoinFlip() {
     if (isFlipped) {
       // Update tech icon for next flip
       setTimeout(updateTechIcon, 500);
+    } else {
+      // Return to original position immediately when not flipped
+      returnToOriginalPosition();
     }
   });
   
-  // Touch events for mobile
+  // Mouse out event - return to original position immediately
+  coin.addEventListener('mouseleave', () => {
+    if (isDragging) {
+      isDragging = false;
+      
+      // If not flipped, return to original position immediately
+      if (!isFlipped) {
+        returnToOriginalPosition();
+      }
+    } else {
+      // If already not dragging, start the timeout
+      startReturnToOriginalTimeout();
+    }
+  });
+  
+  // Touch events for mobile - Modified to prevent default behavior
   coin.addEventListener('touchstart', (e) => {
+    clearTimeout(returnToOriginalTimeout);
     isDragging = true;
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
     coin.style.transition = 'none';
-    e.preventDefault();
-  });
+  }, { passive: false });
   
   document.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
+    
+    // Prevent default scrolling when dragging the coin
+    if (e.target === coin || coin.contains(e.target)) {
+      e.preventDefault();
+    }
     
     const deltaX = e.touches[0].clientX - startX;
     const deltaY = e.touches[0].clientY - startY;
@@ -173,10 +237,9 @@ function initCoinFlip() {
     
     // Check if coin is flipped
     isFlipped = Math.abs(rotateY % 360) > 90 && Math.abs(rotateY % 360) < 270;
-    
-    e.preventDefault();
-  });
+  }, { passive: false });
   
+  // Touch end event
   document.addEventListener('touchend', () => {
     if (!isDragging) return;
     
@@ -190,11 +253,81 @@ function initCoinFlip() {
     // If the coin is flipped, update the tech icon for next flip
     if (isFlipped) {
       setTimeout(updateTechIcon, 500);
+    } else {
+      // Return to original position immediately when not flipped
+      returnToOriginalPosition();
     }
-  });
+  }, { passive: true });
   
-  // Double click to flip the coin
-  coin.addEventListener('dblclick', () => {
+  // Touch leave - return to original position immediately
+  coin.addEventListener('touchleave', () => {
+    if (isDragging) {
+      isDragging = false;
+      
+      // If not flipped, return to original position immediately
+      if (!isFlipped) {
+        returnToOriginalPosition();
+      }
+    } else {
+      // If already not dragging, start the timeout
+      startReturnToOriginalTimeout();
+    }
+  }, { passive: true });
+  
+  // Double click to flip the coin - using touchend for mobile as well
+  coin.addEventListener('dblclick', flipCoin);
+  
+  // Add a tap handler for mobile - fixed to avoid conflicts
+  let lastTap = 0;
+  coin.addEventListener('touchend', (e) => {
+    // Skip if we're dragging (this is part of the coin rotation)
+    if (isDragging) return;
+    
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    
+    if (tapLength < 300 && tapLength > 0) {
+      flipCoin();
+      // Don't try to prevent default on passive listeners
+      // This part is for "double tap" detection only
+    }
+    
+    lastTap = currentTime;
+  }, { passive: true });
+  
+  // Function to gradually return the coin to its original position
+  function startReturnToOriginalTimeout() {
+    clearTimeout(returnToOriginalTimeout);
+    
+    // Only return to original position if not deliberately flipped
+    if (!isFlipped || rotateY % 360 === 0) {
+      returnToOriginalTimeout = setTimeout(() => {
+        returnToOriginalPosition();
+      }, 2000); // Wait 2 seconds of inactivity before returning
+    }
+  }
+  
+  // New function to return coin to original position with smooth animation
+  function returnToOriginalPosition() {
+    // Use a faster animation for the return-to-origin than for the idle timeout
+    // This makes it feel more responsive when directly interacting
+    coin.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    
+    // First reset variables
+    rotateX = 0;
+    rotateY = 0;
+    lastRotateX = 0;
+    lastRotateY = 0;
+    
+    // Then apply transform
+    coin.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    
+    // Clear any existing timeouts to prevent conflicts
+    clearTimeout(returnToOriginalTimeout);
+  }
+  
+  function flipCoin() {
+    clearTimeout(returnToOriginalTimeout);
     coin.style.transition = 'transform 0.8s ease';
     
     if (!isFlipped) {
@@ -214,7 +347,7 @@ function initCoinFlip() {
     rotateX = 0;
     
     coin.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  });
+  }
 }
 
 // Update the tech icon on the back of the coin
