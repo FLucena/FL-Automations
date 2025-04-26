@@ -1,0 +1,133 @@
+/**
+ * Typography - Text styles and font treatments
+ */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 0.5em;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+.highlight {
+    color: var(--highlight-color);
+    font-weight: 700;
+}
+
+/* Hero section typography */
+.hero-title {
+    font-size: 60px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Section headings */
+.projects h1,
+.about-one h1,
+.project-list h1 {
+    font-size: 50px;
+    line-height: 1.2;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.projects h1 span,
+.about-one span,
+.main-one span {
+    color: var(--color-text-secondary);
+    font-weight: 600;
+}
+
+/* Card headings */
+.projects-div h3,
+.project h2,
+.modal-project-title {
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.projects-div h3 {
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Contact heading */
+.contact h1 {
+    font-size: 52px;
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+    font-weight: 700;
+}
+
+.contact h1 span {
+    color: var(--color-text-secondary);
+    position: relative;
+    display: inline-block;
+}
+
+/* Responsive typography */
+@media screen and (max-width: 768px) {
+    .hero-title {
+        font-size: 40px;
+    }
+    
+    .hero-subtitle {
+        font-size: 18px;
+    }
+    
+    .projects h1,
+    .about-one h1,
+    .project-list h1 {
+        font-size: 36px;
+    }
+    
+    .projects-div h3,
+    .project h2 {
+        font-size: 22px;
+    }
+    
+    .contact h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-title {
+        font-size: 32px;
+    }
+    
+    .hero-subtitle {
+        font-size: 16px;
+    }
+    
+    .contact h1 {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .hero-title {
+        font-size: 28px;
+    }
+} 

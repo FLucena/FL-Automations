@@ -1,0 +1,144 @@
+/**
+ * Grid - Grid layout styles for project cards and containers
+ */
+
+/* Main projects grid container */
+.projects .project-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Standard projects container */
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Hero sections with two columns */
+.hero .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+/* About section layout */
+.about {
+    width: 100%;
+    height: auto;
+    padding: 40px 50px;
+    justify-content: center;
+    margin-top: 0;
+    display: flex;
+}
+
+.about-one {
+    padding: 0 60px;
+    width: 60%;
+}
+
+.about-two {
+    width: 40%;
+}
+
+/* Fiverr card layout */
+.fiverr-card-content {
+    display: flex;
+    padding: 25px;
+    align-items: center;
+}
+
+/* Modal two-column layout */
+.modal-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-left-column {
+    width: 30%;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-right-column {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Responsive grid layouts */
+@media screen and (max-width: 768px) {
+    .projects .project-cards-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 1rem;
+    }
+    
+    .projects-container {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+
+    .hero .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 15px;
+    }
+    
+    .hero-content {
+        order: 2;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .about {
+        padding: 60px 20px;
+        flex-direction: column;
+    }
+    
+    .about-one {
+        padding: 0 15px;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+    
+    .fiverr-card-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .modal-content {
+        flex-direction: column;
+        width: 95%;
+        margin: 3vh auto;
+    }
+    
+    .modal-left-column,
+    .modal-right-column {
+        width: 100%;
+        max-height: initial;
+    }
+    
+    .modal-left-column {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+} 

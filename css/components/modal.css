@@ -1,0 +1,386 @@
+/**
+ * Modal - Modal dialog and overlay styles
+ */
+
+/* Modal overlay */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.85);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+/* Modal content */
+.modal-content {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--bg-secondary);
+    margin: 5vh auto;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transform: translateY(-30px);
+    transition: transform 0.3s ease;
+    max-height: 90vh;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+/* Modal header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Close button */
+.close-modal {
+    color: var(--text-secondary);
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-modal:hover {
+    color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+/* Modal search and filter section */
+.modal-search-filter {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 0;
+}
+
+.search-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Filter area */
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.filter-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+}
+
+/* Filter tag styles */
+.filter-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 6px;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+}
+
+.filter-tag img {
+    width: 24px;
+    height: 24px;
+    max-width: 24px;
+    max-height: 24px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.filter-icon {
+    width: 24px;
+    height: 24px;
+    max-width: 24px;
+    max-height: 24px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.filter-tag:hover {
+    transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-tag.active {
+    background-color: var(--accent-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(94, 96, 206, 0.3);
+}
+
+/* Tooltip for filter tags */
+.filter-tag::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.filter-tag:hover::after {
+    opacity: 1;
+    visibility: visible;
+    bottom: -25px;
+}
+
+/* Projects container in modal */
+.modal-projects-container {
+    padding: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: calc(90vh - 150px);
+    overflow: hidden;
+}
+
+/* Carousel navigation */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    border: none;
+    font-size: 18px;
+}
+
+.carousel-nav:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-prev {
+    left: 20px;
+}
+
+.carousel-next {
+    right: 20px;
+}
+
+/* Pagination styling */
+.modal-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pagination-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 5px 15px;
+    border-radius: 30px;
+    min-width: 80px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.current-page {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.total-pages {
+    opacity: 0.8;
+}
+
+/* No results message */
+.no-results {
+    text-align: center;
+    padding: 50px 0;
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 20px 0;
+    width: 100%;
+}
+
+.no-results i {
+    font-size: 56px;
+    margin-bottom: 20px;
+    opacity: 0.7;
+    color: var(--accent-color);
+}
+
+.no-results p {
+    font-size: 18px;
+    opacity: 0.9;
+    max-width: 80%;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Light mode modal adjustments */
+.light_mode .modal {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Modal transparency adjustments */
+#projects-modal .modal-content {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+@media (prefers-color-scheme: dark) {
+    #projects-modal .modal-content {
+        background-color: rgba(0, 0, 0, 0.85);
+    }
+}
+
+body.dark-mode #projects-modal .modal-content {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+body:not(.dark-mode) #projects-modal .modal-content {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive modal */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        flex-direction: column;
+        width: 95%;
+        margin: 3vh auto;
+    }
+    
+    .modal-left-column,
+    .modal-right-column {
+        width: 100%;
+        max-height: initial;
+    }
+    
+    .modal-left-column {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .modal-header {
+        padding: 15px;
+    }
+    
+    .modal-search-filter {
+        padding: 15px;
+    }
+    
+    .filter-container {
+        margin-top: 10px;
+    }
+    
+    .filter-tags-container {
+        gap: 6px;
+    }
+    
+    .modal-projects-container {
+        padding: 15px;
+    }
+    
+    .modal-project-card {
+        padding: 15px;
+    }
+    
+    .carousel-nav {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .carousel-prev {
+        left: 5px;
+    }
+    
+    .carousel-next {
+        right: 5px;
+    }
+    
+    .filter-tag::after {
+        display: none;
+    }
+    
+    .clear-filters {
+        margin-top: 10px;
+    }
+} 

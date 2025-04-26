@@ -1,0 +1,244 @@
+/**
+ * Links - Link and hyperlink styles
+ */
+
+a {
+    text-decoration: none;
+    color: var(--color-links);
+}
+
+/* Standard link hover effect */
+a:hover {
+    color: var(--color-links-hover);
+}
+
+/* Project links */
+.project a {
+    display: inline-block;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    border-bottom: 1px solid var(--color-text-secondary);
+    padding-bottom: 2px;
+}
+
+.project a:hover {
+    color: var(--color-text-secondary);
+}
+
+/* Icon button links */
+.hyperlink, 
+.project a.hyperlink {
+    background-color: var(--color-card-bg);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: var(--color-text-secondary);
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.hyperlink:hover, 
+.project a.hyperlink:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    background-color: var(--color-text-secondary);
+    color: var(--color-card-bg);
+}
+
+/* Hyperlink glow effect */
+.hyperlink::before, 
+.project a.hyperlink::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+    border-radius: 50%;
+}
+
+.hyperlink:hover::before, 
+.project a.hyperlink:hover::before {
+    transform: scale(1.5);
+}
+
+/* Live preview links */
+.live-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.live-preview:hover {
+    color: inherit;
+}
+
+.live-preview i {
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+/* Project card links container */
+.project-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 1rem;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+}
+
+/* Project links in icon format */
+.project-links a {
+    background-color: var(--color-card-bg);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: var(--color-text-secondary);
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+}
+
+.project-links a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    background-color: var(--color-text-secondary);
+    color: var(--color-card-bg);
+}
+
+.project-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+    border-radius: 50%;
+}
+
+.project-links a:hover::before {
+    transform: scale(1.5);
+}
+
+.project-links i {
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+/* Fiverr profile link */
+.fiverr-profile-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-links);
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.fiverr-profile-link:hover {
+    color: var(--color-links-hover);
+    transform: translateY(-2px);
+}
+
+/* Modal project links */
+.modal-project-links {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+    justify-content: center;
+}
+
+.modal-project-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: white;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-project-links a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: var(--highlight-color);
+}
+
+/* Mobile styling for project links */
+@media screen and (max-width: 768px) {
+    .project-links a, 
+    .hyperlink,
+    .project a.hyperlink {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .project-links i,
+    .hyperlink i {
+        font-size: 16px;
+    }
+    
+    .projects-div .project-links {
+        position: absolute;
+        bottom: 25px;
+        right: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: calc(100% - 30px);
+        justify-content: flex-end;
+    }
+    
+    /* For non-featured projects */
+    .project .project-links {
+        justify-content: flex-end;
+        margin-top: 0;
+    }
+    
+    .project-links button,
+    .project-links a,
+    .project .hyperlink {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px;
+        min-height: 36px;
+    }
+} 

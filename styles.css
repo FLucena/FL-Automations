@@ -55,4 +55,194 @@
 
 .slide-up-element {
   animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Contact form validation styles */
+.input-container input.error,
+.textarea-container textarea.error {
+  border: 2px solid #ff3b30;
+}
+
+.error-message {
+  color: #ff3b30;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  margin-left: 2.5rem;
+}
+
+.success-message {
+  background-color: #34c759;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.error-message.form-error {
+  background-color: #ffeeee;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin-left: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Technology tags styling */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.tech-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  position: relative;
+  padding: 5px;
+}
+
+.tech-tag img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: 20px;
+  max-height: 20px;
+}
+
+/* New class for tech icons to ensure proper sizing */
+.tech-icon-small {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  object-fit: contain !important;
+}
+
+.tech-tag:hover {
+  transform: translateY(-3px);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Tooltip for tech tags */
+.tech-tag:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 100;
+  margin-bottom: 5px;
+}
+
+/* Filter tags in modal */
+.filter-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 5px;
+  position: relative;
+  padding: 6px;
+  overflow: hidden;
+  background-image: none !important; /* Prevent background images */
+}
+
+.filter-tag img {
+  width: 24px !important;
+  height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* New class for filter icons */
+.filter-icon {
+  width: 24px !important;
+  height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+.filter-tag:hover {
+  transform: translateY(-3px);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-tag.active {
+  background-color: var(--accent-color);
+  color: white;
+  box-shadow: 0 4px 10px rgba(94, 96, 206, 0.3);
+}
+
+/* Tooltip for filter tags */
+.filter-tag::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 8px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.filter-tag:hover::after {
+  opacity: 1;
+  visibility: visible;
+  bottom: -25px;
+}
+
+/* Filter container styling */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.filter-label {
+  font-weight: 600;
+  margin-right: 10px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.filter-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background-image: none !important; /* Prevent background images */
 } 

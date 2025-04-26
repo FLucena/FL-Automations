@@ -7,8 +7,15 @@
       <title>FL Automations - Portfolio</title>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
       <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/contact.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"  />
       <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <style>
+        /* Add scroll-padding to fix anchor links */
+        html {
+          scroll-padding-top: 100px; /* Adjust based on your navbar height plus some padding */
+        }
+      </style>
   </head>
   <body>
     <div class="navbar">
@@ -23,8 +30,6 @@
             <li><a href="#about" class="lang-es" style="display: none;">Sobre mí</a></li>
             <li><a href="#project" class="lang-en">Portfolio</a></li>
             <li><a href="#project" class="lang-es" style="display: none;">Portafolio</a></li>
-            <li><a href="#project-list" class="lang-en">Projects</a></li>
-            <li><a href="#project-list" class="lang-es" style="display: none;">Proyectos</a></li>
             <li><a href="#contact" class="lang-en">Contact Me</a></li>
             <li><a href="#contact" class="lang-es" style="display: none;">Contáctame</a></li>
             <li>
@@ -75,27 +80,15 @@
         <div class="about-one">
           <h1 class="lang-en">About me</h1>
           <h1 class="lang-es" style="display: none;">Sobre mí</h1>
-          <p class="lang-en">
-            Hello!
-
-            My name is Francisco. I specialize in web development, workflow optimization, and process automation. Over the last 10 years, my passion for new technologies and my quantitative background have driven me to create smart data processing solutions. Imagine waking up in the morning, pressing a button, and having all your recurring tasks ready for you by the time you get your first cup of coffee. I'm here to make it a reality!
-            
-            I have extensive experience in web development using Next.js and React. These technologies enable me to create fast, efficient, and interactive applications that provide an excellent user experience.
-            
-            My commitment is to ensure your satisfaction at every stage of the project. I will work tirelessly until the final result exceeds your expectations. Whether you are starting your first project or looking to take an existing one to the next level, I am excited to turn all your automation dreams into reality.
-            
-            Cheers!
+          <p class="lang-en text-center">
+            Hello! I'm Francisco, a specialist in web development and process automation with 10 years of experience. 
+            I create intelligent solutions using Next.js and React to build fast, efficient applications.
+            My mission is to transform your automation dreams into reality and deliver results that exceed your expectations.
           </p>
-          <p class="lang-es" style="display: none;">
-            ¡Hola!
-
-            Mi nombre es Francisco. Me especializo en desarrollo web, optimización de flujos de trabajo y automatización de procesos. Durante los últimos 10 años, mi pasión por las nuevas tecnologías y mi formación cuantitativa me han impulsado a crear soluciones inteligentes de procesamiento de datos. Imagina despertar por la mañana, presionar un botón y tener todas tus tareas recurrentes listas para cuando tomes tu primera taza de café. ¡Estoy aquí para hacerlo realidad!
-            
-            Tengo amplia experiencia en desarrollo web utilizando Next.js y React. Estas tecnologías me permiten crear aplicaciones rápidas, eficientes e interactivas que brindan una excelente experiencia de usuario.
-            
-            Mi compromiso es garantizar tu satisfacción en cada etapa del proyecto. Trabajaré incansablemente hasta que el resultado final supere tus expectativas. Ya sea que estés comenzando tu primer proyecto o buscando llevar uno existente al siguiente nivel, estoy emocionado de convertir todos tus sueños de automatización en realidad.
-            
-            ¡Saludos!
+          <p class="lang-es text-center" style="display: none;">
+            ¡Hola! Soy Francisco, especialista en desarrollo web y automatización de procesos con 10 años de experiencia.
+            Creo soluciones inteligentes utilizando Next.js y React para construir aplicaciones rápidas y eficientes.
+            Mi misión es transformar tus sueños de automatización en realidad y entregar resultados que superen tus expectativas.
           </p>
         </div>
       </section>
@@ -139,13 +132,11 @@
         <h1 class="lang-es" style="display: none;">Proyectos <br /><span>Destacados</span></h1>
         <p class="lang-en">
           Welcome to my projects section! Discover innovative websites including e-commerce, blog, social network, online learning, and portfolio sites.
-          Find the whole list
-          <a href="#project-list" > <strong>below</strong></a>.
+          <a href="#" id="view-all-projects" class="view-all-link lang-en"><strong>View all projects</strong></a>
         </p>
         <p class="lang-es" style="display: none;">
           ¡Bienvenido a mi sección de proyectos! Descubre sitios web innovadores que incluyen comercio electrónico, blogs, redes sociales, aprendizaje en línea y sitios de portafolio.
-          Encuentra la lista completa
-          <a href="#project-list" > <strong>abajo</strong></a>.
+          <a href="#" id="view-all-projects-es" class="view-all-link lang-es" style="display: none;"><strong>Ver todos los proyectos</strong></a>
         </p>
         <div class="project-cards-container">
           <!-- Featured projects will be loaded dynamically from projects.json -->
@@ -153,26 +144,55 @@
       </section>
       <br />
 
-      <section class="project-list" id="project-list" data-aos="fade-up" data-aos-duration="1000">
-        <h1 class="lang-en">All <br /><span>Projects</span></h1>
-        <h1 class="lang-es" style="display: none;">Todos los <br /><span>Proyectos</span></h1>
-        <p class="lang-en">
-          Browse through my complete collection of projects. Each project showcases different skills and technologies.
-        </p>
-        <p class="lang-es" style="display: none;">
-          Explora mi colección completa de proyectos. Cada proyecto muestra diferentes habilidades y tecnologías.
-        </p>
-        
-        <div class="button-container">
-          <button onclick="refreshProjects()" class="refresh-btn lang-en">Show Different Projects</button>
-          <button onclick="refreshProjects()" class="refresh-btn lang-es" style="display: none;">Mostrar Proyectos Diferentes</button>
+      <!-- Projects Modal -->
+      <div id="projects-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-left-column">
+            <div class="modal-header">
+              <h2 class="lang-en">All Projects</h2>
+              <h2 class="lang-es" style="display: none;">Todos los Proyectos</h2>
+              <span class="close-modal">&times;</span>
+            </div>
+            
+            <div class="modal-search-filter">
+              <div class="search-area">
+                <div class="search-container">
+                  <input type="text" id="project-search" class="lang-en" placeholder="Search projects...">
+                  <input type="text" id="project-search-es" class="lang-es" style="display: none;" placeholder="Buscar proyectos...">
+                  <i class="fa-solid fa-search search-icon"></i>
+                </div>
+                <!-- Clear filters button will be added here via JavaScript -->
+              </div>
+              
+              <div class="filter-container">
+                <span class="filter-label lang-en">Filter by:</span>
+                <span class="filter-label lang-es" style="display: none;">Filtrar por:</span>
+                <div class="filter-tags-container" id="filter-tags">
+                  <!-- Tags will be populated dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal-right-column">
+            <div class="modal-projects-container" id="modal-projects">
+              <!-- Projects will be loaded dynamically -->
+            </div>
+            
+            <div class="modal-pagination">
+              <button id="prev-page" class="pagination-btn">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <div id="pagination-numbers" class="pagination-counter">
+                <!-- Page numbers will now show as counter -->
+              </div>
+              <button id="next-page" class="pagination-btn">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
         </div>
-        
-        <div class="projects-container">
-          <!-- Random projects will be loaded dynamically from projects.json -->
-        </div>
-      </section>
-      <br />
+      </div>
 
       <section class="contact" id="contact" data-aos="fade-up" data-aos-duration="1000">
         <h1 class="lang-en">Let Us <span>Talk!</span></h1>

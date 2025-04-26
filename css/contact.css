@@ -1,0 +1,364 @@
+/* ======= Contact Section Styles ======= */
+
+/* Main contact section container */
+.contact {
+  margin-top: 80px;
+  margin-bottom: 80px;
+  border-radius: 16px;
+  width: 100%;
+  padding: 40px;
+  background: linear-gradient(145deg, var(--color-card-bg), var(--color-background));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Decorative bar at the top of contact section */
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--color-text-secondary), var(--primaryColor));
+}
+
+/* Hover effect for contact section */
+.contact:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading styles */
+.contact h1 {
+  font-size: 52px;
+  margin-bottom: 50px;
+  text-align: center;
+  position: relative;
+  font-weight: 700;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.contact h1 span {
+  color: var(--color-text-secondary);
+  position: relative;
+  display: inline-block;
+}
+
+/* Underline animation for heading */
+.contact h1 span::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--color-text-secondary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.contact h1:hover span::after {
+  transform: scaleX(1);
+}
+
+/* Form container */
+.contact .box {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  max-width: 650px;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.4s;
+}
+
+/* Form fields */
+.contact .box textarea,
+.contact .box input {
+  width: 100%;
+  background: var(--color-input-bg);
+  color: var(--color-input-text);
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Input focus effects */
+.contact .box input:focus,
+.contact .box textarea:focus {
+  animation: formFieldFocus 0.3s ease forwards;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: var(--color-text-secondary);
+  box-shadow: 0 0 0 2px var(--color-text-secondary), 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Submit button container */
+.contact .submit-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 30px auto 0;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.6s;
+}
+
+/* Send button styling */
+.contact .send {
+  width: 220px;
+  padding: 14px 0;
+  margin-top: 10px;
+  background-size: 200% 100%;
+  background-image: linear-gradient(to right, var(--color-button), var(--color-text-secondary), var(--color-button));
+  background-position: -100px;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Button hover effects */
+.contact .send:hover {
+  animation: buttonShine 1.5s infinite;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Button shine effect */
+.contact .send::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.contact .send:hover::before {
+  left: 100%;
+}
+
+/* Input containers */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--color-input-border);
+  transition: all 0.3s ease;
+  padding-bottom: 8px;
+}
+
+.input-container:hover {
+  border-bottom: 2px solid var(--color-text-secondary);
+}
+
+/* Input icons */
+.input-container i {
+  color: var(--color-icon);
+  font-size: 22px;
+  margin-right: 15px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Textarea container */
+.textarea-container {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--color-input-border);
+  transition: all 0.3s ease;
+  padding-bottom: 8px;
+}
+
+.textarea-container:hover {
+  border-bottom: 2px solid var(--color-text-secondary);
+}
+
+/* Textarea icons */
+.textarea-container i {
+  color: var(--color-icon);
+  font-size: 22px;
+  margin-right: 15px;
+  margin-top: 14px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Textarea specific styling */
+.textarea-container textarea {
+  width: 100%;
+  padding: 15px;
+  min-height: 150px;
+  resize: vertical;
+  border-radius: 8px;
+}
+
+/* Focus and hover effects */
+.input-container:focus-within i,
+.textarea-container:focus-within i {
+  color: var(--color-text-secondary);
+  transform: scale(1.1);
+}
+
+.input-container:focus-within,
+.textarea-container:focus-within {
+  border-bottom: 2px solid var(--color-text-secondary);
+}
+
+/* Hover effects for inputs and textareas */
+.input-container:hover input,
+.textarea-container:hover textarea {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Icon animations on hover */
+.input-container:hover i,
+.textarea-container:hover i {
+  transform: translateY(-2px) scale(1.05);
+  color: var(--color-text-secondary);
+}
+
+/* Light mode specific styles */
+.light_mode .contact {
+  background: linear-gradient(145deg, #f0f4f8, #ffffff);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.light_mode .contact::before {
+  background: linear-gradient(90deg, var(--color-text-secondary), var(--primaryColor));
+}
+
+.light_mode .contact .send {
+  background-image: linear-gradient(to right, var(--color-button), var(--color-text-secondary), var(--color-button));
+  color: white;
+}
+
+/* Custom animations */
+@keyframes formFieldFocus {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(-3px); }
+}
+
+@keyframes buttonShine {
+  0% { background-position: -100px; }
+  100% { background-position: 200px; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Media queries */
+@media screen and (max-width: 768px) {
+  .contact {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 30px 20px;
+  }
+  
+  .contact h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+  
+  .contact .box {
+    width: 100%;
+  }
+  
+  .input-container,
+  .textarea-container {
+    margin-bottom: 10px;
+  }
+  
+  .input-container i,
+  .textarea-container i {
+    font-size: 18px;
+  }
+  
+  .contact .box textarea,
+  .contact .box input {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .contact .send {
+    width: 180px;
+    padding: 12px 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .contact {
+    padding: 25px 15px;
+  }
+  
+  .contact h1 {
+    font-size: 30px;
+  }
+  
+  .contact .box {
+    gap: 15px;
+  }
+  
+  .input-container,
+  .textarea-container {
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: none;
+  }
+  
+  .input-container i,
+  .textarea-container i {
+    margin-bottom: 8px;
+    margin-right: 0;
+  }
+  
+  .textarea-container i {
+    margin-top: 0;
+  }
+  
+  .textarea-container textarea {
+    min-height: 120px;
+  }
+  
+  .contact .submit-container {
+    margin-top: 20px;
+  }
+  
+  .contact .send {
+    width: 160px;
+    font-size: 14px;
+  }
+} 

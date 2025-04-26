@@ -1,0 +1,213 @@
+/**
+ * Forms - Form and input styles
+ */
+
+/* Form fields */
+input,
+textarea,
+select,
+button {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Form containers */
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--color-input-border);
+    transition: all 0.3s ease;
+    padding-bottom: 8px;
+}
+
+.input-container:hover {
+    border-bottom: 2px solid var(--color-text-secondary);
+}
+
+.input-container i {
+    color: var(--color-icon);
+    font-size: 22px;
+    margin-right: 15px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Textarea container */
+.textarea-container {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--color-input-border);
+    transition: all 0.3s ease;
+    padding-bottom: 8px;
+}
+
+.textarea-container:hover {
+    border-bottom: 2px solid var(--color-text-secondary);
+}
+
+.textarea-container i {
+    color: var(--color-icon);
+    font-size: 22px;
+    margin-right: 15px;
+    margin-top: 14px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.textarea-container textarea {
+    width: 100%;
+    padding: 15px;
+    min-height: 150px;
+    resize: vertical;
+    border-radius: 8px;
+}
+
+/* Form inputs */
+.contact .box textarea,
+.contact .box input {
+    width: 100%;
+    background: var(--color-input-bg);
+    color: var(--color-input-text);
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Input focus effects */
+.contact .box input:focus,
+.contact .box textarea:focus {
+    animation: formFieldFocus 0.3s ease forwards;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-color: var(--color-text-secondary);
+    box-shadow: 0 0 0 2px var(--color-text-secondary), 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus and hover effects */
+.input-container:focus-within i,
+.textarea-container:focus-within i {
+    color: var(--color-text-secondary);
+    transform: scale(1.1);
+}
+
+.input-container:focus-within,
+.textarea-container:focus-within {
+    border-bottom: 2px solid var(--color-text-secondary);
+}
+
+.input-container:hover input,
+.textarea-container:hover textarea {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.input-container:hover i,
+.textarea-container:hover i {
+    transform: translateY(-2px) scale(1.05);
+    color: var(--color-text-secondary);
+}
+
+/* Search inputs */
+.search-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(94, 96, 206, 0.3);
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 14px;
+    pointer-events: none;
+}
+
+/* Submit button container */
+.contact .submit-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto 0;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+    animation-delay: 0.6s;
+}
+
+/* Responsive form styles */
+@media screen and (max-width: 768px) {
+    .input-container,
+    .textarea-container {
+        margin-bottom: 16px;
+    }
+  
+    .input-container i,
+    .textarea-container i {
+        font-size: 18px;
+    }
+  
+    .contact .box textarea,
+    .contact .box input {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .input-container,
+    .textarea-container {
+        flex-direction: column;
+        align-items: flex-start;
+        border-bottom: none;
+    }
+  
+    .input-container i,
+    .textarea-container i {
+        margin-bottom: 8px;
+        margin-right: 0;
+    }
+  
+    .textarea-container i {
+        margin-top: 0;
+    }
+  
+    .textarea-container textarea {
+        min-height: 120px;
+    }
+  
+    .contact .submit-container {
+        margin-top: 20px;
+    }
+    
+    .contact .box input,
+    .contact .box textarea {
+        padding: 12px 10px;
+        font-size: 16px;
+        width: 100%;
+    }
+} 

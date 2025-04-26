@@ -1,0 +1,172 @@
+/**
+ * Icons - Icon styles for the site
+ */
+
+/* Base icon styles */
+i {
+    display: inline-block;
+    line-height: 1;
+}
+
+/* Social icons in footer */
+footer .social i {
+    font-size: 25px;
+    margin: 0 3px;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    transition: color 0.3s ease;
+}
+
+.social i:hover {
+    color: var(--color-text-secondary);
+}
+
+/* Project link icons */
+.project-links i,
+.hyperlink i,
+.live-preview i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+}
+
+/* Form input icons */
+.input-container i {
+    color: var(--color-icon);
+    font-size: 22px;
+    margin-right: 15px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.textarea-container i {
+    color: var(--color-icon);
+    font-size: 22px;
+    margin-right: 15px;
+    margin-top: 14px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Search icons */
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 14px;
+    pointer-events: none;
+}
+
+#search i {
+    position: absolute;
+    color: #a2b9bc;
+    font-weight: bolder;
+    font-size: 19px;
+    left: 8px;
+}
+
+/* Button icons */
+.resume-btn i {
+    font-size: 16px;
+}
+
+.download-btn i {
+    font-size: 18px;
+}
+
+.clear-filters i {
+    font-size: 12px;
+}
+
+/* Fiverr icons */
+.fiverr-orders i {
+    color: #1dbf73;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.stars i {
+    color: #FFC107;
+    margin-right: 3px;
+    font-size: 18px;
+}
+
+/* Project icon styling */
+.project-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+.project-icon svg {
+    fill: currentColor;
+}
+
+/* Tech icons */
+.tech-icon {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+.profile-img, .tech-icon {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Special tooth icon */
+.tooth-icon {
+    filter: invert(1);
+    border-radius: 0 !important;
+    display: block;
+    margin: 0 auto;
+}
+
+.projects-div .tooth-icon {
+    width: 230px !important;
+    height: 230px !important;
+    margin: 0 auto 15px;
+}
+
+.light_mode .tooth-icon {
+    filter: invert(0);
+}
+
+/* Mobile menu toggle icon */
+.mobile-menu-toggle i {
+    font-size: 20px;
+    color: var(--navbar-text);
+    transition: color 0.3s ease;
+}
+
+.mobile-menu-toggle.active i {
+    transform: rotate(90deg);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    footer .social i {
+        font-size: 14px;
+        margin: 0 3px;
+    }
+    
+    .project-links i,
+    .hyperlink i {
+        font-size: 16px;
+    }
+    
+    .input-container i,
+    .textarea-container i {
+        font-size: 18px;
+    }
+    
+    .resume-btn i {
+        margin-right: 10px;
+    }
+} 

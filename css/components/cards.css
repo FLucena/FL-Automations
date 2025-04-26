@@ -1,0 +1,291 @@
+/**
+ * Cards - Project cards and content card styles
+ */
+
+/* Standard project cards */
+.project {
+    background-color: var(--color-card-bg);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px var(--box-shadow-color);
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 100px; /* Allow space for links */
+}
+
+.project:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--box-shadow-color);
+}
+
+.project h2 {
+    color: var(--color-text-primary);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.project p {
+    color: var(--color-card-text);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Featured project cards */
+.projects-div {
+    width: 100%;
+    position: relative;
+    z-index: 100;
+    flex-direction: column;
+    margin: 0;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px var(--box-shadow-color);
+    transition: all 0.3s ease;
+    padding: 2rem 1.5rem 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 450px;
+    background-color: var(--color-card-bg);
+    color: var(--color-card-text);
+    overflow: hidden;
+}
+
+.project-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.projects-div:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px var(--box-shadow-color);
+}
+
+/* Staggered animations for different cards */
+.projects-div:nth-child(3n+1):hover {
+    animation: cardFloat 4s ease-in-out infinite;
+}
+
+.projects-div:nth-child(3n+2):hover {
+    animation: cardFloat 5s ease-in-out infinite;
+}
+
+.projects-div:nth-child(3n+3):hover {
+    animation: cardFloat 4.5s ease-in-out infinite;
+}
+
+.projects-div h3 {
+    margin-top: 1.5rem;
+    font-size: 24px;
+    padding: 0 1rem;
+    color: var(--color-text-secondary);
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.projects-div p {
+    width: 100%;
+    margin: 1rem auto;
+    text-align: center;
+    line-height: 1.6;
+    font-size: 16px;
+    color: var(--color-card-text);
+}
+
+/* Project image styles */
+.project-image {
+    width: 150px !important;
+    height: 150px !important;
+    object-fit: contain;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: block;
+    padding: 1rem;
+    background-color: var(--color-card-bg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.projects-div:hover .project-image {
+    transform: scale(1.05);
+}
+
+/* Project image container */
+.image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    min-height: 180px;
+}
+
+/* Fiverr card styles */
+.fiverr-card {
+    background-color: var(--color-card-bg);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 30px auto;
+    max-width: 900px;
+    box-shadow: 0 5px 15px var(--box-shadow-color);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.fiverr-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--box-shadow-color);
+    border-color: var(--color-text-secondary);
+}
+
+.fiverr-logo-container {
+    margin-right: 25px;
+    background-color: #1dbf73;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.fiverr-card-logo {
+    width: 50px;
+    height: 50px;
+    filter: brightness(0) invert(1);
+}
+
+.fiverr-stats-content {
+    flex: 1;
+}
+
+/* Modal project card styles */
+.modal-project-card {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 800px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow-y: auto;
+    max-height: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+}
+
+.modal-project-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.modal-project-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.modal-project-description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    opacity: 0.9;
+    flex-grow: 1;
+}
+
+/* Tech tags styling for cards */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.tech-tag {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    position: relative;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tech-icon-small,
+.tech-tag img {
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    object-fit: contain !important;
+}
+
+/* Responsive card styles */
+@media screen and (max-width: 768px) {
+    .projects-div {
+        min-height: 400px;
+        padding: 1.5rem 1rem 4rem;
+        width: 90%;
+        max-width: 400px;
+        margin: 20px auto;
+    }
+    
+    .image-container {
+        min-height: 150px;
+        padding: 0.5rem;
+    }
+    
+    .project-image {
+        width: 120px !important;
+        height: 120px !important;
+    }
+    
+    .projects-div h3 {
+        font-size: 22px;
+        margin-top: 1rem;
+    }
+    
+    .projects-div p {
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+    
+    .project {
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        padding-bottom: 100px;
+        height: auto;
+    }
+    
+    .project h2 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+    
+    .project p {
+        margin-bottom: 15px;
+        font-size: 13px;
+        width: 100%;
+    }
+    
+    .fiverr-card {
+        margin: 0 10px;
+    }
+    
+    .modal-project-card {
+        padding: 15px;
+    }
+} 

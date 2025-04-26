@@ -3,19 +3,80 @@
 // Global variable to store all projects
 let allProjects = [];
 
-// Technology icons for the coin flip
-const techIcons = [
+// Tech icon mapping
+const techIcons = {
+  nextjs: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+    name: 'Next.js'
+  },
+  react: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    name: 'React'
+  },
+  javascript: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+    name: 'JavaScript'
+  },
+  typescript: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+    name: 'TypeScript'
+  },
+  python: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    name: 'Python'
+  },
+  flutter: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg',
+    name: 'Flutter'
+  },
+  streamlit: {
+    icon: 'https://streamlit.io/images/brand/streamlit-mark-color.svg',
+    name: 'Streamlit'
+  },
+  threejs: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg',
+    name: 'Three.js'
+  },
+  html: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+    name: 'HTML5'
+  },
+  css: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+    name: 'CSS3'
+  },
+  tailwind: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg',
+    name: 'TailwindCSS'
+  }
+};
+
+// Available tech tags
+const availableTechTags = [
+  'nextjs', 'react', 'javascript', 'typescript', 'python', 
+  'flutter', 'streamlit', 'threejs', 'html', 'css', 'tailwind'
+];
+
+let currentTechIconIndex = 0;
+let isFlipped = false;
+
+// Modal variables
+let currentPage = 1;
+const projectsPerPage = 6;
+let filteredProjects = [];
+let activeTechFilters = [];
+
+// Coin flip icons
+const coinFlipIcons = [
   { name: 'Next.js', url: 'https://cdn.worldvectorlogo.com/logos/nextjs-2.svg' },
   { name: 'React', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png' },
+  { name: 'Tailwind CSS', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png' },
   { name: 'Google Apps Script', url: 'https://www.gstatic.com/images/branding/product/2x/apps_script_48dp.png' },
   { name: 'Google Sheets', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Google_Sheets_logo_%282014-2020%29.svg/1200px-Google_Sheets_logo_%282014-2020%29.svg.png' },
   { name: 'JavaScript', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/800px-JavaScript-logo.png' },
   { name: 'TypeScript', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png' },
   { name: 'Python', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png' }
 ];
-
-let currentTechIconIndex = 0;
-let isFlipped = false;
 
 // Initialize AOS library for animations
 document.addEventListener('DOMContentLoaded', function() {
@@ -53,7 +114,375 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Mobile menu toggle - Updated to fix passive event issues
   initMobileMenu();
+  
+  // Initialize modal functionality
+  initProjectsModal();
 });
+
+// Initialize projects modal functionality
+function initProjectsModal() {
+  // Modal elements
+  const modal = document.getElementById('projects-modal');
+  const viewAllBtn = document.getElementById('view-all-projects');
+  const viewAllBtnEs = document.getElementById('view-all-projects-es');
+  const closeBtn = document.querySelector('.close-modal');
+  const searchInput = document.getElementById('project-search');
+  const searchInputEs = document.getElementById('project-search-es');
+  const filterContainer = document.getElementById('filter-tags');
+  const prevPageBtn = document.getElementById('prev-page');
+  const nextPageBtn = document.getElementById('next-page');
+  const paginationNumbers = document.getElementById('pagination-numbers');
+  
+  // Create tech filter tags
+  createTechFilterTags();
+  
+  // Open modal when clicking "View all projects"
+  if (viewAllBtn) {
+    viewAllBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+  }
+  
+  if (viewAllBtnEs) {
+    viewAllBtnEs.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+  }
+  
+  // Close modal functionality
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+  
+  // Close modal when clicking outside of content
+  window.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  
+  // Add Escape key support to close modal
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal && modal.style.display === 'block') {
+      closeModal();
+    }
+  });
+  
+  // Search functionality
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      currentPage = 1;
+      updateClearButtonVisibility();
+      filterAndDisplayProjects();
+    });
+  }
+  
+  if (searchInputEs) {
+    searchInputEs.addEventListener('input', function() {
+      currentPage = 1;
+      updateClearButtonVisibility();
+      filterAndDisplayProjects();
+    });
+  }
+  
+  // Pagination buttons
+  if (prevPageBtn) {
+    prevPageBtn.addEventListener('click', function() {
+      if (currentPage > 1) {
+        currentPage--;
+        displayPaginatedProjects();
+        updatePaginationUI();
+      }
+    });
+  }
+  
+  if (nextPageBtn) {
+    nextPageBtn.addEventListener('click', function() {
+      const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        displayPaginatedProjects();
+        updatePaginationUI();
+      }
+    });
+  }
+}
+
+// Create tech filter tags
+function createTechFilterTags() {
+  const filterContainer = document.getElementById('filter-tags');
+  if (!filterContainer) return;
+  
+  filterContainer.innerHTML = '';
+  
+  // Create tech filter buttons
+  availableTechTags.forEach(tech => {
+    const techInfo = techIcons[tech];
+    
+    const tagElement = document.createElement('button');
+    tagElement.className = 'filter-tag';
+    tagElement.dataset.tech = tech;
+    tagElement.dataset.tooltip = techInfo.name;
+    
+    // Create image element for the tech icon
+    const imgElement = document.createElement('img');
+    imgElement.src = techInfo.icon;
+    imgElement.alt = techInfo.name;
+    imgElement.loading = 'lazy';
+    imgElement.className = 'filter-icon';
+    
+    // Add fallback in case image doesn't load
+    imgElement.onerror = function() {
+      this.style.display = 'none';
+      tagElement.textContent = techInfo.name.charAt(0);
+    };
+    
+    // Additional validation for empty images that may not trigger onerror
+    imgElement.onload = function() {
+      if (this.naturalWidth === 0 || this.naturalHeight === 0) {
+        this.onerror();
+      }
+    };
+    
+    tagElement.appendChild(imgElement);
+    
+    tagElement.addEventListener('click', function() {
+      this.classList.toggle('active');
+      
+      const tech = this.dataset.tech;
+      if (this.classList.contains('active')) {
+        // Add to filters
+        if (!activeTechFilters.includes(tech)) {
+          activeTechFilters.push(tech);
+        }
+      } else {
+        // Remove from filters
+        activeTechFilters = activeTechFilters.filter(t => t !== tech);
+      }
+      
+      // Show/hide clear button based on if there are active filters or search text
+      updateClearButtonVisibility();
+      
+      // Reset to first page when filter changes
+      currentPage = 1;
+      filterAndDisplayProjects();
+    });
+    
+    filterContainer.appendChild(tagElement);
+  });
+  
+  // Add a clear filters button below the search box
+  const searchArea = document.querySelector('.search-area');
+  if (!searchArea) return;
+  
+  // Remove existing clear button if any
+  const existingClearButton = document.querySelector('.clear-filters');
+  if (existingClearButton) {
+    existingClearButton.remove();
+  }
+  
+  const clearButton = document.createElement('button');
+  clearButton.className = 'clear-filters';
+  clearButton.innerHTML = '<i class="fa-solid fa-xmark"></i> Clear Filters';
+  clearButton.disabled = true; // Initially disabled since no filters are active
+  
+  clearButton.addEventListener('click', function() {
+    if (this.disabled) return;
+    
+    // Reset active filters
+    activeTechFilters = [];
+    document.querySelectorAll('.filter-tag').forEach(tag => {
+      tag.classList.remove('active');
+    });
+    
+    // Clear search input
+    const searchInput = document.getElementById('project-search');
+    const searchInputEs = document.getElementById('project-search-es');
+    if (searchInput) searchInput.value = '';
+    if (searchInputEs) searchInputEs.value = '';
+    
+    // Disable clear button
+    this.disabled = true;
+    
+    // Reset to first page and refresh display
+    currentPage = 1;
+    filterAndDisplayProjects();
+  });
+  
+  // Append to search area
+  searchArea.appendChild(clearButton);
+}
+
+// Add helper function to update clear button visibility
+function updateClearButtonVisibility() {
+  const clearButton = document.querySelector('.clear-filters');
+  const searchInput = document.getElementById('project-search');
+  const searchInputEs = document.getElementById('project-search-es');
+  
+  if (!clearButton) return;
+  
+  const hasActiveFilters = activeTechFilters.length > 0;
+  const hasSearchText = (searchInput && searchInput.value.trim() !== '') || 
+                        (searchInputEs && searchInputEs.value.trim() !== '');
+  
+  // Always keep the button visible, but disable it when no filters are active
+  clearButton.disabled = !(hasActiveFilters || hasSearchText);
+}
+
+// Filter and display projects
+function filterAndDisplayProjects() {
+  const searchInput = document.getElementById('project-search');
+  const searchInputEs = document.getElementById('project-search-es');
+  const searchTerm = searchInput.value.toLowerCase() || searchInputEs.value.toLowerCase();
+  
+  // Update clear button visibility
+  updateClearButtonVisibility();
+  
+  // Filter projects based on search term and active filters
+  filteredProjects = allProjects.filter(project => {
+    // Search term filter
+    const titleMatch = project.title.toLowerCase().includes(searchTerm);
+    const descEnMatch = project.description.en.toLowerCase().includes(searchTerm);
+    const descEsMatch = project.description.es.toLowerCase().includes(searchTerm);
+    const contentMatch = titleMatch || descEnMatch || descEsMatch;
+    
+    // Tech filters
+    let techMatch = true;
+    if (activeTechFilters.length > 0) {
+      const projectTechs = project.technologies || [];
+      techMatch = activeTechFilters.every(tech => projectTechs.includes(tech));
+    }
+    
+    return contentMatch && techMatch;
+  });
+  
+  // Reset to first page when filters change
+  currentPage = Math.min(currentPage, Math.max(1, filteredProjects.length));
+  
+  // Display paginated results (now as carousel)
+  displayPaginatedProjects();
+  updatePaginationUI();
+}
+
+// Function to navigate to the next project
+function goToNextProject() {
+  if (filteredProjects.length <= 1) return;
+  
+  currentPage = currentPage >= filteredProjects.length ? 1 : currentPage + 1;
+  displayPaginatedProjects('slide-in-right');
+  updatePaginationUI();
+}
+
+// Function to navigate to the previous project
+function goToPreviousProject() {
+  if (filteredProjects.length <= 1) return;
+  
+  currentPage = currentPage <= 1 ? filteredProjects.length : currentPage - 1;
+  displayPaginatedProjects('slide-in-left');
+  updatePaginationUI();
+}
+
+// Function to handle keyboard navigation
+function handleCarouselKeyboard(e) {
+  if (document.getElementById('projects-modal').style.display !== 'block') {
+    // Remove the event listener when the modal is closed
+    document.removeEventListener('keydown', handleCarouselKeyboard);
+    return;
+  }
+  
+  if (e.key === 'ArrowLeft') {
+    goToPreviousProject();
+  } else if (e.key === 'ArrowRight') {
+    goToNextProject();
+  }
+}
+
+// Update language display in modal
+function updateLanguageDisplayInModal() {
+  const enVisible = document.querySelector('.lang-en:not([style*="display: none"])');
+  
+  if (enVisible) {
+    // English is visible
+    document.querySelectorAll('#projects-modal .lang-en').forEach(el => {
+      el.style.display = '';
+    });
+    document.querySelectorAll('#projects-modal .lang-es').forEach(el => {
+      el.style.display = 'none';
+    });
+  } else {
+    // Spanish is visible
+    document.querySelectorAll('#projects-modal .lang-en').forEach(el => {
+      el.style.display = 'none';
+    });
+    document.querySelectorAll('#projects-modal .lang-es').forEach(el => {
+      el.style.display = '';
+    });
+  }
+}
+
+// Update pagination UI
+function updatePaginationUI() {
+  const prevPageBtn = document.getElementById('prev-page');
+  const nextPageBtn = document.getElementById('next-page');
+  const paginationNumbers = document.getElementById('pagination-numbers');
+  
+  if (!prevPageBtn || !nextPageBtn || !paginationNumbers) return;
+  
+  // Calculate total pages
+  const totalPages = filteredProjects.length;
+  
+  // Enable/disable prev/next buttons
+  prevPageBtn.disabled = false;
+  nextPageBtn.disabled = false;
+  
+  // Generate page numbers
+  paginationNumbers.innerHTML = '';
+  
+  if (totalPages > 0) {
+    paginationNumbers.innerHTML = `<span class="current-page">${currentPage}</span> / <span class="total-pages">${totalPages}</span>`;
+  }
+}
+
+// Get HTML for tech tags
+function getTechTagsHTML(technologies, shouldLimitTags = false) {
+  let techTagsHTML = '';
+  const maxVisibleTags = 3; // Maximum number of tags to show when limiting
+  
+  // If technologies is null or undefined, return empty string
+  if (!technologies) return '';
+  
+  // Limit the number of tags if shouldLimitTags is true
+  const visibleTechnologies = shouldLimitTags 
+    ? technologies.slice(0, maxVisibleTags) 
+    : technologies;
+  
+  // Generate HTML for visible tech tags with tooltips
+  visibleTechnologies.forEach(tech => {
+    const techInfo = techIcons[tech] || { name: tech };
+    const displayName = techInfo.name || tech;
+    const iconUrl = techInfo.icon || '';
+    
+    techTagsHTML += `
+      <span class="tech-tag" data-tooltip="${displayName}">
+        <img src="${iconUrl}" alt="${displayName}" class="tech-icon-small">
+      </span>`;
+  });
+  
+  // Show +X more if there are hidden technologies
+  if (shouldLimitTags && technologies.length > maxVisibleTags) {
+    const moreCount = technologies.length - maxVisibleTags;
+    const hiddenTechs = technologies.slice(maxVisibleTags).map(tech => {
+      const techInfo = techIcons[tech] || { name: tech };
+      return techInfo.name || tech;
+    }).join(', ');
+    
+    techTagsHTML += `<span class="tech-tag more-tag" data-tooltip="${hiddenTechs}">+${moreCount}</span>`;
+  }
+  
+  return `<div class="tech-tags">${techTagsHTML}</div>`;
+}
 
 // Initialize mobile menu functionality
 function initMobileMenu() {
@@ -311,7 +740,7 @@ function initCoinFlip() {
   function returnToOriginalPosition() {
     // Use a faster animation for the return-to-origin than for the idle timeout
     // This makes it feel more responsive when directly interacting
-    coin.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    coin.style.transition = 'transform 3.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
     
     // First reset variables
     rotateX = 0;
@@ -355,9 +784,9 @@ function updateTechIcon() {
   const techIcon = document.getElementById('tech-icon');
   if (!techIcon) return;
   
-  // Get next tech icon
-  currentTechIconIndex = (currentTechIconIndex + 1) % techIcons.length;
-  const icon = techIcons[currentTechIconIndex];
+  // Update to next tech icon
+  currentTechIconIndex = (currentTechIconIndex + 1) % coinFlipIcons.length;
+  const icon = coinFlipIcons[currentTechIconIndex];
   
   // Update the tech icon
   techIcon.src = icon.url;
@@ -377,7 +806,6 @@ function loadProjectsFromJSON() {
     .then(data => {
       allProjects = data;
       displayFeaturedProjects();
-      displayRandomProjects();
     })
     .catch(error => {
       console.error('Error loading projects:', error);
@@ -403,7 +831,7 @@ function loadProjectsFromJSON() {
           },
           "url": "https://dental-start.vercel.app/",
           "featured": true,
-          "icon": "location"
+          "icon": "tooth"
         },
         {
           "id": 3,
@@ -413,103 +841,24 @@ function loadProjectsFromJSON() {
             "es": "Juego atractivo de piedra-papel-tijeras. Disfruta de una jugabilidad adictiva."
           },
           "url": "https://react-game-rock-paper-scissors.vercel.app/",
-          "featured": true,
+          "featured": false,
           "icon": "game"
         },
         {
-          "id": 4,
-          "title": "AI Chat with Cohere",
+          "id": 14,
+          "title": "FinSave",
           "description": {
-            "en": "A Streamlit application that lets you chat with Cohere's AI model.",
-            "es": "Una aplicación Streamlit que te permite chatear con el modelo de IA de Cohere."
+            "en": "FinSave is a platform that helps you save money and achieve your financial goals.",
+            "es": "FinSave es una plataforma que te ayuda a ahorrar dinero y alcanzar tus objetivos financieros."
           },
-          "url": "https://cohere-aichat.streamlit.app/",
-          "featured": false
-        },
-        {
-          "id": 5,
-          "title": "User Management",
-          "description": {
-            "en": "A user management system with the ability to export the list in CSV format.",
-            "es": "Un sistema de gestión de usuarios con la capacidad de exportar la lista en formato CSV."
-          },
-          "url": "https://apimanagement.vercel.app/",
-          "featured": false
-        },
-        {
-          "id": 6,
-          "title": "Tic tac toe",
-          "description": {
-            "en": "The Tic tac toe game created with Flutter!",
-            "es": "¡El juego de Tic tac toe creado con Flutter!"
-          },
-          "url": "https://tictactoe-flautomations.vercel.app/",
-          "featured": false
-        },
-        {
-          "id": 7,
-          "title": "Max & Min Finder App",
-          "description": {
-            "en": "Discover the highest and lowest values in any array with our intuitive app.",
-            "es": "Descubre los valores más altos y más bajos en cualquier matriz con nuestra intuitiva aplicación."
-          },
-          "url": "https://listapp-flautomations.vercel.app/",
-          "featured": false
-        },
-        {
-          "id": 8,
-          "title": "Palindrome Checker",
-          "description": {
-            "en": "An intuitive application designed to identify if a word or phrase is a palindrome.",
-            "es": "Una aplicación intuitiva diseñada para identificar si una palabra o frase es un palíndromo."
-          },
-          "url": "https://palindrome-checker-flautomations.vercel.app/",
-          "featured": false
-        },
-        {
-          "id": 9,
-          "title": "Division Calculator",
-          "description": {
-            "en": "A Next.js app that divides numbers using subtraction instead of division.",
-            "es": "Una aplicación Next.js que divide números usando resta en lugar de signos de división."
-          },
-          "url": "https://division-calculator.vercel.app/",
-          "featured": false
-        },
-        {
-          "id": 10,
-          "title": "Product Showcase",
-          "description": {
-            "en": "A 3D showcase where the user can interact with the product",
-            "es": "Un escaparate 3D donde el usuario puede interactuar con el producto"
-          },
-          "url": "https://3dshowcase.vercel.app/",
-          "featured": false
-        },
-        {
-          "id": 11,
-          "title": "Dog Fetcher",
-          "description": {
-            "en": "Discover randomly selected dog photos with our app.",
-            "es": "Descubre fotos de perros seleccionadas aleatoriamente con nuestra aplicación."
-          },
-          "url": "https://dogfetcher-sigma.vercel.app/",
-          "featured": false
-        },
-        {
-          "id": 12,
-          "title": "Tetris Game",
-          "description": {
-            "en": "Play tetris!",
-            "es": "¡Juega al tetris!"
-          },
-          "url": "https://tetris-lovat.vercel.app/",
-          "featured": false
+          "url": "https://finsave.vercel.app/",
+          "featured": true,
+          "icon": "computer"
         }
+        // Other projects...
       ];
       
       displayFeaturedProjects();
-      displayRandomProjects();
     });
 }
 
@@ -538,6 +887,9 @@ function displayFeaturedProjects() {
       projectImage = getIconSVG(project.icon);
     }
     
+    // Get tech tags for this project
+    const techTagsHTML = getTechTagsHTML(project.technologies, true);
+    
     const projectHTML = `
       <div class="projects-div flex div-${index + 1} project-card" data-aos="zoom-in" data-aos-delay="${100 * (index + 1)}">
         <div class="image-container">
@@ -545,6 +897,7 @@ function displayFeaturedProjects() {
         </div>
         
         <h3>${project.title}</h3>
+        ${techTagsHTML}
         <p class="lang-en">
           ${project.description.en}
         </p>
@@ -567,46 +920,6 @@ function displayFeaturedProjects() {
     
     container.innerHTML += projectHTML;
   });
-}
-
-// Display random projects in the All Projects section
-function displayRandomProjects() {
-  const nonFeaturedProjects = allProjects.filter(project => !project.featured);
-  const randomProjects = getRandomProjects(nonFeaturedProjects, 9);
-  const container = document.querySelector('.projects-container');
-  
-  if (!container) return;
-  
-  container.innerHTML = '';
-  
-  randomProjects.forEach(project => {
-    const projectHTML = `
-      <div class="project">
-        <h2>${project.title}</h2>
-        <p class="lang-en">${project.description.en}</p>
-        <p class="lang-es" style="display: none;">${project.description.es}</p>
-        <div class="project-links">
-          <a href="${project.url}" target="_blank" class="hyperlink" title="Live Preview" aria-label="Visit live project">
-            <i class="fa-solid fa-eye"></i>
-          </a>
-          <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="hyperlink lang-en" title="Suggest Ideas" aria-label="Suggest ideas for this project">
-            <i class="fa-solid fa-lightbulb"></i>
-          </a>
-          <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="hyperlink lang-es" style="display: none;" title="Sugerir Ideas" aria-label="Sugerir ideas para este proyecto">
-            <i class="fa-solid fa-lightbulb"></i>
-          </a>
-        </div>
-      </div>
-    `;
-    
-    container.innerHTML += projectHTML;
-  });
-}
-
-// Get random projects from an array
-function getRandomProjects(projects, count) {
-  const shuffled = [...projects].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
 }
 
 // Get SVG icon based on icon name
@@ -746,6 +1059,9 @@ function toggleLanguage() {
       initTypedEn();
     }
   }
+  
+  // Update language display in modal if it's open
+  updateLanguageDisplayInModal();
 }
 
 // Variables for typed.js instances
@@ -780,80 +1096,259 @@ function initTypedEs() {
 function sendEmail() {
   // Get values from visible inputs based on language
   const isEnglish = document.querySelector('.lang-en').style.display !== 'none';
-  const name = isEnglish ? document.getElementById("name").value : document.getElementById("name-es").value;
-  const email = isEnglish ? document.getElementById("email").value : document.getElementById("email-es").value;
-  const message = isEnglish ? document.getElementById("message").value : document.getElementById("message-es").value;
-
+  const nameInput = isEnglish ? document.getElementById("name") : document.getElementById("name-es");
+  const emailInput = isEnglish ? document.getElementById("email") : document.getElementById("email-es");
+  const messageInput = isEnglish ? document.getElementById("message") : document.getElementById("message-es");
+  
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const message = messageInput.value.trim();
+  
+  // Validate inputs
+  let isValid = true;
+  
+  // Reset previous error states
+  [nameInput, emailInput, messageInput].forEach(input => {
+    input.classList.remove('error');
+    const errorMsg = input.parentElement.querySelector('.error-message');
+    if (errorMsg) errorMsg.remove();
+  });
+  
+  // Name validation
+  if (!name) {
+    displayError(nameInput, isEnglish ? 'Name is required' : 'Nombre es requerido');
+    isValid = false;
+  }
+  
+  // Email validation
+  if (!email) {
+    displayError(emailInput, isEnglish ? 'Email is required' : 'Email es requerido');
+    isValid = false;
+  } else if (!isValidEmail(email)) {
+    displayError(emailInput, isEnglish ? 'Please enter a valid email' : 'Por favor ingresa un email válido');
+    isValid = false;
+  }
+  
+  // Message validation
+  if (!message) {
+    displayError(messageInput, isEnglish ? 'Message is required' : 'Mensaje es requerido');
+    isValid = false;
+  }
+  
+  if (!isValid) return;
+  
+  // Show loading state
+  const submitBtn = isEnglish ? 
+    document.querySelector('.send.lang-en') : 
+    document.querySelector('.send.lang-es');
+  const originalText = submitBtn.value;
+  submitBtn.value = isEnglish ? 'Sending...' : 'Enviando...';
+  submitBtn.disabled = true;
+  
+  // Option 1: Send via mailto as fallback
   const subject = isEnglish ? "Contact Form Submission" : "Envío del formulario de contacto";
   const body = "Name: " + name + "\nEmail: " + email + "\nMessage: " + message;
 
-  const mailtoLink = "mailto:flautomationsok@gmail.com" +
-    "?subject=" + encodeURIComponent(subject) +
-    "&body=" + encodeURIComponent(body);
-
-  window.location.href = mailtoLink;
+  // Here you would typically send data to a server endpoint
+  // For demonstration, using a timeout to simulate API call
+  setTimeout(() => {
+    try {
+      // Simulate successful API call (in a real app, this would be an actual API request)
+      
+      // Show success message
+      const successMessage = document.createElement('div');
+      successMessage.className = 'success-message';
+      successMessage.textContent = isEnglish ? 
+        'Message sent successfully! I will get back to you soon.' : 
+        '¡Mensaje enviado con éxito! Me pondré en contacto contigo pronto.';
+      
+      const formContainer = submitBtn.closest('.submit-container');
+      formContainer.appendChild(successMessage);
+      
+      // Reset form
+      nameInput.value = '';
+      emailInput.value = '';
+      messageInput.value = '';
+      
+      // Reset button
+      submitBtn.value = originalText;
+      submitBtn.disabled = false;
+      
+      // Remove success message after 5 seconds
+      setTimeout(() => {
+        if (successMessage.parentNode) {
+          successMessage.remove();
+        }
+      }, 5000);
+    } catch (error) {
+      // In case of error, create error message with retry option
+      const errorContainer = document.createElement('div');
+      errorContainer.className = 'error-message form-error';
+      errorContainer.style.marginLeft = '0';
+      errorContainer.style.marginBottom = '1rem';
+      
+      const errorText = document.createElement('span');
+      errorText.textContent = isEnglish ? 
+        'Failed to send message. ' : 
+        'Error al enviar el mensaje. ';
+      
+      const retryLink = document.createElement('a');
+      retryLink.href = "mailto:flautomationsok@gmail.com" +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+      retryLink.textContent = isEnglish ? 'Try sending email directly' : 'Intenta enviar email directamente';
+      retryLink.style.textDecoration = 'underline';
+      retryLink.style.marginLeft = '0.5rem';
+      
+      errorContainer.appendChild(errorText);
+      errorContainer.appendChild(retryLink);
+      
+      const formContainer = submitBtn.closest('.submit-container');
+      formContainer.appendChild(errorContainer);
+      
+      // Reset button
+      submitBtn.value = originalText;
+      submitBtn.disabled = false;
+    }
+  }, 1500);
 }
 
-// Refresh projects - can be called to get new random projects
-function refreshProjects() {
-  const container = document.querySelector('.projects-container');
+function displayError(input, message) {
+  input.classList.add('error');
   
-  if (container) {
-    // First fade out existing projects
-    const projects = container.querySelectorAll('.project');
-    
-    projects.forEach((project, index) => {
-      setTimeout(() => {
-        project.style.transition = 'all 0.3s ease';
-        project.style.opacity = '0';
-        project.style.transform = 'translateY(20px)';
-      }, index * 50); // Staggered animation
+  const errorMessage = document.createElement('div');
+  errorMessage.className = 'error-message';
+  errorMessage.textContent = message;
+  
+  input.parentElement.appendChild(errorMessage);
+}
+
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Open modal
+function openModal() {
+  const modal = document.getElementById('projects-modal');
+  if (modal) {
+    // Reset filters and search
+    activeTechFilters = [];
+    document.querySelectorAll('.filter-tag').forEach(tag => {
+      tag.classList.remove('active');
     });
+    document.getElementById('project-search').value = '';
+    document.getElementById('project-search-es').value = '';
     
-    // Then load new projects after animation completes
+    // Reset clear filters button - make it disabled instead of hiding
+    const clearButton = document.querySelector('.clear-filters');
+    if (clearButton) {
+      clearButton.disabled = true;
+    }
+    
+    // Reset to first page
+    currentPage = 1;
+    
+    // Reset filteredProjects to show all projects
+    filteredProjects = [...allProjects];
+    
+    // Filter and display projects
+    displayPaginatedProjects();
+    updatePaginationUI();
+    
+    // Show modal with animation
+    modal.style.display = 'block';
     setTimeout(() => {
-      // Create new projects but keep them hidden initially
-      const nonFeaturedProjects = allProjects.filter(project => !project.featured);
-      const randomProjects = getRandomProjects(nonFeaturedProjects, 9);
-      
-      // Clear the container
-      container.innerHTML = '';
-      
-      // Add new projects with opacity 0
-      randomProjects.forEach(project => {
-        const projectHTML = `
-          <div class="project" style="opacity: 0; transform: translateY(20px);">
-            <h2>${project.title}</h2>
-            <p class="lang-en">${project.description.en}</p>
-            <p class="lang-es" style="display: none;">${project.description.es}</p>
-            <div class="project-links">
-              <a href="${project.url}" target="_blank" class="hyperlink" title="Live Preview" aria-label="Visit live project">
-                <i class="fa-solid fa-eye"></i>
-              </a>
-              <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="hyperlink lang-en" title="Suggest Ideas" aria-label="Suggest ideas for this project">
-                <i class="fa-solid fa-lightbulb"></i>
-              </a>
-              <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="hyperlink lang-es" style="display: none;" title="Sugerir Ideas" aria-label="Sugerir ideas para este proyecto">
-                <i class="fa-solid fa-lightbulb"></i>
-              </a>
-            </div>
-          </div>
-        `;
-        
-        container.innerHTML += projectHTML;
-      });
-      
-      // Now fade them in with staggered effect
-      const newProjects = container.querySelectorAll('.project');
-      newProjects.forEach((project, index) => {
-        setTimeout(() => {
-          project.style.transition = 'all 0.5s ease';
-          project.style.opacity = '1';
-          project.style.transform = 'translateY(0)';
-        }, index * 100); // Staggered animation
-      });
-    }, 500); // Wait for fade out to complete
-  } else {
-    displayRandomProjects();
+      modal.classList.add('show');
+    }, 10);
+    
+    // Prevent body scrolling
+    document.body.style.overflow = 'hidden';
   }
+}
+
+// Close modal
+function closeModal() {
+  const modal = document.getElementById('projects-modal');
+  if (modal) {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }, 300);
+  }
+}
+
+// Display paginated projects (Transformed to carousel)
+function displayPaginatedProjects(animationClass = '') {
+  const projectsContainer = document.getElementById('modal-projects');
+  if (!projectsContainer) return;
+  
+  projectsContainer.innerHTML = '';
+  
+  if (filteredProjects.length === 0) {
+    projectsContainer.innerHTML = `
+      <div class="no-results">
+        <i class="fa-solid fa-search"></i>
+        <p class="lang-en">No projects found matching your criteria.</p>
+        <p class="lang-es" style="display: none;">No se encontraron proyectos que coincidan con tus criterios.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  // Add current project
+  const currentProject = filteredProjects[currentPage - 1];
+  
+  // Get tech tags for this project
+  const techTagsHTML = getTechTagsHTML(currentProject.technologies, true);
+  
+  // Apply the animation class if provided
+  const animationClassAttribute = animationClass ? ` ${animationClass}` : '';
+  
+  const projectHTML = `
+    <div class="modal-project-card${animationClassAttribute}" data-index="${currentPage - 1}">
+      <h3 class="modal-project-title">${currentProject.title}</h3>
+      <p class="modal-project-description lang-en">${currentProject.description.en}</p>
+      <p class="modal-project-description lang-es" style="display: none;">${currentProject.description.es}</p>
+      ${techTagsHTML}
+      <div class="modal-project-links">
+        <a href="${currentProject.url}" target="_blank" title="Live Preview" aria-label="Visit live project">
+          <i class="fa-solid fa-eye"></i>
+        </a>
+        <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(currentProject.title)}" class="lang-en" title="Suggest Ideas" aria-label="Suggest ideas for this project">
+          <i class="fa-solid fa-lightbulb"></i>
+        </a>
+        <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(currentProject.title)}" class="lang-es" style="display: none;" title="Sugerir Ideas" aria-label="Sugerir ideas para este proyecto">
+          <i class="fa-solid fa-lightbulb"></i>
+        </a>
+      </div>
+    </div>
+  `;
+  
+  projectsContainer.innerHTML = projectHTML;
+  
+  // Only add navigation if there's more than one project
+  if (filteredProjects.length > 1) {
+    const prevButton = document.createElement('button');
+    prevButton.className = 'carousel-nav carousel-prev';
+    prevButton.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+    
+    const nextButton = document.createElement('button');
+    nextButton.className = 'carousel-nav carousel-next';
+    nextButton.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+    
+    projectsContainer.appendChild(prevButton);
+    projectsContainer.appendChild(nextButton);
+    
+    // Event listeners for navigation
+    prevButton.addEventListener('click', goToPreviousProject);
+    nextButton.addEventListener('click', goToNextProject);
+  }
+  
+  // Add keyboard navigation
+  document.addEventListener('keydown', handleCarouselKeyboard);
+  
+  // Make sure language display matches current state
+  updateLanguageDisplayInModal();
 } 

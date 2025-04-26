@@ -1,0 +1,65 @@
+/**
+ * CSS Variables - Theme colors and values
+ */
+
+:root {
+    /* Dark mode (default) with improved contrast */
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #7BBFD9; /* Lightened for better contrast on dark backgrounds */
+    --color-background: #121212;
+    --color-links: #FFFFFF;
+    --color-links-hover: #7BBFD9; /* Matched to secondary */
+    --color-btn: #FFFFFF;
+    --primaryColor: #7BBFD9; /* Lightened for better contrast */
+    --secondaryColor: #4A8CA0;
+    --navbar-bg: #1E1E1E;
+    --navbar-text: #FFFFFF;
+    --color-button: #4A8CA0; /* Darker for better contrast on light text */
+    --color-button-hover: #3A7080; /* Even darker for hover state */
+    --color-card-bg: #1E1E1E;
+    --color-card-text: #FFFFFF;
+    --color-input-bg: #2A2A2A;
+    --color-input-text: #FFFFFF;
+    --color-input-border: #7BBFD9; /* Matched to secondary */
+    --color-icon: #7BBFD9; /* Matched to secondary */
+    --box-shadow-color: rgba(0, 0, 0, 0.3);
+    --highlight-color: #7BBFD9; /* Matched to secondary */
+}
+
+/* Dark mode preferences match default */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text-primary: #FFFFFF;
+        --color-text-secondary: #7BBFD9; /* Lightened for better contrast */
+        --color-background: #121212;
+        --color-links: #FFFFFF;
+        --color-links-hover: #7BBFD9; /* Matched to secondary */
+        --color-btn: #FFFFFF;
+        --primaryColor: #7BBFD9; /* Lightened for better contrast */
+        --secondaryColor: #4A8CA0;
+    }
+}
+
+/* Light mode theme override */
+.light_mode {
+    --color-text-primary: #121212;
+    --color-text-secondary: #0E5776; /* Darkened for better contrast on light backgrounds */
+    --color-background: #FFFFFF;
+    --color-links: #0E5776; /* Matched to secondary */
+    --color-links-hover: #083142; /* Darker for hover */
+    --color-btn: #121212;
+    --primaryColor: #0E5776; /* Darkened for better contrast */
+    --secondaryColor: #083142; /* Darker for secondary actions */
+    --navbar-bg: #F5F5F5;
+    --navbar-text: #121212;
+    --color-button: #0E5776; /* Matched to secondary */
+    --color-button-hover: #083142; /* Darker for hover */
+    --color-card-bg: #F5F5F5;
+    --color-card-text: #121212;
+    --color-input-bg: #FFFFFF;
+    --color-input-text: #121212;
+    --color-input-border: #0E5776; /* Matched to secondary */
+    --color-icon: #0E5776; /* Matched to secondary */
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+    --highlight-color: #0E5776; /* Matched to secondary */
+} 

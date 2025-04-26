@@ -1,0 +1,299 @@
+/**
+ * Buttons - Button styles for the site
+ */
+
+/* Basic button */
+.btn {
+    color: var(--color-btn);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Navbar buttons */
+.navbar .btn {
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    box-sizing: border-box;
+}
+
+.navbar .btn:hover {
+    background-color: var(--color-text-secondary);
+}
+
+/* Hero section buttons */
+.hero-cta .btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    width: auto;
+    min-width: 150px;
+    text-align: center;
+    margin: 0 10px 10px 0;
+}
+
+.hero-cta {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Download button in hero section */
+.download-btn {
+    background-color: var(--color-button);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 10px var(--box-shadow-color);
+    margin-top: 20px;
+}
+
+.download-btn:hover {
+    background-color: var(--color-button-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px var(--box-shadow-color);
+}
+
+.download-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 5px var(--box-shadow-color);
+}
+
+.download-btn i {
+    font-size: 18px;
+}
+
+/* Resume button */
+.resume-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.resume-btn:hover {
+    background-color: var(--color-text-secondary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.resume-btn:active {
+    transform: scale(0.95);
+}
+
+.resume-btn i {
+    font-size: 16px;
+}
+
+/* Tooltip for resume button */
+.resume-btn::after {
+    content: 'Download CV';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-card-bg);
+    color: var(--color-text-primary);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px var(--box-shadow-color);
+    pointer-events: none;
+}
+
+.resume-btn:hover::after {
+    opacity: 1;
+    visibility: visible;
+    bottom: -35px;
+}
+
+/* Refresh button styles */
+.refresh-btn {
+    background-color: var(--color-button);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 2px 5px var(--box-shadow-color);
+}
+
+.refresh-btn:hover {
+    background-color: var(--color-button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--box-shadow-color);
+}
+
+.refresh-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Project buttons */
+.projects button {
+    transform: translate(25%, 0%);
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    outline: none;
+    border: 1px solid #a2b9bc;
+    padding: 7px 25px;
+    font-weight: 500;
+    font-size: 22px;
+    border-radius: 0;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin-top: 25px;
+    border-radius: 50px;
+}
+
+/* Clear filters button */
+.clear-filters {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    justify-content: center;
+    opacity: 1;
+}
+
+.clear-filters:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.clear-filters:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.clear-filters i {
+    font-size: 12px;
+}
+
+/* Pagination buttons */
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Active states for button interaction */
+.project-links button:active,
+.project a.hyperlink:active,
+nav ul li a:active,
+.btn:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+/* Responsive buttons */
+@media screen and (max-width: 768px) {
+    .resume-btn::after {
+        display: none;
+    }
+    
+    .resume-btn {
+        width: 100%;
+        padding: 10px;
+        border-radius: 0;
+        justify-content: flex-start;
+    }
+    
+    .resume-btn i {
+        margin-right: 10px;
+    }
+    
+    .resume-btn::before {
+        content: 'Download Resume';
+        font-size: 16px;
+    }
+    
+    .download-btn {
+        width: 100%;
+        max-width: 250px;
+        margin: 15px auto 0;
+        padding: 12px 10px;
+        font-size: 15px;
+    }
+    
+    .hero-cta {
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    .refresh-btn {
+        display: inline-block;
+        margin: 0 auto;
+        min-width: 250px;
+    }
+    
+    .projects button {
+        transform: translate(0, 0%);
+    }
+    
+    input, textarea, button {
+        font-size: 16px !important; /* Prevent iOS zoom */
+    }
+} 

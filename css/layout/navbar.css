@@ -1,0 +1,314 @@
+/**
+ * Navbar - Navigation styles
+ */
+
+/* Navbar basic structure */
+.navbar {
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text);
+    padding: 8px 15px;
+    margin-bottom: 0;
+    transition: all 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px var(--box-shadow-color);
+    min-height: auto;
+    box-sizing: border-box;
+}
+
+/* Scroll effects */
+.navbar.scrolled {
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 8px 0;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.navbar.scrolled:hover {
+    background-color: var(--navbar-bg);
+    padding: 15px 0;
+}
+
+/* Logo styling */
+.logo {
+    margin-left: 5%;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 2px 0;
+}
+
+.logo span {
+    color: var(--color-text-secondary);
+    font-size: 55px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
+
+/* Navbar container */
+.nav-container {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+/* Navigation links */
+nav {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+nav ul li {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li:first-child {
+    margin-left: 0;
+}
+
+nav ul li:last-child {
+    margin-right: 10px;
+}
+
+nav ul li:nth-last-child(-n+2) {
+    margin-right: 5px;
+}
+
+nav ul li a {
+    color: var(--navbar-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 14px;
+    padding: 6px 8px;
+}
+
+nav ul li a:hover {
+    color: var(--color-text-secondary);
+    transition: color 0.3s ease;
+}
+
+/* Light mode navbar */
+.light_mode .navbar.scrolled {
+    background-color: rgba(245, 245, 245, 0.9);
+}
+
+/* Scroll effects on navbar elements */
+.navbar.scrolled .logo {
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled:hover .logo {
+    font-size: 24px;
+}
+
+.navbar.scrolled .logo span {
+    font-size: 50px;
+    top: -40%;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled:hover .logo span {
+    font-size: 70px;
+    top: -60%;
+}
+
+.navbar.scrolled nav ul li a {
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled:hover nav ul li a {
+    font-size: 16px;
+}
+
+/* Mobile menu toggle button */
+.mobile-menu-toggle {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px;
+    margin-left: auto;
+    z-index: 1100;
+    position: relative;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.mobile-menu-toggle i {
+    font-size: 20px;
+    color: var(--navbar-text);
+    transition: color 0.3s ease;
+}
+
+.mobile-menu-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-toggle.active i {
+    transform: rotate(90deg);
+}
+
+.light_mode .mobile-menu-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Media queries for responsive navbar */
+@media screen and (min-width: 769px) and (max-width: 992px) {
+    nav ul li a {
+        padding: 6px 5px;
+        font-size: 13px;
+    }
+    
+    .navbar .btn {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+    }
+  
+    .navbar {
+        padding: 5px 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+    }
+  
+    .nav-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        padding: 5px 15px;
+        padding-right: 15px;
+        width: 100%;
+        min-height: auto;
+    }
+  
+    .logo {
+        margin: 0;
+        text-align: left;
+        width: auto;
+        padding-left: 15px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: 100%;
+    }
+  
+    .logo span {
+        font-size: 35px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -20%);
+    }
+  
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: var(--navbar-bg);
+        box-shadow: -5px 0 15px var(--box-shadow-color);
+        transition: right 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 999;
+        padding: 80px 20px 20px;
+        overflow-y: auto;
+    }
+  
+    .light_mode nav {
+        background-color: var(--navbar-bg);
+        box-shadow: -5px 0 15px var(--box-shadow-color);
+    }
+  
+    nav.mobile-nav-open {
+        right: 0;
+        display: block;
+    }
+  
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%;
+        padding-top: 20px;
+        padding-right: 15px; /* Add right padding to prevent cropping */
+    }
+  
+    nav ul li {
+        width: 100%;
+        margin: 0;
+        padding: 5px 0;
+    }
+  
+    nav ul li a {
+        font-size: 18px;
+        padding: 12px 0;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Improved menu overlay */
+    body.menu-open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        animation: fadeIn 0.3s ease forwards;
+        backdrop-filter: blur(3px);
+    }
+  
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+} 
