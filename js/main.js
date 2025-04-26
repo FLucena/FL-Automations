@@ -3,6 +3,132 @@
 // Global variable to store all projects
 let allProjects = [];
 
+// Add a global scroll event listener to test if scroll is working
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM content loaded - setting up global scroll listener');
+  
+  // Add a direct scroll listener to test
+  document.addEventListener('scroll', function() {
+    console.log('Global scroll event detected');
+  });
+  
+  // Test for passive event support
+  let passiveSupported = false;
+  try {
+    const options = {
+      get passive() {
+        passiveSupported = true;
+        return false;
+      }
+    };
+    window.addEventListener("test", null, options);
+    window.removeEventListener("test", null, options);
+  } catch (err) {
+    passiveSupported = false;
+  }
+  console.log('Passive event listeners supported:', passiveSupported);
+  
+  // Add scroll polyfill - make sure we can reliably detect scroll position
+  if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = function(callback) {
+      return setTimeout(callback, 15);
+    };
+  }
+  
+  // Smooth scroll polyfill for browsers that don't support scrollIntoView with options
+  if (typeof Element !== 'undefined' && !('scrollIntoView' in Element.prototype)) {
+    Element.prototype.scrollIntoView = function(options) {
+      window.scrollTo(0, this.getBoundingClientRect().top + window.pageYOffset);
+    };
+  } else if (typeof Element !== 'undefined') {
+    // Check if smooth scroll behavior is supported
+    const originalScrollIntoView = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = function(options) {
+      if (options && typeof options === 'object' && options.behavior === 'smooth') {
+        const targetY = this.getBoundingClientRect().top + window.pageYOffset;
+        smoothScrollTo(targetY);
+        return;
+      }
+      
+      // Fall back to the native implementation for other cases
+      originalScrollIntoView.apply(this, arguments);
+    };
+  }
+  
+  // Smooth scroll implementation
+  function smoothScrollTo(targetY) {
+    const startY = window.pageYOffset;
+    const distance = targetY - startY;
+    const duration = 800; // ms
+    let startTime = null;
+    
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const easeInOutCubic = progress < 0.5 
+        ? 4 * progress * progress * progress 
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+      
+      window.scrollTo(0, startY + distance * easeInOutCubic);
+      
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    }
+    
+    requestAnimationFrame(animation);
+  }
+  
+  // Ensure we have a reliable way to get scroll position
+  const getScrollPosition = function() {
+    return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  };
+  
+  // Add a scroll-spy handler using requestAnimationFrame for better performance
+  let ticking = false;
+  let lastScrollY = getScrollPosition();
+  
+  const onScroll = function() {
+    lastScrollY = getScrollPosition();
+    requestTick();
+  };
+  
+  const requestTick = function() {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  };
+  
+  const update = function() {
+    // Debug
+    console.log('RAF scroll update, position:', lastScrollY);
+    
+    // Reset tick
+    ticking = false;
+    
+    // Access the scroll indicator directly
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+      if (lastScrollY > 100) {
+        console.log('RAF: Hiding scroll indicator');
+        scrollIndicator.classList.add('scroll-hidden');
+        scrollIndicator.style.opacity = '0';
+        scrollIndicator.style.visibility = 'hidden';
+      } else {
+        console.log('RAF: Showing scroll indicator');
+        scrollIndicator.classList.remove('scroll-hidden');
+        scrollIndicator.style.opacity = '1';
+        scrollIndicator.style.visibility = 'visible';
+      }
+    }
+  };
+  
+  // Add the scroll listener with this handler too
+  window.addEventListener('scroll', onScroll, { passive: true });
+});
+
 // Tech icon mapping
 const techIcons = {
   nextjs: {
@@ -99,15 +225,8 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   }
   
-  // Handle navbar scroll effect
-  const navbar = document.querySelector('.navbar');
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  });
+  // Initialize scroll handler
+  initScrollHandler();
   
   // Initialize the coin flip functionality
   initCoinFlip();
@@ -118,6 +237,145 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize modal functionality
   initProjectsModal();
 });
+
+// Separate function to initialize scroll handling
+function initScrollHandler() {
+  console.log('Initializing scroll handler');
+  
+  const navbar = document.querySelector('.navbar');
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  const scrollArrow = document.querySelector('.scroll-arrow');
+  const scrollTextEn = document.querySelector('.scroll-text.lang-en');
+  const scrollTextEs = document.querySelector('.scroll-text.lang-es');
+  
+  // Variables to track scroll state
+  let isPageTop = true;
+  let isScrolling = false;
+  
+  // Log initial state
+  console.log('Scroll indicator found:', scrollIndicator ? 'Yes' : 'No');
+  if (scrollIndicator) {
+    console.log('Initial scroll indicator classes:', scrollIndicator.className);
+    
+    // Track if we're in Spanish mode
+    const isSpanishMode = () => {
+      return document.querySelector('.lang-en').style.display === 'none';
+    };
+    
+    // Update arrow direction and text based on scroll position
+    const updateArrowDirection = () => {
+      const scrollTop = window.scrollY || window.pageYOffset;
+      
+      // If we're at the top of the page
+      if (scrollTop < 100) {
+        isPageTop = true;
+        scrollArrow.classList.remove('scroll-arrow-up');
+        scrollArrow.classList.add('scroll-arrow-down');
+        scrollIndicator.setAttribute('aria-label', isSpanishMode() ? 'Desplácese a la sección Sobre mí' : 'Scroll to about section');
+        scrollTextEn.textContent = 'Scroll down';
+        scrollTextEs.textContent = 'Desplácese hacia abajo';
+      } else {
+        isPageTop = false;
+        scrollArrow.classList.remove('scroll-arrow-down');
+        scrollArrow.classList.add('scroll-arrow-up');
+        scrollIndicator.setAttribute('aria-label', isSpanishMode() ? 'Volver al inicio' : 'Back to top');
+        scrollTextEn.textContent = 'Back to top';
+        scrollTextEs.textContent = 'Volver arriba';
+      }
+    };
+    
+    // Handle click on the scroll indicator
+    scrollIndicator.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Don't process clicks while already scrolling
+      if (isScrolling) return;
+      
+      isScrolling = true;
+      
+      if (isPageTop) {
+        // If at top, scroll to About section
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+          console.log('Scrolling to about section');
+          // Smooth scroll to the about section
+          scrollToElement(aboutSection);
+        }
+      } else {
+        // If anywhere else, scroll back to top
+        console.log('Scrolling to top');
+        scrollToTop();
+      }
+      
+      // Reset scrolling flag after animation completes
+      setTimeout(() => {
+        isScrolling = false;
+      }, 1000);
+    });
+    
+    // Smooth scroll to element
+    function scrollToElement(element) {
+      const headerOffset = 80; // Adjust based on your header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      // Use native smooth scrolling if supported
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Smooth scroll to top
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Add keyboard accessibility
+    scrollIndicator.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        scrollIndicator.click();
+      }
+    });
+  }
+  
+  // Throttle function to limit how often the scroll event fires
+  let lastScrollTime = 0;
+  const scrollThrottle = 10; // ms between scroll events
+  
+  // Define scroll handler function
+  const handleScroll = function() {
+    const now = Date.now();
+    if (now - lastScrollTime < scrollThrottle) return;
+    lastScrollTime = now;
+    
+    // Use window.scrollY instead of deprecated pageYOffset
+    const scrollTop = window.scrollY;
+    console.log('Scroll handled, position:', scrollTop);
+    
+    // Navbar effect
+    if (scrollTop > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+    
+    // Update arrow direction
+    if (scrollIndicator) {
+      updateArrowDirection();
+    }
+  };
+  
+  // Add event listener for scroll
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  // Initial call to set the correct state
+  handleScroll();
+}
 
 // Initialize projects modal functionality
 function initProjectsModal() {
@@ -1083,6 +1341,21 @@ function toggleLanguage() {
   
   // Make sure profile image stays visible
   document.querySelector('.profile-image').style.display = 'block';
+  
+  // Update scroll indicator aria-label and text based on language and scroll position
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  if (scrollIndicator) {
+    const isSpanish = document.querySelector('.lang-en').style.display === 'none';
+    const isScrolledDown = window.scrollY > 100;
+    
+    if (isScrolledDown) {
+      scrollIndicator.setAttribute('aria-label', isSpanish ? 'Volver al inicio' : 'Back to top');
+      // Texts are already toggled by the forEach loops above, no need to manually set them here
+    } else {
+      scrollIndicator.setAttribute('aria-label', isSpanish ? 'Desplácese a la sección Sobre mí' : 'Scroll to about section');
+      // Texts are already toggled by the forEach loops above, no need to manually set them here
+    }
+  }
   
   // Initialize appropriate typing animation based on language
   if (enElements[0].style.display === 'none') {

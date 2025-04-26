@@ -48,7 +48,7 @@
     </div>
     <main class="container">
       <section class="hero" data-aos="fade-up" data-aos-duration="1000">
-        <div class="container d-flex align-items-center justify-content-between">
+        <div class="container hero-container">
           <div class="hero-content">
             <h1 class="hero-title lang-en">Hi, I'm <span class="highlight">Francisco</span></h1>
             <h1 class="hero-title lang-es" style="display: none;">Hola, soy <span class="highlight">Francisco</span></h1>
@@ -63,16 +63,25 @@
               </a>
             </div>
           </div>
-          <div class="profile-image" data-aos="zoom-in" d ata-aos-delay="200">
+          <div class="profile-image" data-aos="zoom-in" data-aos-delay="200">
             <div class="coin">
               <div class="coin-face coin-front">
                 <img src="./img/square-img.png" alt="Francisco's profile picture" class="profile-img" />
               </div>
               <div class="coin-face coin-back">
-                <img src="" alt="Technology icon" class="tech-icon" id="tech-icon">
+                <img src="" alt="Technology icon" class="tech-icon coin-tech-icon" id="tech-icon">
               </div>
             </div>
           </div>
+        </div>
+        
+        <!-- Scroll indicator button -->
+        <div class="scroll-indicator" role="button" tabindex="0" aria-label="Scroll to about section">
+          <div class="scroll-arrow scroll-arrow-down">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <span class="scroll-text lang-en">Scroll down</span>
+          <span class="scroll-text lang-es" style="display: none;">Desplácese hacia abajo</span>
         </div>
       </section>
 

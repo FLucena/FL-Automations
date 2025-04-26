@@ -4,7 +4,7 @@
 
 .hero {
     width: 100%;
-    height: 100vh;
+    height: 80vh;
     position: relative;
     display: flex;
     align-items: center;
@@ -18,17 +18,18 @@
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     position: relative;
     z-index: 2;
-    gap: 40px;
+    gap: 0;
 }
 
 .hero-content {
-    width: 45%;
+    width: 55%;
+    padding-left: 40px;
 }
 
 .hero-subtitle {
@@ -104,7 +105,7 @@
 }
 
 .hero-image {
-    width: 40%;
+    width: 38%;
     position: relative;
     opacity: 0;
     animation: fadeIn 1s ease forwards;
@@ -348,12 +349,115 @@
 /* Adjusted for large screens */
 @media screen and (min-width: 1200px) {
     .hero-container {
-        max-width: 1100px;
-        justify-content: center; /* Center content better */
-        gap: 100px; /* Adjust the gap on large screens */
+        max-width: 1000px;
+        justify-content: center;
+        gap: 20px;
     }
     
     .hero-content, .hero-image {
-        width: 42%; /* Equal width for better balance */
+        width: 45%;
     }
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    cursor: pointer;
+}
+
+.scroll-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    background-color: rgba(94, 96, 206, 0.3);
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(94, 96, 206, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scroll-indicator:hover .scroll-arrow {
+    transform: scale(1.1);
+    background-color: rgba(94, 96, 206, 0.4);
+    box-shadow: 0 4px 12px rgba(94, 96, 206, 0.3);
+}
+
+.scroll-arrow i {
+    font-size: 20px;
+    color: var(--color-primary);
+    transition: transform 0.5s ease;
+}
+
+.scroll-indicator:hover .scroll-arrow i {
+    animation: none;
+    transform: translateY(2px);
+}
+
+.scroll-text {
+    font-size: 14px;
+    color: var(--color-text-light);
+    font-weight: 500;
+    margin-top: 8px;
+    transition: color 0.3s ease;
+}
+
+.scroll-indicator:hover .scroll-text {
+    color: var(--color-primary);
+}
+
+/* Animation for scroll-down arrow */
+.scroll-arrow-down i {
+    animation: bounce 2s infinite;
+}
+
+/* Animation for scroll-up arrow - slight upward bounce */
+.scroll-arrow-up i {
+    animation: bounceUp 2s infinite;
+    transform: rotate(180deg);
+}
+
+/* Bounce animation for the down arrow */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Bounce animation for the up arrow */
+@keyframes bounceUp {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) rotate(180deg);
+    }
+    40% {
+        transform: translateY(-10px) rotate(180deg);
+    }
+    60% {
+        transform: translateY(-5px) rotate(180deg);
+    }
+}
+
+/* Light mode styles for scroll arrow */
+.light_mode .scroll-arrow {
+    background-color: rgba(94, 96, 206, 0.2);
+    box-shadow: 0 2px 10px rgba(94, 96, 206, 0.15);
+}
+
+.light_mode .scroll-arrow i {
+    color: #434190; /* Darker purple for better contrast in light mode */
 } 
