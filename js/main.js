@@ -46,7 +46,7 @@ const techIcons = {
     name: 'CSS3'
   },
   tailwind: {
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg',
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png',
     name: 'TailwindCSS'
   }
 };
@@ -782,7 +782,8 @@ function initCoinFlip() {
 // Update the tech icon on the back of the coin
 function updateTechIcon() {
   const techIcon = document.getElementById('tech-icon');
-  if (!techIcon) return;
+  const coinBack = document.querySelector('.coin-back');
+  if (!techIcon || !coinBack) return;
   
   // Update to next tech icon
   currentTechIconIndex = (currentTechIconIndex + 1) % coinFlipIcons.length;
@@ -791,6 +792,40 @@ function updateTechIcon() {
   // Update the tech icon
   techIcon.src = icon.url;
   techIcon.alt = icon.name + ' icon';
+  
+  // Add data-tooltip attribute to the parent container for tooltips
+  coinBack.setAttribute('data-tooltip', icon.name);
+  
+  // Add error handling for icon loading
+  techIcon.onerror = function() {
+    console.error(`Failed to load tech icon: ${icon.name}`);
+    // Set a fallback text or icon
+    const coin = document.querySelector('.coin-back');
+    if (coin) {
+      this.style.display = 'none';
+      // Add fallback text if the icon doesn't load
+      if (!coin.querySelector('.icon-fallback')) {
+        const fallback = document.createElement('div');
+        fallback.className = 'icon-fallback';
+        fallback.textContent = icon.name.charAt(0);
+        fallback.style.fontSize = '36px';
+        fallback.style.fontWeight = 'bold';
+        coin.appendChild(fallback);
+      } else {
+        coin.querySelector('.icon-fallback').textContent = icon.name.charAt(0);
+        coin.querySelector('.icon-fallback').style.display = 'block';
+      }
+    }
+  };
+  
+  // Clear fallback if image loads successfully
+  techIcon.onload = function() {
+    this.style.display = 'block';
+    const fallback = document.querySelector('.coin-back .icon-fallback');
+    if (fallback) {
+      fallback.style.display = 'none';
+    }
+  };
 }
 
 // Load projects from JSON file
