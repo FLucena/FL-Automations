@@ -189,8 +189,8 @@ a:hover {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background-color: var(--accent-color);
-    color: white;
+    background-color: var(--color-card-bg);
+    color: var(--color-text-secondary);
     transition: all 0.3s ease;
     text-decoration: none;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);

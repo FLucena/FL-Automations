@@ -42,6 +42,19 @@ html {
   button {
     font-size: 14px;
   }
+
+  /* Center download button */
+  .hero-cta {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .download-btn {
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 /* Tablet adjustments */
@@ -55,6 +68,12 @@ html {
 @media screen and (max-width: 480px) {
   .container {
     padding: 0 10px;
+  }
+  
+  /* Ensure button is centered on very small screens */
+  .download-btn {
+    max-width: 180px;
+    margin: 0 auto;
   }
 }
 

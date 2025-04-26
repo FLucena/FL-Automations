@@ -415,4 +415,74 @@ footer .social i {
         height: 180px;
         margin: 0 auto 20px;
     }
+}
+
+/* Project action icons (eye and light bulb) */
+.view-icon, .idea-icon {
+    color: var(--color-primary, #5e60ce);
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.15);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+}
+
+.view-icon:hover, .idea-icon:hover {
+    transform: translateY(-3px);
+    opacity: 1;
+    color: white;
+    background-color: var(--color-primary, #5e60ce);
+    box-shadow: 0 5px 15px rgba(94, 96, 206, 0.4);
+}
+
+/* Light mode specific styles for action icons */
+.light_mode .view-icon, 
+.light_mode .idea-icon {
+    background-color: rgba(94, 96, 206, 0.2);
+    color: #434190; /* Darker purple for better contrast */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.light_mode .view-icon:hover, 
+.light_mode .idea-icon:hover {
+    background-color: var(--color-primary, #5e60ce);
+    color: white;
+    box-shadow: 0 5px 15px rgba(94, 96, 206, 0.3);
+}
+
+/* Fiverr SVG icon */
+.fiverr-svg {
+    width: 25px;
+    height: 25px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+}
+
+.light_mode .fiverr-svg {
+    filter: brightness(0);
+}
+
+.fiverr-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+}
+
+.fiverr-icon:hover {
+    transform: translateY(-3px);
+}
+
+.fiverr-icon:hover .fiverr-svg {
+    transform: scale(1.1);
 } 

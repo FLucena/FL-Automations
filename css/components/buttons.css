@@ -49,6 +49,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    align-items: center;
 }
 
 /* Download button in hero section */
@@ -69,7 +70,7 @@
     transition: all 0.3s ease;
     text-decoration: none;
     box-shadow: 0 4px 10px var(--box-shadow-color);
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .download-btn:hover {
@@ -253,47 +254,57 @@ nav ul li a:active,
     .resume-btn::after {
         display: none;
     }
-    
+
     .resume-btn {
-        width: 100%;
-        padding: 10px;
-        border-radius: 0;
-        justify-content: flex-start;
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
     }
-    
+
     .resume-btn i {
-        margin-right: 10px;
+        font-size: 14px;
     }
-    
+
     .resume-btn::before {
-        content: 'Download Resume';
-        font-size: 16px;
+        font-size: 12px;
+    }
+
+    .download-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin-top: 10px;
+        min-width: 140px;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 15px auto 0;
+    }
+
+    .refresh-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .projects button {
+        font-size: 18px;
+    }
+
+    input, textarea, button {
+        font-size: 14px;
+    }
+}
+
+/* For large screens */
+@media screen and (min-width: 1200px) {
+    .hero-cta {
+        margin-top: 10px;
     }
     
     .download-btn {
-        width: 100%;
-        max-width: 250px;
-        margin: 15px auto 0;
-        padding: 12px 10px;
-        font-size: 15px;
-    }
-    
-    .hero-cta {
-        justify-content: center;
-        margin-top: 20px;
-    }
-    
-    .refresh-btn {
-        display: inline-block;
-        margin: 0 auto;
-        min-width: 250px;
-    }
-    
-    .projects button {
-        transform: translate(0, 0%);
-    }
-    
-    input, textarea, button {
-        font-size: 16px !important; /* Prevent iOS zoom */
+        margin-top: 5px;
     }
 } 

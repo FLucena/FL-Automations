@@ -28,7 +28,6 @@
 }
 
 .fiverr-logo-container {
-  background-color: white;
   padding: 15px;
   border-radius: 8px;
   display: flex;
@@ -36,12 +35,16 @@
   justify-content: center;
   width: 80px;
   height: 80px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .fiverr-card-logo {
   width: 60px;
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
 .fiverr-stats-content {

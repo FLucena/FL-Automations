@@ -10,6 +10,8 @@
     align-items: center;
     background-color: var(--color-bg);
     overflow: hidden;
+    max-width: 1440px; /* Limit maximum width on very large screens */
+    margin: 0 auto;
 }
 
 .hero-container {
@@ -22,10 +24,11 @@
     align-items: center;
     position: relative;
     z-index: 2;
+    gap: 40px;
 }
 
 .hero-content {
-    width: 50%;
+    width: 45%;
 }
 
 .hero-subtitle {
@@ -101,7 +104,7 @@
 }
 
 .hero-image {
-    width: 45%;
+    width: 40%;
     position: relative;
     opacity: 0;
     animation: fadeIn 1s ease forwards;
@@ -271,71 +274,86 @@
 
 @media screen and (max-width: 768px) {
     .hero {
+        padding-top: 100px;
         height: auto;
-        padding: 120px 0 80px;
+        min-height: 100vh;
     }
-    
+
     .hero-container {
         flex-direction: column;
-        text-align: center;
         padding: 0 20px;
+        gap: 40px;
     }
-    
+
     .hero-content {
         width: 100%;
-        margin-bottom: 60px;
+        text-align: center;
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .hero-cta {
         justify-content: center;
     }
-    
+
     .hero-image {
-        width: 80%;
-        max-width: 400px;
+        width: 70%;
+        margin: 0 auto;
     }
-    
+
     .hero-socials {
         position: relative;
-        bottom: auto;
-        left: auto;
+        bottom: 0;
+        left: 0;
         justify-content: center;
-        margin-top: 40px;
+        margin-top: 30px;
     }
 }
 
 @media screen and (max-width: 480px) {
     .hero {
-        padding: 100px 0 60px;
+        padding-top: 80px;
     }
-    
+
     .hero-subtitle {
         font-size: 1rem;
     }
-    
+
     .hero-title {
         font-size: 2rem;
     }
-    
+
     .hero-description {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
-    
+
     .hero-cta {
         flex-direction: column;
+        align-items: center;
         gap: 15px;
     }
-    
+
     .btn-primary, .btn-secondary {
-        width: 100%;
-        text-align: center;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .hero-image {
+        width: 80%;
+    }
+}
+
+/* Adjusted for large screens */
+@media screen and (min-width: 1200px) {
+    .hero-container {
+        max-width: 1100px;
+        justify-content: center; /* Center content better */
+        gap: 100px; /* Adjust the gap on large screens */
     }
     
-    .hero-image {
-        width: 100%;
+    .hero-content, .hero-image {
+        width: 42%; /* Equal width for better balance */
     }
 } 

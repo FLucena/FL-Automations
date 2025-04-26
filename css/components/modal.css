@@ -194,11 +194,12 @@
 /* Projects container in modal */
 .modal-projects-container {
     position: relative;
-    padding: 0 60px;
+    padding: 0 80px;
     min-height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: visible;
 }
 
 /* Carousel navigation */
@@ -209,7 +210,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.2);
     color: white;
     display: flex;
     align-items: center;
@@ -217,21 +218,21 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 10;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-nav:hover {
-    background-color: var(--primaryColor);
+    background-color: var(--color-primary, #5e60ce);
     transform: translateY(-50%) scale(1.1);
 }
 
 .carousel-prev {
-    left: -55px;
+    left: 15px;
 }
 
 .carousel-next {
-    right: -55px;
+    right: 15px;
 }
 
 /* Pagination styling */
@@ -321,60 +322,62 @@ body:not(.dark-mode) #projects-modal .modal-content {
 /* Responsive modal */
 @media screen and (max-width: 768px) {
     .modal-content {
-        flex-direction: column;
         width: 95%;
+        flex-direction: column;
         margin: 3vh auto;
+        max-height: 94vh;
     }
-    
+
     .modal-left-column,
     .modal-right-column {
         width: 100%;
-        max-height: initial;
+        padding: 15px;
     }
-    
+
     .modal-left-column {
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        max-height: 40vh;
+        overflow-y: auto;
     }
-    
+
     .modal-header {
         padding: 15px;
     }
-    
+
     .modal-search-filter {
         padding: 15px;
     }
-    
+
     .filter-container {
-        margin-top: 10px;
+        width: 100%;
     }
-    
+
     .filter-tags-container {
-        gap: 6px;
+        justify-content: center;
     }
-    
+
     .modal-projects-container {
-        padding: 0 20px;
+        padding: 0 50px;
+        min-height: 250px;
     }
-    
+
     .modal-project-card {
-        padding: 15px;
+        padding: 20px;
+        width: 95%;
     }
-    
+
     .carousel-nav {
         width: 36px;
         height: 36px;
-        top: initial;
-        bottom: -60px;
-        transform: none;
+        font-size: 14px;
+        background-color: rgba(255, 255, 255, 0.25);
     }
-    
+
     .carousel-prev {
-        left: calc(50% - 50px);
+        left: 10px;
     }
-    
+
     .carousel-next {
-        right: calc(50% - 50px);
+        right: 10px;
     }
     
     .filter-tag::after {
@@ -382,7 +385,15 @@ body:not(.dark-mode) #projects-modal .modal-content {
     }
     
     .clear-filters {
-        margin-top: 10px;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    /* Ensure the eye and lightbulb icons are properly positioned on mobile */
+    .view-icon, .idea-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
     }
 }
 
@@ -428,11 +439,12 @@ body:not(.dark-mode) #projects-modal .modal-content {
 /* Adjust modal content padding to ensure enough space for arrows */
 .modal-projects-container {
     position: relative;
-    padding: 0 60px;
+    padding: 0 80px;
     min-height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: visible;
 }
 
 /* Responsive adjustments for mobile */
