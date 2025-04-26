@@ -523,11 +523,26 @@ function displayFeaturedProjects() {
   container.innerHTML = '';
   
   featuredProjects.forEach((project, index) => {
-    const iconSVG = getIconSVG(project.icon);
+    // Use project images instead of SVG icons
+    let projectImage = '';
+    
+    // Map project titles to their respective image files
+    if (project.title === 'FinSave') {
+      projectImage = '<img src="img/Projects/finsave.png" alt="FinSave Project" class="project-image">';
+    } else if (project.title === 'FL Automations') {
+      projectImage = '<img src="img/Projects/flautomations.png" alt="FL Automations Project" class="project-image">';
+    } else if (project.title === 'Dental Start') {
+      projectImage = '<img src="img/Projects/dental-start.webp" alt="Dental Start Project" class="project-image">';
+    } else {
+      // Fallback to using SVG if no matching image
+      projectImage = getIconSVG(project.icon);
+    }
     
     const projectHTML = `
       <div class="projects-div flex div-${index + 1} project-card" data-aos="zoom-in" data-aos-delay="${100 * (index + 1)}">
-        ${iconSVG}
+        <div class="image-container">
+          ${projectImage}
+        </div>
         
         <h3>${project.title}</h3>
         <p class="lang-en">
@@ -537,19 +552,15 @@ function displayFeaturedProjects() {
           ${project.description.es}
         </p>
         <div class="project-links">
-          <button>
-            <a href="${project.url}" target="_blank" class="live-preview" title="Live Preview">
-              <i class="fa-solid fa-eye"></i>
-            </a>
-          </button>
-          <button>
-            <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="live-preview lang-en" title="Suggest Ideas">
-              <i class="fa-solid fa-lightbulb"></i>
-            </a>
-            <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="live-preview lang-es" style="display: none;" title="Sugerir Ideas">
-              <i class="fa-solid fa-lightbulb"></i>
-            </a>
-          </button>
+          <a href="${project.url}" target="_blank" class="live-preview" title="Live Preview" aria-label="Visit live project">
+            <i class="fa-solid fa-eye"></i>
+          </a>
+          <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="live-preview lang-en" title="Suggest Ideas" aria-label="Suggest ideas for this project">
+            <i class="fa-solid fa-lightbulb"></i>
+          </a>
+          <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="live-preview lang-es" style="display: none;" title="Sugerir Ideas" aria-label="Sugerir ideas para este proyecto">
+            <i class="fa-solid fa-lightbulb"></i>
+          </a>
         </div>
       </div>
     `;
@@ -575,13 +586,13 @@ function displayRandomProjects() {
         <p class="lang-en">${project.description.en}</p>
         <p class="lang-es" style="display: none;">${project.description.es}</p>
         <div class="project-links">
-          <a href="${project.url}" target="_blank" class="hyperlink" title="Live Preview">
+          <a href="${project.url}" target="_blank" class="hyperlink" title="Live Preview" aria-label="Visit live project">
             <i class="fa-solid fa-eye"></i>
           </a>
-          <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="hyperlink lang-en" title="Suggest Ideas">
+          <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="hyperlink lang-en" title="Suggest Ideas" aria-label="Suggest ideas for this project">
             <i class="fa-solid fa-lightbulb"></i>
           </a>
-          <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="hyperlink lang-es" style="display: none;" title="Sugerir Ideas">
+          <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="hyperlink lang-es" style="display: none;" title="Sugerir Ideas" aria-label="Sugerir ideas para este proyecto">
             <i class="fa-solid fa-lightbulb"></i>
           </a>
         </div>
@@ -816,13 +827,13 @@ function refreshProjects() {
             <p class="lang-en">${project.description.en}</p>
             <p class="lang-es" style="display: none;">${project.description.es}</p>
             <div class="project-links">
-              <a href="${project.url}" target="_blank" class="hyperlink" title="Live Preview">
+              <a href="${project.url}" target="_blank" class="hyperlink" title="Live Preview" aria-label="Visit live project">
                 <i class="fa-solid fa-eye"></i>
               </a>
-              <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="hyperlink lang-en" title="Suggest Ideas">
+              <a href="mailto:flucena.dev@gmail.com?subject=Suggestion for ${encodeURIComponent(project.title)}" class="hyperlink lang-en" title="Suggest Ideas" aria-label="Suggest ideas for this project">
                 <i class="fa-solid fa-lightbulb"></i>
               </a>
-              <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="hyperlink lang-es" style="display: none;" title="Sugerir Ideas">
+              <a href="mailto:flucena.dev@gmail.com?subject=Sugerencia para ${encodeURIComponent(project.title)}" class="hyperlink lang-es" style="display: none;" title="Sugerir Ideas" aria-label="Sugerir ideas para este proyecto">
                 <i class="fa-solid fa-lightbulb"></i>
               </a>
             </div>

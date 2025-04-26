@@ -58,7 +58,7 @@
               </a>
             </div>
           </div>
-          <div class="profile-image" data-aos="zoom-in" data-aos-delay="200">
+          <div class="profile-image" data-aos="zoom-in" d ata-aos-delay="200">
             <div class="coin">
               <div class="coin-face coin-front">
                 <img src="./img/square-img.png" alt="Francisco's profile picture" class="profile-img" />
@@ -158,12 +158,15 @@
         <h1 class="lang-es" style="display: none;">Todos los <br /><span>Proyectos</span></h1>
         <p class="lang-en">
           Browse through my complete collection of projects. Each project showcases different skills and technologies.
-          <button onclick="refreshProjects()" class="refresh-btn lang-en">Show Different Projects</button>
         </p>
         <p class="lang-es" style="display: none;">
           Explora mi colección completa de proyectos. Cada proyecto muestra diferentes habilidades y tecnologías.
-          <button onclick="refreshProjects()" class="refresh-btn lang-es" style="display: none;">Mostrar Proyectos Diferentes</button>
         </p>
+        
+        <div class="button-container">
+          <button onclick="refreshProjects()" class="refresh-btn lang-en">Show Different Projects</button>
+          <button onclick="refreshProjects()" class="refresh-btn lang-es" style="display: none;">Mostrar Proyectos Diferentes</button>
+        </div>
         
         <div class="projects-container">
           <!-- Random projects will be loaded dynamically from projects.json -->
