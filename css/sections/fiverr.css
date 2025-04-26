@@ -1,0 +1,167 @@
+/* Fiverr Stats Section */
+.fiverr-stats {
+  margin: 2rem 0;
+  padding: 20px;
+  width: 100%;
+}
+
+.fiverr-card {
+  background-color: var(--color-card-bg);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 15px var(--box-shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.fiverr-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--box-shadow-color);
+}
+
+.fiverr-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.fiverr-logo-container {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+}
+
+.fiverr-card-logo {
+  width: 60px;
+  max-width: 100%;
+  height: auto;
+}
+
+.fiverr-stats-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fiverr-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stars {
+  display: flex;
+  gap: 3px;
+}
+
+.stars i {
+  color: #ffb33e;
+  font-size: 18px;
+}
+
+.rating-text {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--color-text-primary);
+}
+
+.light_mode .rating-text {
+  color: var(--color-text-primary);
+}
+
+.fiverr-orders {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-primary);
+}
+
+.light_mode .fiverr-orders {
+  color: var(--color-text-primary);
+}
+
+.fiverr-orders i {
+  color: #4caf50;
+  font-size: 18px;
+}
+
+.fiverr-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 5px;
+  transition: color 0.3s ease;
+}
+
+.fiverr-profile-link:hover {
+  color: var(--color-links-hover);
+  text-decoration: underline;
+}
+
+.fiverr-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  overflow: hidden;
+  position: relative;
+}
+
+.fiverr-icon:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+}
+
+.fiverr-svg {
+  width: 25px;
+  height: 25px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+
+.light_mode .fiverr-svg {
+  filter: brightness(0);
+}
+
+.fiverr-icon:hover .fiverr-svg {
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .fiverr-card-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .fiverr-logo-container {
+    margin: 0 auto 15px;
+  }
+  
+  .fiverr-rating, 
+  .fiverr-orders {
+    justify-content: center;
+  }
+  
+  .fiverr-profile-link {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .fiverr-card {
+    padding: 15px;
+  }
+} 

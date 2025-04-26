@@ -169,4 +169,250 @@ footer .social i {
     .resume-btn i {
         margin-right: 10px;
     }
+}
+
+/* Coin flip effect and tech icons */
+.coin {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+    cursor: pointer;
+}
+
+.coin-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.coin-front {
+    background-color: var(--color-background);
+    border: 4px solid var(--color-text-secondary);
+}
+
+.coin-back {
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-background);
+    border: 4px solid var(--color-text-secondary);
+    position: relative;
+}
+
+.coin-back::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.coin-back::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.coin-back:hover::before,
+.coin-back:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.light_mode .coin-back::before {
+    background-color: rgba(50, 50, 50, 0.95);
+    color: white;
+}
+
+.light_mode .coin-back::after {
+    border-color: transparent transparent rgba(50, 50, 50, 0.95) transparent;
+}
+
+.tech-icon {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+.profile-img, .tech-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+}
+
+.profile-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.profile-image:active {
+    transform: scale(0.95);
+}
+
+/* Tech tag icons */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.tech-tag {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    position: relative;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.tech-tag:hover {
+    transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.tech-icon-small {
+    width: 20px;
+    height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+    object-fit: contain;
+}
+
+/* Tech tag tooltip styles */
+.tech-tag::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.tech-tag:hover::before {
+    opacity: 1;
+    visibility: visible;
+    bottom: -25px;
+}
+
+.more-tag {
+    background-color: rgba(123, 191, 217, 0.2);
+    color: var(--color-text-primary);
+}
+
+.light_mode .tech-tag {
+    background-color: rgba(14, 87, 118, 0.1);
+}
+
+.light_mode .tech-tag:hover {
+    background-color: rgba(14, 87, 118, 0.2);
+}
+
+.light_mode .tech-tag::before {
+    background-color: rgba(50, 50, 50, 0.95);
+}
+
+/* Other icons */
+.tooth-icon {
+    max-width: 220px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    filter: invert(1) brightness(1.5);
+    transition: all 0.3s ease;
+}
+
+.projects-div .tooth-icon {
+    max-width: 100%;
+    height: 220px;
+    filter: invert(1) brightness(1.5);
+}
+
+.light_mode .tooth-icon {
+    filter: none;
+}
+
+/* Project icons */
+.project-icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.project-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .profile-image {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto 20px;
+    }
 } 

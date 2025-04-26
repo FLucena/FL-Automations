@@ -25,7 +25,7 @@
 .modal-content {
     display: flex;
     flex-direction: row;
-    background-color: var(--bg-secondary);
+    background-color: #222 !important;
     margin: 5vh auto;
     width: 90%;
     max-width: 1200px;
@@ -35,6 +35,7 @@
     transform: translateY(-30px);
     transition: transform 0.3s ease;
     max-height: 90vh;
+    color: #fff !important;
 }
 
 .modal.show .modal-content {
@@ -54,7 +55,7 @@
 .modal-header h2 {
     margin: 0;
     font-size: 1.8rem;
-    color: var(--text-primary);
+    color: #fff !important;
     font-weight: 600;
 }
 
@@ -192,14 +193,12 @@
 
 /* Projects container in modal */
 .modal-projects-container {
-    padding: 20px;
     position: relative;
+    padding: 0 60px;
+    min-height: 300px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex: 1;
-    height: calc(90vh - 150px);
-    overflow: hidden;
+    justify-content: center;
 }
 
 /* Carousel navigation */
@@ -207,33 +206,32 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: var(--text-primary);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.3s ease;
     border: none;
-    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .carousel-nav:hover {
-    background-color: var(--accent-color);
-    color: white;
+    background-color: var(--primaryColor);
     transform: translateY(-50%) scale(1.1);
 }
 
 .carousel-prev {
-    left: 20px;
+    left: -55px;
 }
 
 .carousel-next {
-    right: 20px;
+    right: -55px;
 }
 
 /* Pagination styling */
@@ -356,7 +354,7 @@ body:not(.dark-mode) #projects-modal .modal-content {
     }
     
     .modal-projects-container {
-        padding: 15px;
+        padding: 0 20px;
     }
     
     .modal-project-card {
@@ -364,16 +362,19 @@ body:not(.dark-mode) #projects-modal .modal-content {
     }
     
     .carousel-nav {
-        width: 35px;
-        height: 35px;
+        width: 36px;
+        height: 36px;
+        top: initial;
+        bottom: -60px;
+        transform: none;
     }
     
     .carousel-prev {
-        left: 5px;
+        left: calc(50% - 50px);
     }
     
     .carousel-next {
-        right: 5px;
+        right: calc(50% - 50px);
     }
     
     .filter-tag::after {
@@ -382,5 +383,81 @@ body:not(.dark-mode) #projects-modal .modal-content {
     
     .clear-filters {
         margin-top: 10px;
+    }
+}
+
+/* Modal contrast improvements */
+.modal-project-title,
+.modal-project-description,
+.modal-header h2 {
+    color: #fff !important;
+}
+
+/* Light mode contrast improvements */
+.light_mode .modal-content {
+    background-color: #f5f5f5 !important;
+    color: #222 !important;
+}
+
+.light_mode .modal-project-title,
+.light_mode .modal-project-description,
+.light_mode .modal-header h2,
+.light_mode .filter-label,
+.light_mode .search-container input,
+.light_mode .pagination-counter {
+    color: #222 !important;
+}
+
+.light_mode .search-container input {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ccc;
+}
+
+.light_mode .search-container input:focus {
+    border-color: var(--primaryColor);
+}
+
+.light_mode .carousel-nav {
+    background-color: rgba(14, 87, 118, 0.7);
+}
+
+.light_mode .carousel-nav:hover {
+    background-color: var(--primaryColor);
+}
+
+/* Adjust modal content padding to ensure enough space for arrows */
+.modal-projects-container {
+    position: relative;
+    padding: 0 60px;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments for mobile */
+@media screen and (max-width: 768px) {
+    .modal-projects-container {
+        padding: 0 20px;
+    }
+    
+    .carousel-nav {
+        width: 36px;
+        height: 36px;
+        top: initial;
+        bottom: -60px;
+        transform: none;
+    }
+    
+    .carousel-prev {
+        left: calc(50% - 50px);
+    }
+    
+    .carousel-next {
+        right: calc(50% - 50px);
+    }
+    
+    .modal-project-card {
+        margin-bottom: 50px;
     }
 } 

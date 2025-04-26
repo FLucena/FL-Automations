@@ -1,0 +1,67 @@
+/* Responsive Design Utilities */
+
+/* Media query variables */
+:root {
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+/* Global responsive adjustments */
+html {
+  scroll-padding-top: 100px; /* Adjust based on navbar height plus padding */
+  scroll-behavior: smooth;
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    scroll-padding-top: 80px;
+  }
+  
+  body {
+    overflow-x: hidden;
+  }
+  
+  .container, 
+  section, 
+  main, 
+  .projects-container, 
+  .project-cards-container {
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+  
+  section {
+    padding: 40px 0;
+  }
+  
+  input, 
+  textarea, 
+  button {
+    font-size: 14px;
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+/* Mobile small adjustments */
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
+/* Mobile extra small adjustments */
+@media screen and (max-width: 380px) {
+  .hero-title {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+} 
