@@ -1,101 +1,36 @@
-# FL Automations Portfolio
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A modern, interactive portfolio website showcasing projects and skills with a responsive design and bilingual support.
+## Getting Started
 
-![FL Automations Portfolio](img/Projects/flautomations.png)
+First, run the development server:
 
-## Features
-
-- **Interactive Coin Flip**: Engaging profile image that flips to reveal different tech stack icons
-- **Responsive Design**: Fully responsive layout optimized for all devices
-- **Bilingual Support**: Toggle between English and Spanish content
-- **Dark/Light Mode**: User-selectable color scheme
-- **Project Showcase**: Featured projects section with filtering capabilities
-- **Form Validation**: Contact form with client-side validation and feedback
-- **Dynamic Content**: Projects loaded from JSON with fallback data
-- **Animations**: Smooth animations and transitions using AOS library
-
-## Technologies Used
-
-- [HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML)
-- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [TailwindCSS](https://tailwindcss.com/)
-- [Font Awesome](https://fontawesome.com/)
-- [AOS Library](https://michalsnik.github.io/aos/)
-- [Typed.js](https://github.com/mattboldt/typed.js/)
-
-## Project Structure
-
-```
-├── css/
-│   ├── style.css
-│   └── contact.css
-├── img/
-│   ├── Projects/
-│   └── ...
-├── js/
-│   ├── main.js
-│   └── projects.json
-├── index.html
-└── README.md
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Installation & Setup
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YourUsername/flucena.git
-   cd flucena
-   ```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-2. Open `index.html` in your browser or use a local server:
-   ```bash
-   # Using Python
-   python -m http.server
-   
-   # Or using Node.js
-   npx serve
-   ```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Usage
+## Learn More
 
-- **Coin Flip**: Click or drag the profile image to see it flip and reveal tech icons
-- **Language Toggle**: Click the language icon in the navigation to switch between English and Spanish
-- **Dark/Light Mode**: Click the moon icon to toggle between dark and light themes
-- **Project Filter**: Use the "View all projects" link to see all projects with filtering options
-- **Contact Form**: Fill out the form at the bottom to send a message
+To learn more about Next.js, take a look at the following resources:
 
-## Project Highlights
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-The portfolio showcases various projects including:
-- Web applications
-- Automations
-- React/Next.js projects
-- Python applications
-- And more!
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Recent Updates
+## Deploy on Vercel
 
-- Migrated from Bootstrap to Tailwind CSS for more flexible and utility-first styling
-- Consolidated footer styling into a single CSS file for better maintainability
-- Enhanced coin flip component with improved animation and styling
-- Added multilanguage support for English and Spanish
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## Contributing
-
-Contributions are welcome! Feel free to submit a pull request or open an issue.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## Contact
-
-Francisco Lucena - [franciscolucena90@gmail.com](mailto:franciscolucena90@gmail.com)
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
