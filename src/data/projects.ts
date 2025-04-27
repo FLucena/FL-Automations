@@ -23,7 +23,7 @@ export const projects: Project[] = [
       es: "¡Un blog con todas las aplicaciones y proyectos en los que he estado trabajando!"
     },
     url: "https://www.flautomations.com.ar/",
-    featured: true,
+    featured: false,
     icon: "blog",
     technologies: ["nextjs", "typescript", "react", "tailwind"],
     hasPreview: false
@@ -200,4 +200,30 @@ export const projects: Project[] = [
     technologies: ["vite", "typescript", "react", "bootstrap"],
     hasPreview: false
   },
+  {
+    id: 16,
+    title: "Modelflow",
+    description: {
+      en: "A powerful Node.js API and toolkit for processing 3D models, including conversion, optimization, and preview generation.",
+      es: "Una API y toolkit poderosa para procesar modelos 3D, incluyendo conversión, optimización y generación de vista previa."
+    },
+    url: "https://modelflow.netlify.app/",
+    featured: true,
+    icon: "3dshowcase",
+    technologies: ["nodejs", "vite", "react", "tailwind"],
+    hasPreview: false
+  },
+  {
+    id: 17,
+    title: "Mamuk",
+    description: {
+      en: "A training app that connects coaches with clients.",
+      es: "Una app de entrenamiento que conecta a los coaches con los clientes."
+    },
+    url: "https://mamuk.com.ar/",
+    featured: true,
+    icon: "3dshowcase",
+    technologies: ["nextjs", "nodejs", "express", "typescript", "tailwind"],
+    hasPreview: false
+  }
 ]; 

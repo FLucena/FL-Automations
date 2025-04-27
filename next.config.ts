@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'streamlit.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.icon-icons.com',
       }
     ]
   }

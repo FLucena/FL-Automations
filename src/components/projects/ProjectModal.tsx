@@ -83,16 +83,20 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
               {project.description[language]}
             </p>
             
-            <div className="tech-tags flex flex-wrap gap-3 mb-4">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">
+              {language === "en" ? "Technologies Used" : "Tecnologías Utilizadas"}
+            </h3>
+            
+            <div className="tech-tags flex flex-wrap gap-4 mb-4">
               {project.technologies.map((tech) => (
-                <Tooltip key={tech} label={techIcons[tech]?.name}>
-                  <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full p-1.5 flex items-center justify-center">
+                <Tooltip key={tech} label={techIcons[tech]?.name || tech}>
+                  <div className="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-full p-2 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
                     <Image 
                       src={techIcons[tech]?.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-                      alt={techIcons[tech]?.name || 'Technology icon'}
-                      className="w-full h-full object-contain"
-                      width={20}
-                      height={20}
+                      alt={techIcons[tech]?.name || tech}
+                      className={`w-full h-full object-contain ${tech === 'express' ? 'invert dark:invert-0' : ''}`}
+                      width={24}
+                      height={24}
                     />
                   </div>
                 </Tooltip>

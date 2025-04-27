@@ -51,12 +51,45 @@ export const techIcons: TechIconsMap = {
   tailwind: {
     icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/600px-Tailwind_CSS_Logo.svg.png',
     name: 'TailwindCSS'
+  },
+  nodejs: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    name: 'Node.js'
+  },
+  express: {
+    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/express.svg',
+    name: 'Express'
+  },
+  django: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg',
+    name: 'Django'
+  },
+  bootstrap: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg',
+    name: 'Bootstrap'
+  },
+  figma: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+    name: 'Figma'
+  },
+  appsscript: {
+    icon: 'https://www.gstatic.com/images/branding/product/2x/apps_script_48dp.png',
+    name: 'Google Apps Script'
+  },
+  vba: {
+    icon: 'https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vba_icon_130097.png',
+    name: 'VBA'
+  },
+  vite: {
+    icon: 'https://vitejs.dev/logo.svg',
+    name: 'Vite'
   }
 };
 
 export const availableTechTags: string[] = [
   'nextjs', 'react', 'javascript', 'typescript', 'python', 
-  'flutter', 'streamlit', 'threejs', 'html', 'css', 'tailwind'
+  'flutter', 'streamlit', 'threejs', 'html', 'css', 'tailwind',
+  'nodejs', 'express', 'django', 'bootstrap', 'figma', 'appsscript', 'vba', 'vite'
 ];
 
 export const coinFlipIcons = [

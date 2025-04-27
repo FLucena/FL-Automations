@@ -39,33 +39,25 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
         </p>
         
         <div className="tech-tags flex flex-wrap gap-2 mb-4">
-          {project.technologies.slice(0, 3).map((tech) => (
-            <div 
-              key={tech}
-              className="tech-tag flex items-center bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1"
-            >
-              <Tooltip label={techIcons[tech]?.name} position="top">
-                <div className="flex items-center">
-                  <Image 
-                    src={techIcons[tech]?.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-                    alt={techIcons[tech]?.name || 'Technology icon'}
-                    className="mr-1 w-4 h-4 object-contain"
-                    width={16}
-                    height={16}
-                  />
-                  <span className="text-xs text-gray-700 dark:text-gray-300">
-                    {techIcons[tech]?.name}
-                  </span>
-                </div>
-              </Tooltip>
-            </div>
+          {project.technologies.slice(0, 5).map((tech) => (
+            <Tooltip key={tech} label={techIcons[tech]?.name || tech} position="top">
+              <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full p-1.5 flex items-center justify-center">
+                <Image 
+                  src={techIcons[tech]?.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
+                  alt={techIcons[tech]?.name || tech}
+                  className={`w-full h-full object-contain ${tech === 'express' ? 'invert dark:invert-0' : ''}`}
+                  width={20}
+                  height={20}
+                />
+              </div>
+            </Tooltip>
           ))}
           
-          {project.technologies.length > 3 && (
-            <Tooltip label={`${project.technologies.length - 3} more technologies`}>
-              <div className="tech-tag bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1">
-                <span className="text-xs text-gray-700 dark:text-gray-300">
-                  +{project.technologies.length - 3}
+          {project.technologies.length > 5 && (
+            <Tooltip label={`${project.technologies.length - 5} more technologies`}>
+              <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                  +{project.technologies.length - 5}
                 </span>
               </div>
             </Tooltip>
