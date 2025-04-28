@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import TechFilter from "./TechFilter";
 import ProjectModal from "./ProjectModal";
@@ -27,6 +27,29 @@ const ProjectGrid = () => {
   
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentMobileIndex, setCurrentMobileIndex] = useState(0);
+  const [isTouching, setIsTouching] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const filterContainerRef = useRef<HTMLDivElement>(null);
+
+  // Check if device is mobile on mount and resize
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Check on mount
+    checkIsMobile();
+    
+    // Check on resize
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
 
   const handleOpenProjectModal = (project: Project) => {
     setSelectedProject(project);
@@ -36,6 +59,51 @@ const ProjectGrid = () => {
   const handleCloseProjectModal = () => {
     setIsModalOpen(false);
   };
+
+  // Mobile project slider navigation
+  const goToPrevMobileProject = () => {
+    setCurrentMobileIndex(prev => 
+      prev === 0 ? filteredProjects.length - 1 : prev - 1
+    );
+  };
+
+  const goToNextMobileProject = () => {
+    setCurrentMobileIndex(prev => 
+      prev === filteredProjects.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  // Touch handlers for swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsTouching(true);
+    setTouchStart(e.targetTouches[0].clientX);
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isTouching) return;
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    setIsTouching(false);
+    
+    // Minimum swipe distance required (in pixels)
+    const minSwipeDistance = 50;
+    
+    if (touchStart - touchEnd > minSwipeDistance) {
+      // Swiped left, go to next project
+      goToNextMobileProject();
+    } else if (touchEnd - touchStart > minSwipeDistance) {
+      // Swiped right, go to previous project
+      goToPrevMobileProject();
+    }
+  };
+
+  // Reset mobile index when filtered projects change
+  useEffect(() => {
+    setCurrentMobileIndex(0);
+  }, [filteredProjects]);
 
   // Generate page numbers for pagination
   const getPageNumbers = () => {
@@ -79,6 +147,9 @@ const ProjectGrid = () => {
   };
 
   const currentProjects = getCurrentPageProjects();
+  
+  // Get current mobile project
+  const currentMobileProject = filteredProjects[currentMobileIndex];
 
   return (
     <div className="project-grid-container">
@@ -115,11 +186,16 @@ const ProjectGrid = () => {
           </button>
         </div>
         
-        {/* Tech Filters */}
-        <TechFilter 
-          activeTechFilters={activeTechFilters} 
-          toggleTechFilter={toggleTechFilter} 
-        />
+        {/* Tech Filters - Horizontally scrollable on mobile */}
+        <div 
+          ref={filterContainerRef}
+          className="overflow-x-auto md:overflow-visible pb-2 -mx-1 px-1"
+        >
+          <TechFilter 
+            activeTechFilters={activeTechFilters} 
+            toggleTechFilter={toggleTechFilter} 
+          />
+        </div>
         
         {/* Project Count */}
         <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
@@ -130,17 +206,83 @@ const ProjectGrid = () => {
         </div>
       </div>
       
-      {/* Projects Grid */}
+      {/* Projects Display */}
       {filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {currentProjects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              onClick={() => handleOpenProjectModal(project)}
-            />
-          ))}
-        </div>
+        <>
+          {/* Mobile Carousel View */}
+          <div className={`md:hidden ${isTouching ? "transition-none" : "transition-opacity duration-300"}`}>
+            {filteredProjects.length > 0 && (
+              <div 
+                className="mobile-carousel-container relative mb-8"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                <div className="mobile-project-card w-full">
+                  <ProjectCard
+                    key={currentMobileProject.id}
+                    project={currentMobileProject}
+                    onClick={() => handleOpenProjectModal(currentMobileProject)}
+                  />
+                </div>
+                
+                {/* Mobile navigation buttons */}
+                <div className="flex justify-between items-center mt-6">
+                  <button 
+                    onClick={goToPrevMobileProject}
+                    className="p-3 rounded-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 shadow-md"
+                    aria-label={language === "en" ? "Previous project" : "Proyecto anterior"}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    {currentMobileIndex + 1} / {filteredProjects.length}
+                  </div>
+                  
+                  <button 
+                    onClick={goToNextMobileProject}
+                    className="p-3 rounded-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 shadow-md"
+                    aria-label={language === "en" ? "Next project" : "Proyecto siguiente"}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+                
+                {/* Project indicators */}
+                <div className="flex justify-center mt-4 space-x-2">
+                  {filteredProjects.map((_, index) => (
+                    <button
+                      key={`indicator-${index}`}
+                      onClick={() => setCurrentMobileIndex(index)}
+                      className={`w-2 h-2 rounded-full ${
+                        currentMobileIndex === index
+                          ? "bg-accent"
+                          : "bg-gray-300 dark:bg-gray-600"
+                      }`}
+                      aria-label={`${language === "en" ? "Go to project" : "Ir al proyecto"} ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          
+          {/* Desktop Grid View */}
+          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {currentProjects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onClick={() => handleOpenProjectModal(project)}
+              />
+            ))}
+          </div>
+        </>
       ) : (
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -164,9 +306,9 @@ const ProjectGrid = () => {
         </div>
       )}
       
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="pagination flex justify-center items-center space-x-2 mt-8">
+      {/* Pagination - Only show on desktop */}
+      {totalPages > 1 && !isMobile && (
+        <div className="pagination hidden md:flex justify-center items-center space-x-2 mt-8">
           {/* Previous Page Button */}
           <button
             onClick={prevPage}

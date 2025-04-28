@@ -56,117 +56,156 @@ const About = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               <div className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
-                <h4 className="font-medium text-gray-800 dark:text-white mb-2">Front End</h4>
+                <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">Front End</h4>
                 <ul className="text-gray-600 dark:text-gray-300 space-y-1">
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.react.name} position="top">
                         <Image
                           src={techIcons.react.icon}
                           alt="React"
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           className="mr-1 object-contain"
                         />
                       </Tooltip>
+                      React.js
+                    </div>
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.nextjs.name} position="top">
                         <Image
                           src={techIcons.nextjs.icon}
                           alt="Next.js"
-                          width={16}
-                          height={16}
-                          className="mx-1 object-contain"
+                          width={14}
+                          height={14}
+                          className="mr-1 object-contain"
                         />
                       </Tooltip>
+                      Next.js
+                    </div>
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.vite.name} position="top">
                         <Image
                           src={techIcons.vite.icon}
                           alt="Vite"
-                          width={16}
-                          height={16}
-                          className="mx-1 object-contain"
+                          width={14}
+                          height={14}
+                          className="mr-1 object-contain"
                         />
                       </Tooltip>
-                      React.js / Next.js / Vite
+                      Vite
                     </div>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.javascript.name} position="top">
                         <Image
                           src={techIcons.javascript.icon}
                           alt="JavaScript"
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           className="mr-1 object-contain"
                         />
                       </Tooltip>
+                      JavaScript
+                    </div>
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.typescript.name} position="top">
                         <Image
                           src={techIcons.typescript.icon}
                           alt="TypeScript"
-                          width={16}
-                          height={16}
-                          className="mx-1 object-contain"
+                          width={14}
+                          height={14}
+                          className="mr-1 object-contain"
                         />
                       </Tooltip>
-                      JavaScript / TypeScript
+                      TypeScript
                     </div>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.html.name} position="top">
                         <Image
                           src={techIcons.html.icon}
                           alt="HTML"
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           className="mr-1 object-contain"
                         />
                       </Tooltip>
+                      HTML5
+                    </div>
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.css.name} position="top">
                         <Image
                           src={techIcons.css.icon}
                           alt="CSS"
-                          width={16}
-                          height={16}
-                          className="mx-1 object-contain"
+                          width={14}
+                          height={14}
+                          className="mr-1 object-contain"
                         />
                       </Tooltip>
-                      HTML5 / CSS3
+                      CSS3
                     </div>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.tailwind.name} position="top">
                         <Image
                           src={techIcons.tailwind.icon}
                           alt="Tailwind"
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           className="mr-1 object-contain"
                         />
                       </Tooltip>
-                      Tailwind CSS / 
+                      Tailwind
+                    </div>
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.bootstrap.name} position="top">
                         <Image
                           src={techIcons.bootstrap.icon}
                           alt="Bootstrap"
-                          width={16}
-                          height={16}
-                          className="mx-1 object-contain"
+                          width={14}
+                          height={14}
+                          className="mr-1 object-contain"
                         />
                       </Tooltip>
                       Bootstrap
@@ -176,21 +215,21 @@ const About = () => {
               </div>
               
               <div className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
-                <h4 className="font-medium text-gray-800 dark:text-white mb-2">
+                <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">
                   {language === "en" ? "Back End" : "Back End"}
                 </h4>
                 <ul className="text-gray-600 dark:text-gray-300 space-y-1">
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.nodejs.name} position="top">
                         <Image
                           src={techIcons.nodejs.icon}
                           alt="Node.js"
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           className="mr-1 object-contain"
                         />
                       </Tooltip>
@@ -198,16 +237,16 @@ const About = () => {
                     </div>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.express.name} position="top">
                         <Image
                           src={techIcons.express.icon}
                           alt="Express"
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           className="mr-1 object-contain invert dark:invert-0" 
                         />
                       </Tooltip>
@@ -215,16 +254,16 @@ const About = () => {
                     </div>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.django.name} position="top">
                         <Image
                           src={techIcons.django.icon}
                           alt="Django"
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           className="mr-1 object-contain"
                         />
                       </Tooltip>
@@ -232,16 +271,16 @@ const About = () => {
                     </div>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.python.name} position="top">
                         <Image
                           src={techIcons.python.icon}
                           alt="Python"
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           className="mr-1 object-contain"
                         />
                       </Tooltip>
@@ -254,21 +293,21 @@ const About = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               <div className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
-                <h4 className="font-medium text-gray-800 dark:text-white mb-2">
+                <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">
                   {language === "en" ? "Other Skills" : "Otras Habilidades"}
                 </h4>
                 <ul className="text-gray-600 dark:text-gray-300 space-y-1">
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.flutter.name} position="top">
                         <Image
                           src={techIcons.flutter.icon}
                           alt="Flutter"
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           className="mr-1 object-contain"
                         />
                       </Tooltip>
@@ -276,16 +315,16 @@ const About = () => {
                     </div>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.figma.name} position="top">
                         <Image
                           src={techIcons.figma.icon}
                           alt="UI/UX"
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           className="mr-1 object-contain"
                         />
                       </Tooltip>
@@ -293,27 +332,34 @@ const About = () => {
                     </div>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.appsscript.name} position="top">
                         <Image
                           src={techIcons.appsscript.icon}
                           alt="Apps Script"
                           width={12}
                           height={12}
-                          className="mx-1 object-contain"
+                          className="mr-1 object-contain"
                         />
                       </Tooltip>
-                      Apps Script, 
+                      Apps Script
+                    </div>
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <div className="flex items-center text-xs">
                       <Tooltip label={techIcons.vba.name} position="top">
                         <Image
                           src={techIcons.vba.icon}
                           alt="VBA"
                           width={12}
                           height={12}
-                          className="mx-1 object-contain"
+                          className="mr-1 object-contain"
                         />
                       </Tooltip>
                       VBA

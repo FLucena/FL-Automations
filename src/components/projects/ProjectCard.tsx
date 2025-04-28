@@ -29,12 +29,12 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
       onKeyDown={(e) => e.key === "Enter" && onClick()}
       aria-label={`Open ${project.title} project details`}
     >
-      <div className="p-6">
-        <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+      <div className="p-8">
+        <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">
           {project.title}
         </h3>
         
-        <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm h-12 overflow-hidden">
+        <p className="text-gray-600 dark:text-gray-300 mb-5 text-sm h-16 overflow-hidden text-ellipsis line-clamp-3">
           {project.description[language]}
         </p>
         

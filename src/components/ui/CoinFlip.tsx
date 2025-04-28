@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { coinFlipIcons } from "@/data/techIcons";
 
@@ -20,6 +20,18 @@ const CoinFlip = ({ profileImage }: CoinFlipProps) => {
   const [rotateY, setRotateY] = useState(0);
   const [showHint, setShowHint] = useState(false);
   const returnTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Function references to avoid circular dependencies
+  const handleDragMoveHelperRef = useRef<((clientX: number, clientY: number) => void) | null>(null);
+  const handleDragEndRef = useRef<(() => void) | null>(null);
+  const cleanupDragListenersRef = useRef<(() => void) | null>(null);
+  const flipCoinRef = useRef<(() => void) | null>(null);
+  const startReturnToOriginalTimeoutRef = useRef<(() => void) | null>(null);
+  const returnToOriginalPositionRef = useRef<(() => void) | null>(null);
+  const handleGlobalMouseMoveRef = useRef<((e: MouseEvent) => void) | null>(null);
+  const handleGlobalTouchMoveRef = useRef<((e: TouchEvent) => void) | null>(null);
+  const handleGlobalMouseUpRef = useRef<(() => void) | null>(null);
+  const handleGlobalTouchEndRef = useRef<(() => void) | null>(null);
 
   // Show hint after a short delay
   useEffect(() => {
@@ -37,100 +49,8 @@ const CoinFlip = ({ profileImage }: CoinFlipProps) => {
     return () => clearTimeout(hintTimeout);
   }, []);
 
-  useEffect(() => {
-    // Change tech icon automatically every 3 seconds but only when flipped
-    const iconInterval = setInterval(() => {
-      if (isFlipped && !isAnimating && !isDragging) {
-        changeTechIcon();
-      }
-    }, 3000);
-
-    return () => {
-      clearInterval(iconInterval);
-      if (returnTimeoutRef.current) {
-        clearTimeout(returnTimeoutRef.current);
-      }
-    };
-  }, [isAnimating, isDragging, isFlipped]);
-
-  const changeTechIcon = () => {
-    setIsAnimating(true);
-    
-    // Change the icon
-    setCurrentIcon(prev => (prev + 1) % coinFlipIcons.length);
-    
-    // Animation complete
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 300);
-  };
-
-  const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
-    if (isAnimating) return;
-    
-    setIsDragging(true);
-    
-    // Get starting position
-    if ('touches' in e) {
-      setDragStartX(e.touches[0].clientX);
-      setDragStartY(e.touches[0].clientY);
-    } else {
-      setDragStartX(e.clientX);
-      setDragStartY(e.clientY);
-    }
-    
-    // Clear any return timeout
-    if (returnTimeoutRef.current) {
-      clearTimeout(returnTimeoutRef.current);
-    }
-  };
-
-  const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!isDragging) return;
-    
-    // Calculate new position
-    let clientX, clientY;
-    if ('touches' in e) {
-      clientX = e.touches[0].clientX;
-      clientY = e.touches[0].clientY;
-    } else {
-      clientX = e.clientX;
-      clientY = e.clientY;
-    }
-    
-    // Calculate rotation based on drag distance
-    const deltaX = clientX - dragStartX;
-    const deltaY = clientY - dragStartY;
-    
-    // Base rotation on current flipped state
-    const baseRotateY = isFlipped ? 180 : 0;
-    
-    // Rotate the coin freely in both axes
-    setRotateY(baseRotateY + deltaX * 0.5);
-    setRotateX(-deltaY * 0.5); // Invert Y for more intuitive rotation
-    
-    // Flip the coin if rotation exceeds threshold in either axis
-    if (Math.abs(deltaX) > 180 || Math.abs(deltaY) > 180) {
-      flipCoin();
-    }
-  };
-
-  const handleDragEnd = () => {
-    if (!isDragging) return;
-    
-    setIsDragging(false);
-    
-    // Start return timer
-    startReturnToOriginalTimeout();
-  };
-
-  const startReturnToOriginalTimeout = () => {
-    returnTimeoutRef.current = setTimeout(() => {
-      returnToOriginalPosition();
-    }, 1000);
-  };
-
-  const returnToOriginalPosition = () => {
+  // Define core functions first
+  const returnToOriginalPosition = useCallback(() => {
     setIsAnimating(true);
     
     // Animate back to original position based on flipped state
@@ -141,10 +61,23 @@ const CoinFlip = ({ profileImage }: CoinFlipProps) => {
     setTimeout(() => {
       setIsAnimating(false);
     }, 500);
-  };
+  }, [isFlipped]);
+  
+  // Store reference
+  returnToOriginalPositionRef.current = returnToOriginalPosition;
 
-  const flipCoin = () => {
-    
+  const startReturnToOriginalTimeout = useCallback(() => {
+    returnTimeoutRef.current = setTimeout(() => {
+      if (returnToOriginalPositionRef.current) {
+        returnToOriginalPositionRef.current();
+      }
+    }, 1000);
+  }, []);
+  
+  // Store reference
+  startReturnToOriginalTimeoutRef.current = startReturnToOriginalTimeout;
+
+  const flipCoin = useCallback(() => {
     if (isAnimating) {
       return;
     }
@@ -167,47 +100,231 @@ const CoinFlip = ({ profileImage }: CoinFlipProps) => {
     setTimeout(() => {
       setIsAnimating(false);
     }, 500);
-  };
+  }, [isAnimating, isFlipped]);
+  
+  // Store reference
+  flipCoinRef.current = flipCoin;
 
-  const handleClick = () => {
+  const handleDragEnd = useCallback(() => {
+    if (!isDragging) return;
+    
+    setIsDragging(false);
+    
+    // Start return timer
+    if (startReturnToOriginalTimeoutRef.current) {
+      startReturnToOriginalTimeoutRef.current();
+    }
+  }, [isDragging]);
+  
+  // Store reference
+  handleDragEndRef.current = handleDragEnd;
+  
+  const handleDragMoveHelper = useCallback((clientX: number, clientY: number) => {
+    if (!isDragging) return;
+    
+    // Calculate rotation based on drag distance
+    const deltaX = clientX - dragStartX;
+    const deltaY = clientY - dragStartY;
+    
+    // Base rotation on current flipped state
+    const baseRotateY = isFlipped ? 180 : 0;
+    
+    // Rotate the coin freely in both axes
+    setRotateY(baseRotateY + deltaX * 0.5);
+    setRotateX(-deltaY * 0.5); // Invert Y for more intuitive rotation
+    
+    // Flip the coin if rotation exceeds threshold in either axis
+    if (Math.abs(deltaX) > 180 || Math.abs(deltaY) > 180) {
+      if (flipCoinRef.current) {
+        flipCoinRef.current();
+      }
+    }
+  }, [isDragging, dragStartX, dragStartY, isFlipped]);
+  
+  // Store reference
+  handleDragMoveHelperRef.current = handleDragMoveHelper;
+  
+  // Event handlers using the refs
+  const handleGlobalMouseMove = useCallback((e: MouseEvent) => {
+    if (handleDragMoveHelperRef.current) {
+      handleDragMoveHelperRef.current(e.clientX, e.clientY);
+    }
+    e.preventDefault();
+  }, []);
+  
+  // Store reference
+  handleGlobalMouseMoveRef.current = handleGlobalMouseMove;
+  
+  const handleGlobalTouchMove = useCallback((e: TouchEvent) => {
+    if (e.touches && e.touches[0] && handleDragMoveHelperRef.current) {
+      handleDragMoveHelperRef.current(e.touches[0].clientX, e.touches[0].clientY);
+      e.preventDefault();
+    }
+  }, []);
+  
+  // Store reference
+  handleGlobalTouchMoveRef.current = handleGlobalTouchMove;
+  
+  // Clean up function that uses refs instead of direct function references
+  const cleanupGlobalListeners = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      if (handleGlobalMouseMoveRef.current) {
+        window.removeEventListener('mousemove', handleGlobalMouseMoveRef.current);
+      }
+      if (handleGlobalMouseUpRef.current) {
+        window.removeEventListener('mouseup', handleGlobalMouseUpRef.current);
+      }
+      if (handleGlobalTouchMoveRef.current) {
+        window.removeEventListener('touchmove', handleGlobalTouchMoveRef.current);
+      }
+      if (handleGlobalTouchEndRef.current) {
+        window.removeEventListener('touchend', handleGlobalTouchEndRef.current);
+      }
+    }
+  }, []);
+  
+  // Define handlers
+  const handleGlobalMouseUp = useCallback(() => {
+    cleanupGlobalListeners();
+    
+    if (handleDragEndRef.current) {
+      handleDragEndRef.current();
+    }
+  }, [cleanupGlobalListeners]);
+  
+  // Store reference
+  handleGlobalMouseUpRef.current = handleGlobalMouseUp;
+  
+  const handleGlobalTouchEnd = useCallback(() => {
+    cleanupGlobalListeners();
+    
+    if (handleDragEndRef.current) {
+      handleDragEndRef.current();
+    }
+  }, [cleanupGlobalListeners]);
+  
+  // Store reference
+  handleGlobalTouchEndRef.current = handleGlobalTouchEnd;
+  
+  // Store the reference for use in useEffect cleanup
+  const cleanupDragListeners = useCallback(() => {
+    cleanupGlobalListeners();
+  }, [cleanupGlobalListeners]);
+  
+  // Store reference
+  cleanupDragListenersRef.current = cleanupDragListeners;
+  
+  const changeTechIcon = useCallback(() => {
+    setIsAnimating(true);
+    
+    // Change the icon
+    setCurrentIcon(prev => (prev + 1) % coinFlipIcons.length);
+    
+    // Animation complete
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 300);
+  }, []);
+
+  const handleDragStart = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    if (isAnimating) return;
+    
+    // Prevent default browser drag behavior
+    e.preventDefault();
+    
+    setIsDragging(true);
+    
+    // Get starting position
+    if ('touches' in e) {
+      setDragStartX(e.touches[0].clientX);
+      setDragStartY(e.touches[0].clientY);
+    } else {
+      setDragStartX(e.clientX);
+      setDragStartY(e.clientY);
+    }
+    
+    // Clear any return timeout
+    if (returnTimeoutRef.current) {
+      clearTimeout(returnTimeoutRef.current);
+    }
+    
+    // Capture events outside of component
+    if (typeof window !== 'undefined') {
+      if (handleGlobalMouseMoveRef.current) {
+        window.addEventListener('mousemove', handleGlobalMouseMoveRef.current);
+      }
+      if (handleGlobalMouseUpRef.current) {
+        window.addEventListener('mouseup', handleGlobalMouseUpRef.current);
+      }
+      if (handleGlobalTouchMoveRef.current) {
+        window.addEventListener('touchmove', handleGlobalTouchMoveRef.current, { passive: false });
+      }
+      if (handleGlobalTouchEndRef.current) {
+        window.addEventListener('touchend', handleGlobalTouchEndRef.current);
+      }
+    }
+  }, [isAnimating]);
+  
+  const handleClick = useCallback(() => {
     // Disable custom double-click detection since we're using the native one
-  };
+  }, []);
 
-  const handleDoubleClick = (e: React.MouseEvent) => {
+  const handleDoubleClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     
     if (isAnimating) {
       return;
     }
     
-    flipCoin();
-  };
+    if (flipCoinRef.current) {
+      flipCoinRef.current();
+    }
+  }, [isAnimating]);
+
+  // Effect for tech icon auto-change
+  useEffect(() => {
+    // Change tech icon automatically every 3 seconds but only when flipped
+    const iconInterval = setInterval(() => {
+      if (isFlipped && !isAnimating && !isDragging) {
+        changeTechIcon();
+      }
+    }, 3000);
+
+    return () => {
+      clearInterval(iconInterval);
+      if (returnTimeoutRef.current) {
+        clearTimeout(returnTimeoutRef.current);
+      }
+      // Clean up any global event listeners
+      if (cleanupDragListenersRef.current) {
+        cleanupDragListenersRef.current();
+      }
+    };
+  }, [isAnimating, isDragging, isFlipped, changeTechIcon]);
 
   return (
     <div className="coin-flip-container perspective-500 w-full h-full">
       <div
         ref={coinRef}
-        className={`coin-flip relative w-full h-full rounded-full transform-style-3d transition-transform duration-500 cursor-pointer ${
+        className={`coin-flip relative w-full h-full rounded-full transform-style-3d transition-transform duration-500 ${
           showHint ? "animate-pulse" : ""
         } hover:scale-105 hover:shadow-xl`}
         style={{ 
           transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-          transition: isDragging ? "none" : "transform 0.5s ease, box-shadow 0.3s ease"
+          transition: isDragging ? "none" : "transform 0.5s ease, box-shadow 0.3s ease",
+          cursor: isDragging ? "grabbing" : "grab"
         }}
         data-is-flipped={isFlipped}
         onMouseDown={handleDragStart}
-        onMouseMove={handleDragMove}
-        onMouseUp={handleDragEnd}
-        onMouseLeave={handleDragEnd}
         onTouchStart={handleDragStart}
-        onTouchMove={handleDragMove}
-        onTouchEnd={handleDragEnd}
         onClick={handleClick}
         onDoubleClick={handleDoubleClick}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            flipCoin();
+            if (flipCoinRef.current) {
+              flipCoinRef.current();
+            }
           }
         }}
         tabIndex={0}
@@ -224,7 +341,8 @@ const CoinFlip = ({ profileImage }: CoinFlipProps) => {
               fill
               sizes="(max-width: 768px) 256px, 320px"
               priority
-              className="object-cover w-auto h-auto"
+              draggable="false"
+              className="object-cover pointer-events-none"
               onError={(e) => {
                 // Apply fallback via CSS since we can't directly change the src in Next Image
                 const target = e.target as HTMLImageElement;
@@ -253,7 +371,8 @@ const CoinFlip = ({ profileImage }: CoinFlipProps) => {
               alt={coinFlipIcons[currentIcon]?.name || 'Technology icon'}
               fill
               sizes="(max-width: 768px) 256px, 320px"
-              className="object-contain p-10 w-auto h-auto"
+              className="object-contain p-10 pointer-events-none"
+              draggable="false"
               priority
             />
           </div>
@@ -275,6 +394,26 @@ const CoinFlip = ({ profileImage }: CoinFlipProps) => {
         
         .rotate-y-180 {
           transform: rotateY(180deg);
+        }
+        
+        /* Prevent default dragging behavior */
+        .coin-flip-container img {
+          -webkit-user-drag: none;
+          user-select: none;
+          -moz-user-select: none;
+          -webkit-user-select: none;
+          -ms-user-select: none;
+          pointer-events: none;
+        }
+        
+        /* Allow interactions on the main coin element */
+        .coin-flip {
+          pointer-events: auto;
+          cursor: grab;
+        }
+        
+        .coin-flip:active {
+          cursor: grabbing;
         }
       `}</style>
     </div>
