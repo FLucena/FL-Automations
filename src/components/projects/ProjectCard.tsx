@@ -19,7 +19,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
 
   return (
     <div
-      className="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer"
+      className="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer md:h-auto h-[420px]"
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -29,16 +29,16 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
       onKeyDown={(e) => e.key === "Enter" && onClick()}
       aria-label={`Open ${project.title} project details`}
     >
-      <div className="p-8">
+      <div className="p-8 flex flex-col h-full">
         <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">
           {project.title}
         </h3>
         
-        <p className="text-gray-600 dark:text-gray-300 mb-5 text-sm h-16 overflow-hidden text-ellipsis line-clamp-3">
+        <p className="text-gray-600 dark:text-gray-300 mb-5 text-sm line-clamp-3">
           {project.description[language]}
         </p>
         
-        <div className="tech-tags flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mt-auto">
           {project.technologies.slice(0, 5).map((tech) => (
             <Tooltip key={tech} label={techIcons[tech]?.name || tech} position="top">
               <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full p-1.5 flex items-center justify-center">
@@ -64,7 +64,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
           )}
         </div>
         
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between mt-4">
           <a
             href={project.url}
             target="_blank"

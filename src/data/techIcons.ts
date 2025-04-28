@@ -49,7 +49,7 @@ export const techIcons: TechIconsMap = {
     name: 'CSS3'
   },
   tailwind: {
-    icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/600px-Tailwind_CSS_Logo.svg.png',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
     name: 'TailwindCSS'
   },
   nodejs: {

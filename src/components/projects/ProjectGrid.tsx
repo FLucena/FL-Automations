@@ -227,10 +227,10 @@ const ProjectGrid = () => {
                 </div>
                 
                 {/* Mobile navigation buttons */}
-                <div className="flex justify-between items-center mt-6">
+                <div className="flex items-center justify-center gap-4 mt-4 bottom-4 z-10">
                   <button 
                     onClick={goToPrevMobileProject}
-                    className="p-3 rounded-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 shadow-md"
+                    className="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 shadow-md"
                     aria-label={language === "en" ? "Previous project" : "Proyecto anterior"}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -238,35 +238,19 @@ const ProjectGrid = () => {
                     </svg>
                   </button>
                   
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                  <div className="text-sm text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-300 dark:border-gray-600 shadow-md">
                     {currentMobileIndex + 1} / {filteredProjects.length}
                   </div>
                   
                   <button 
                     onClick={goToNextMobileProject}
-                    className="p-3 rounded-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 shadow-md"
+                    className="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 shadow-md"
                     aria-label={language === "en" ? "Next project" : "Proyecto siguiente"}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
-                </div>
-                
-                {/* Project indicators */}
-                <div className="flex justify-center mt-4 space-x-2">
-                  {filteredProjects.map((_, index) => (
-                    <button
-                      key={`indicator-${index}`}
-                      onClick={() => setCurrentMobileIndex(index)}
-                      className={`w-2 h-2 rounded-full ${
-                        currentMobileIndex === index
-                          ? "bg-accent"
-                          : "bg-gray-300 dark:bg-gray-600"
-                      }`}
-                      aria-label={`${language === "en" ? "Go to project" : "Ir al proyecto"} ${index + 1}`}
-                    />
-                  ))}
                 </div>
               </div>
             )}
