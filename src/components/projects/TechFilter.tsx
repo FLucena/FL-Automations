@@ -83,9 +83,9 @@ const TechFilter = ({ activeTechFilters, toggleTechFilter }: TechFilterProps) =>
                   <Image
                     src={techIcons[tech].icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
                     alt={techIcons[tech].name || 'Technology icon'}
-                    fill
-                    sizes="24px"
-                    className="object-contain"
+                    width={24}
+                    height={24}
+                    className="object-contain w-auto h-auto"
                   />
                 </div>
               </div>
@@ -97,32 +97,16 @@ const TechFilter = ({ activeTechFilters, toggleTechFilter }: TechFilterProps) =>
       {/* Scroll indicators */}
       {showScrollIndicator && (
         <>
-          <div 
-            className={`md:hidden absolute left-0 top-1/2 h-8 w-8 transform -translate-y-1/2 bg-gradient-to-r from-gray-50 dark:from-gray-800 to-transparent pointer-events-none transition-opacity duration-300 ${
-              scrollPosition === "start" ? "opacity-0" : "opacity-100"
-            }`}
-            aria-hidden="true"
-          />
-          <div 
-            className={`md:hidden absolute right-0 top-1/2 h-8 w-8 transform -translate-y-1/2 bg-gradient-to-l from-gray-50 dark:from-gray-800 to-transparent pointer-events-none transition-opacity duration-300 ${
-              scrollPosition === "end" ? "opacity-0" : "opacity-100"
-            }`}
-            aria-hidden="true" 
-          />
+          {scrollPosition !== "start" && (
+            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white dark:from-gray-800 to-transparent" />
+          )}
+          {scrollPosition !== "end" && (
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white dark:from-gray-800 to-transparent" />
+          )}
         </>
       )}
-
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;  /* Chrome, Safari and Opera */
-        }
-      `}</style>
     </div>
   );
 };
 
-export default TechFilter; 
+export default TechFilter;

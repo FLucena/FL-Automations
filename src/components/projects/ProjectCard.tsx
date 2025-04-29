@@ -39,23 +39,32 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
         </p>
         
         <div className="flex flex-wrap gap-2 mt-auto">
-          {project.technologies.slice(0, 5).map((tech) => (
-            <Tooltip key={tech} label={techIcons[tech]?.name || tech} position="top">
-              <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full p-1.5 flex items-center justify-center">
-                <Image 
-                  src={techIcons[tech]?.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-                  alt={techIcons[tech]?.name || tech}
-                  className={`w-full h-full object-contain ${tech === 'express' ? 'invert dark:invert-0' : ''}`}
-                  width={20}
-                  height={20}
-                />
-              </div>
-            </Tooltip>
-          ))}
+          {project.technologies.slice(0, 5).map((tech) => {
+            return (
+              <Tooltip 
+                key={tech} 
+                label={techIcons[tech]?.name || tech} 
+              >
+                <div 
+                  className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full p-1.5 flex items-center justify-center"
+                >
+                  <Image 
+                    src={techIcons[tech]?.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
+                    alt={techIcons[tech]?.name || tech}
+                    className={`w-auto h-auto object-contain ${tech === 'express' ? 'invert dark:invert-0' : ''}`}
+                    width={20}
+                    height={20}
+                  />
+                </div>
+              </Tooltip>
+            );
+          })}
           
           {project.technologies.length > 5 && (
             <Tooltip label={`${project.technologies.length - 5} more technologies`}>
-              <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+              <div 
+                className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center"
+              >
                 <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
                   +{project.technologies.length - 5}
                 </span>

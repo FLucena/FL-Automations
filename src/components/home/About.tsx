@@ -69,7 +69,7 @@ const About = () => {
                           alt="React"
                           width={14}
                           height={14}
-                          className="mr-1 object-contain"
+                          className="mr-1 object-contain w-auto h-auto"
                         />
                       </Tooltip>
                       React.js

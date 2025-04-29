@@ -1,39 +1,74 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface TooltipProps {
   label: string;
-  position?: 'top' | 'bottom' | 'left' | 'right';
   children: React.ReactNode;
 }
 
 export const useTooltip = () => {
-  const Tooltip = ({ label, position = 'top', children }: TooltipProps) => {
-    // Positioning classes based on position
-    const positionClasses = {
-      top: "bottom-full left-1/2 transform -translate-x-1/2 mb-1",
-      bottom: "top-full left-1/2 transform -translate-x-1/2 mt-1",
-      left: "right-full top-1/2 transform -translate-y-1/2 mr-1",
-      right: "left-full top-1/2 transform -translate-y-1/2 ml-1"
+  const Tooltip = ({ label, children }: TooltipProps) => {
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isVisible, setIsVisible] = useState(false);
+    const [tooltipRoot, setTooltipRoot] = useState<HTMLElement | null>(null);
+
+    useEffect(() => {
+      const root = document.createElement('div');
+      root.style.position = 'fixed';
+      root.style.top = '0';
+      root.style.left = '0';
+      root.style.width = '100%';
+      root.style.height = '100%';
+      root.style.zIndex = '99999';
+      root.style.pointerEvents = 'none';
+      document.body.appendChild(root);
+      setTooltipRoot(root);
+
+      return () => {
+        document.body.removeChild(root);
+      };
+    }, []);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+      // Only update position if the event target is the direct container
+      if (e.currentTarget === e.target || e.currentTarget.contains(e.target as Node)) {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+      }
+    };
+
+    const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+      // Only show tooltip if hovering the direct container
+      if (e.currentTarget === e.target || e.currentTarget.contains(e.target as Node)) {
+        setIsVisible(true);
+      }
+    };
+
+    const handleMouseLeave = () => {
+      setIsVisible(false);
     };
 
     return (
-      <div className="relative inline-flex group/tooltip">
+      <div 
+        className="relative inline-flex"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+      >
         {children}
-        <div 
-          className={`absolute ${positionClasses[position]} px-2 py-1 bg-gray-900 text-white text-xs rounded pointer-events-none whitespace-nowrap z-50 opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-150`}
-          role="tooltip"
-          aria-hidden="true"
-        >
-          {label}
+        {isVisible && tooltipRoot && createPortal(
           <div 
-            className={`absolute w-2 h-2 bg-gray-900 transform rotate-45 ${
-              position === 'top' ? 'bottom-[-4px] left-1/2 -translate-x-1/2' :
-              position === 'bottom' ? 'top-[-4px] left-1/2 -translate-x-1/2' :
-              position === 'left' ? 'right-[-4px] top-1/2 -translate-y-1/2' :
-              'left-[-4px] top-1/2 -translate-y-1/2'
-            }`}
-          />
-        </div>
+            className="fixed px-2 py-1 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white text-xs rounded pointer-events-none whitespace-nowrap transition-opacity duration-150 shadow-lg"
+            style={{
+              left: mousePosition.x + 10,
+              top: mousePosition.y - 30,
+            }}
+            role="tooltip"
+            aria-hidden="true"
+          >
+            {label}
+          </div>,
+          tooltipRoot
+        )}
       </div>
     );
   };
