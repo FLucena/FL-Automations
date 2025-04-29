@@ -128,18 +128,6 @@ export const projects: Project[] = [
   },
   {
     id: 10,
-    title: "Product Showcase",
-    description: {
-      en: "A 3D showcase where the user can interact with the product",
-      es: "Un escaparate 3D donde el usuario puede interactuar con el producto"
-    },
-    url: "https://3dshowcase.vercel.app/",
-    featured: true,
-    technologies: ["threejs", "javascript"],
-    hasPreview: false
-  },
-  {
-    id: 11,
     title: "Dog Fetcher",
     description: {
       en: "Discover randomly selected dog photos with our app for searching dog pictures of all breeds.",
@@ -151,7 +139,7 @@ export const projects: Project[] = [
     hasPreview: false
   },
   {
-    id: 12,
+    id: 11,
     title: "Tetris Game",
     description: {
       en: "Play tetris!",
@@ -163,7 +151,7 @@ export const projects: Project[] = [
     hasPreview: false
   },
   {
-    id: 13,
+    id: 12,
     title: "3D App",
     description: {
       en: "Discover the upcoming websites with a 3D app.",
@@ -175,7 +163,7 @@ export const projects: Project[] = [
     hasPreview: false
   },
   {
-    id: 14,
+    id: 13,
     title: "FinSave",
     description: {
       en: "FinSave is a platform that helps you save money and achieve your financial goals.",
@@ -188,7 +176,7 @@ export const projects: Project[] = [
     hasPreview: false
   },
   {
-    id: 15,
+    id: 14,
     title: "Pet Connect",
     description: {
       en: "Pet Connect is a platform that facilitates responsible pet adoption, connecting animal shelters with people looking to give a loving home to a new family member.",
@@ -201,7 +189,7 @@ export const projects: Project[] = [
     hasPreview: false
   },
   {
-    id: 16,
+    id: 15,
     title: "Modelflow",
     description: {
       en: "A powerful Node.js API and toolkit for processing 3D models, including conversion, optimization, and preview generation.",
@@ -214,7 +202,7 @@ export const projects: Project[] = [
     hasPreview: false
   },
   {
-    id: 17,
+    id: 16,
     title: "Mamuk",
     description: {
       en: "A training app that connects coaches with clients.",
@@ -225,5 +213,17 @@ export const projects: Project[] = [
     icon: "gym",
     technologies: ["nextjs", "nodejs", "express", "typescript", "tailwind"],
     hasPreview: false
-  }
+  },
+  {
+    id: 17,
+    title: "Product Showcase",
+    description: {
+      en: "A 3D showcase where the user can interact with the product",
+      es: "Un escaparate 3D donde el usuario puede interactuar con el producto"
+    },
+    url: "https://3dshowcase.vercel.app/",
+    featured: true,
+    technologies: ["threejs", "javascript"],
+    hasPreview: false
+  },
 ]; 
