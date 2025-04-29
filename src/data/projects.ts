@@ -134,7 +134,7 @@ export const projects: Project[] = [
       es: "Un escaparate 3D donde el usuario puede interactuar con el producto"
     },
     url: "https://3dshowcase.vercel.app/",
-    featured: false,
+    featured: true,
     technologies: ["threejs", "javascript"],
     hasPreview: false
   },
@@ -182,7 +182,7 @@ export const projects: Project[] = [
       es: "FinSave es una plataforma que te ayuda a ahorrar dinero y alcanzar tus objetivos financieros."
     },
     url: "https://finsave.vercel.app/",
-    featured: true,
+    featured: false,
     icon: "computer",
     technologies: ["nextjs", "react", "tailwind"],
     hasPreview: false
@@ -221,8 +221,8 @@ export const projects: Project[] = [
       es: "Una app de entrenamiento que conecta a los coaches con los clientes."
     },
     url: "https://mamuk.com.ar/",
-    featured: true,
-    icon: "3dshowcase",
+    featured: false,
+    icon: "gym",
     technologies: ["nextjs", "nodejs", "express", "typescript", "tailwind"],
     hasPreview: false
   }
