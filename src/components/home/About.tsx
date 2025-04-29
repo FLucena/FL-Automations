@@ -63,7 +63,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.react.name} position="top">
+                      <Tooltip label={techIcons.react.name}>
                         <Image
                           src={techIcons.react.icon}
                           alt="React"
@@ -80,7 +80,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.nextjs.name} position="top">
+                      <Tooltip label={techIcons.nextjs.name}>
                         <Image
                           src={techIcons.nextjs.icon}
                           alt="Next.js"
@@ -97,7 +97,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.vite.name} position="top">
+                      <Tooltip label={techIcons.vite.name}>
                         <Image
                           src={techIcons.vite.icon}
                           alt="Vite"
@@ -114,7 +114,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.javascript.name} position="top">
+                      <Tooltip label={techIcons.javascript.name}>
                         <Image
                           src={techIcons.javascript.icon}
                           alt="JavaScript"
@@ -131,7 +131,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.typescript.name} position="top">
+                      <Tooltip label={techIcons.typescript.name}>
                         <Image
                           src={techIcons.typescript.icon}
                           alt="TypeScript"
@@ -148,7 +148,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.html.name} position="top">
+                      <Tooltip label={techIcons.html.name}>
                         <Image
                           src={techIcons.html.icon}
                           alt="HTML"
@@ -165,7 +165,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.css.name} position="top">
+                      <Tooltip label={techIcons.css.name}>
                         <Image
                           src={techIcons.css.icon}
                           alt="CSS"
@@ -182,7 +182,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.tailwind.name} position="top">
+                      <Tooltip label={techIcons.tailwind.name}>
                         <Image
                           src={techIcons.tailwind.icon}
                           alt="Tailwind"
@@ -199,7 +199,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.bootstrap.name} position="top">
+                      <Tooltip label={techIcons.bootstrap.name}>
                         <Image
                           src={techIcons.bootstrap.icon}
                           alt="Bootstrap"
@@ -224,7 +224,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.nodejs.name} position="top">
+                      <Tooltip label={techIcons.nodejs.name}>
                         <Image
                           src={techIcons.nodejs.icon}
                           alt="Node.js"
@@ -241,7 +241,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.express.name} position="top">
+                      <Tooltip label={techIcons.express.name}>
                         <Image
                           src={techIcons.express.icon}
                           alt="Express"
@@ -258,7 +258,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.django.name} position="top">
+                      <Tooltip label={techIcons.django.name}>
                         <Image
                           src={techIcons.django.icon}
                           alt="Django"
@@ -275,7 +275,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.python.name} position="top">
+                      <Tooltip label={techIcons.python.name}>
                         <Image
                           src={techIcons.python.icon}
                           alt="Python"
@@ -302,7 +302,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.flutter.name} position="top">
+                      <Tooltip label={techIcons.flutter.name}>
                         <Image
                           src={techIcons.flutter.icon}
                           alt="Flutter"
@@ -319,7 +319,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.figma.name} position="top">
+                      <Tooltip label={techIcons.figma.name}>
                         <Image
                           src={techIcons.figma.icon}
                           alt="UI/UX"
@@ -336,7 +336,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.appsscript.name} position="top">
+                      <Tooltip label={techIcons.appsscript.name}>
                         <Image
                           src={techIcons.appsscript.icon}
                           alt="Apps Script"
@@ -353,7 +353,7 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.vba.name} position="top">
+                      <Tooltip label={techIcons.vba.name}>
                         <Image
                           src={techIcons.vba.icon}
                           alt="VBA"
