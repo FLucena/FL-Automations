@@ -79,7 +79,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
           </div>
           
           <div className="mb-6">
-            <p className="text-gray-700 dark:text-gray-300 mb-4">
+            <p className="text-gray-600 mb-6 text-sm">
               {project.description[language]}
             </p>
             

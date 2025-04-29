@@ -34,7 +34,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
           {project.title}
         </h3>
         
-        <p className="text-gray-600 dark:text-gray-300 mb-5 text-sm line-clamp-3">
+        <p className="text-gray-600 mb-5 text-sm line-clamp-3">
           {project.description[language]}
         </p>
         
@@ -57,7 +57,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
                   <Image 
                     src={techIcon?.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
                     alt={techIcon?.name || tech}
-                    className={`w-auto h-auto object-contain ${normalizedTech === 'express' ? 'invert dark:invert-0' : ''}`}
+                    className="w-auto h-auto object-contain"
                     width={20}
                     height={20}
                   />
@@ -71,7 +71,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
               <div 
                 className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center"
               >
-                <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                <span className="text-xs font-medium text-black">
                   +{project.technologies.length - 5}
                 </span>
               </div>
@@ -92,7 +92,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
           
           <button
             className={`view-details-btn flex items-center text-sm ${
-              isHovered ? "text-accent" : "text-gray-500 dark:text-gray-400"
+              isHovered ? "text-accent" : "text-gray-500"
             } transition-colors`}
             onClick={(e) => {
               e.stopPropagation();

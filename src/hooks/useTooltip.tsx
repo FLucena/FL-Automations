@@ -57,7 +57,7 @@ export const useTooltip = () => {
         {children}
         {isVisible && tooltipRoot && createPortal(
           <div 
-            className="fixed px-2 py-1 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white text-xs rounded pointer-events-none whitespace-nowrap transition-opacity duration-150 shadow-lg"
+            className="fixed px-3 py-2 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white text-xs rounded pointer-events-none whitespace-nowrap transition-opacity duration-150 shadow-lg"
             style={{
               left: mousePosition.x + 10,
               top: mousePosition.y - 30,

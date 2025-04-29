@@ -36,6 +36,13 @@ const About = () => {
               }
             </p>
             
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
+              {language === "en"
+                ? "I also specialize in workflow automation using Google Apps Script, VBA, n8n, and AI tools to create efficient solutions that save time and reduce errors."
+                : "También me especializo en automatización de flujos de trabajo usando Google Apps Script, VBA, n8n y herramientas de IA para crear soluciones eficientes que ahorran tiempo y reducen errores."
+              }
+            </p>
+            
             <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
               {language === "en" ? "My Approach" : "Mi Enfoque"}
             </h3>
@@ -57,7 +64,7 @@ const About = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               <div className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
                 <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">Front End</h4>
-                <ul className="text-gray-600 dark:text-gray-300 space-y-1">
+                <ul className="text-gray-600 space-y-1">
                   <li className="flex items-center">
                     <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -69,7 +76,7 @@ const About = () => {
                           alt="React"
                           width={14}
                           height={14}
-                          className="mr-1 object-contain w-auto h-auto"
+                          className="mr-1 object-contain"
                         />
                       </Tooltip>
                       React.js
@@ -218,7 +225,7 @@ const About = () => {
                 <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">
                   {language === "en" ? "Back End" : "Back End"}
                 </h4>
-                <ul className="text-gray-600 dark:text-gray-300 space-y-1">
+                <ul className="text-gray-600 space-y-1">
                   <li className="flex items-center">
                     <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -247,7 +254,7 @@ const About = () => {
                           alt="Express"
                           width={14}
                           height={14}
-                          className="mr-1 object-contain invert dark:invert-0" 
+                          className="mr-1 object-contain"
                         />
                       </Tooltip>
                       Express
@@ -296,7 +303,7 @@ const About = () => {
                 <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">
                   {language === "en" ? "Other Skills" : "Otras Habilidades"}
                 </h4>
-                <ul className="text-gray-600 dark:text-gray-300 space-y-1">
+                <ul className="text-gray-600 space-y-1">
                   <li className="flex items-center">
                     <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
