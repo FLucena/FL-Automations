@@ -63,7 +63,7 @@ export const projects: Project[] = [
     },
     url: "https://cohere-aichat.streamlit.app/",
     featured: false,
-    technologies: ["python", "streamlit"],
+    technologies: ["python", "streamlit", "3d"],
     hasPreview: false
   },
   {
@@ -135,7 +135,7 @@ export const projects: Project[] = [
     },
     url: "https://dogfetcher-sigma.vercel.app/",
     featured: false,
-    technologies: ["javascript", "html", "css"],
+    technologies: ["javascript", "html5", "css3"],
     hasPreview: false
   },
   {
@@ -147,7 +147,7 @@ export const projects: Project[] = [
     },
     url: "https://tetris-lovat.vercel.app/",
     featured: false,
-    technologies: ["javascript", "html", "css"],
+    technologies: ["javascript", "html5", "css3"],
     hasPreview: false
   },
   {
@@ -222,8 +222,20 @@ export const projects: Project[] = [
       es: "Un escaparate 3D donde el usuario puede interactuar con el producto"
     },
     url: "https://3dshowcase.vercel.app/",
-    featured: true,
-    technologies: ["threejs", "javascript"],
+    featured: false,
+    technologies: ["threejs", "javascript", "3d"],
     hasPreview: false
   },
+  {
+    id: 18,
+    title: "Biz Templates",
+    description: {
+      en: "A collection of templates for your business, ready to use in your work.",
+      es: "Una colección de plantillas en Excel o Google Sheets para tu negocio, listas para utilizar en tu trabajo."
+    },  
+    url: "https://biztemplates.netlify.app/",
+    featured: true,
+    technologies: ["javascript", "html5", "css3"],
+    hasPreview: false
+  }
 ]; 

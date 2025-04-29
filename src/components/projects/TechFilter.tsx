@@ -67,31 +67,36 @@ const TechFilter = ({ activeTechFilters, toggleTechFilter }: TechFilterProps) =>
         ref={scrollContainerRef}
         className="filter-tags-container flex gap-3 overflow-x-auto md:flex-wrap scrollbar-hide pb-2"
       >
-        {availableTechTags.map((tech) => (
-          <Tooltip key={tech} label={techIcons[tech].name}>
-            <button
-              onClick={() => toggleTechFilter(tech)}
-              className={`filter-tag flex-shrink-0 flex items-center justify-center rounded-lg p-2 transition-all ${
-                activeTechFilters.includes(tech)
-                  ? "bg-accent text-white shadow-md"
-                  : "bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
-              }`}
-              aria-label={`${language === "en" ? "Filter by" : "Filtrar por"} ${techIcons[tech].name}`}
-            >
-              <div className="w-8 h-8 flex items-center justify-center">
-                <div className="relative w-6 h-6">
-                  <Image
-                    src={techIcons[tech].icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-                    alt={techIcons[tech].name || 'Technology icon'}
-                    width={24}
-                    height={24}
-                    className="object-contain w-auto h-auto"
-                  />
+        {availableTechTags.map((tech) => {
+          const techIcon = techIcons[tech];
+          if (!techIcon) return null;
+          
+          return (
+            <Tooltip key={tech} label={techIcon.name}>
+              <button
+                onClick={() => toggleTechFilter(tech)}
+                className={`filter-tag flex-shrink-0 flex items-center justify-center rounded-lg p-2 transition-all ${
+                  activeTechFilters.includes(tech)
+                    ? "bg-accent text-white shadow-md"
+                    : "bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
+                }`}
+                aria-label={`${language === "en" ? "Filter by" : "Filtrar por"} ${techIcon.name}`}
+              >
+                <div className="w-8 h-8 flex items-center justify-center">
+                  <div className="relative w-6 h-6">
+                    <Image
+                      src={techIcon.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
+                      alt={techIcon.name || 'Technology icon'}
+                      width={24}
+                      height={24}
+                      className="object-contain w-auto h-auto"
+                    />
+                  </div>
                 </div>
-              </div>
-            </button>
-          </Tooltip>
-        ))}
+              </button>
+            </Tooltip>
+          );
+        })}
       </div>
       
       {/* Scroll indicators */}

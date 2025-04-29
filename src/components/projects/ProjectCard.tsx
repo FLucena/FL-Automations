@@ -40,18 +40,24 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
         
         <div className="flex flex-wrap gap-2 mt-auto">
           {project.technologies.slice(0, 5).map((tech) => {
+            // Normalize tech name to match techIcons keys
+            const normalizedTech = tech === 'css' ? 'css3' : 
+                                 tech === 'html' ? 'html5' : 
+                                 tech;
+            const techIcon = techIcons[normalizedTech];
+            
             return (
               <Tooltip 
                 key={tech} 
-                label={techIcons[tech]?.name || tech} 
+                label={techIcon?.name || tech} 
               >
                 <div 
                   className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full p-1.5 flex items-center justify-center"
                 >
                   <Image 
-                    src={techIcons[tech]?.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-                    alt={techIcons[tech]?.name || tech}
-                    className={`w-auto h-auto object-contain ${tech === 'express' ? 'invert dark:invert-0' : ''}`}
+                    src={techIcon?.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
+                    alt={techIcon?.name || tech}
+                    className={`w-auto h-auto object-contain ${normalizedTech === 'express' ? 'invert dark:invert-0' : ''}`}
                     width={20}
                     height={20}
                   />

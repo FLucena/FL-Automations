@@ -40,11 +40,11 @@ export const techIcons: TechIconsMap = {
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg',
     name: 'Three.js'
   },
-  html: {
+  html5: {
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
     name: 'HTML5'
   },
-  css: {
+  css3: {
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
     name: 'CSS3'
   },
@@ -83,13 +83,21 @@ export const techIcons: TechIconsMap = {
   vite: {
     icon: 'https://vitejs.dev/logo.svg',
     name: 'Vite'
+  },
+  ai: {
+    icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHN0eWxlPnRleHQgeyBmb250LWZhbWlseTogQXJpYWw7IGZvbnQtd2VpZ2h0OiBib2xkOyBmb250LXNpemU6IDEycHg7IGZpbGw6ICM0NDQ7IH0gPC9zdHlsZT48dGV4dCB4PSIxMiIgeT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFJPC90ZXh0Pjwvc3ZnPg==',
+    name: 'AI'
+  },
+  '3d': {
+    icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHN0eWxlPnRleHQgeyBmb250LWZhbWlseTogQXJpYWw7IGZvbnQtd2VpZ2h0OiBib2xkOyBmb250LXNpemU6IDEycHg7IGZpbGw6ICM0NDQ7IH0gPC9zdHlsZT48dGV4dCB4PSIxMiIgeT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjNEPC90ZXh0Pjwvc3ZnPg==',
+    name: '3D'
   }
 };
 
 export const availableTechTags: string[] = [
   'nextjs', 'react', 'javascript', 'typescript', 'python', 
-  'flutter', 'streamlit', 'threejs', 'html', 'css', 'tailwind',
-  'nodejs', 'express', 'django', 'bootstrap', 'figma', 'appsscript', 'vba', 'vite'
+  'flutter', 'streamlit', 'threejs', 'html5', 'html', 'css3', 'css', 'tailwind',
+  'nodejs', 'express', 'django', 'bootstrap', 'figma', 'appsscript', 'vba', 'vite', 'ai', '3d'
 ];
 
 export const coinFlipIcons = [

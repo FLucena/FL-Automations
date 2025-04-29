@@ -148,9 +148,9 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.html.name}>
+                      <Tooltip label={techIcons.html5.name}>
                         <Image
-                          src={techIcons.html.icon}
+                          src={techIcons.html5.icon}
                           alt="HTML"
                           width={14}
                           height={14}
@@ -165,9 +165,9 @@ const About = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <div className="flex items-center text-xs">
-                      <Tooltip label={techIcons.css.name}>
+                      <Tooltip label={techIcons.css3.name}>
                         <Image
-                          src={techIcons.css.icon}
+                          src={techIcons.css3.icon}
                           alt="CSS"
                           width={14}
                           height={14}
