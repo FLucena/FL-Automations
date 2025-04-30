@@ -95,16 +95,36 @@ const TechFilter = ({ activeTechFilters, toggleTechFilter }: TechFilterProps) =>
     }
   };
 
+  // Handle keyboard navigation
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault(); // Prevent default scrolling behavior
+      if (e.key === 'ArrowLeft') {
+        handleScrollLeft();
+      } else {
+        handleScrollRight();
+      }
+    }
+  };
+
+  // Focus the container when it's clicked
+  const handleClick = () => {
+    containerRef.current?.focus();
+  };
+
   return (
     <div className="relative">
       <div 
         ref={containerRef}
-        className="flex gap-2 overflow-x-auto scrollbar-hide snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing transition-transform duration-300 ease-out"
+        className="flex gap-2 overflow-x-auto scrollbar-hide snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing transition-transform duration-300 ease-out outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
         onScroll={handleScroll}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
+        onKeyDown={handleKeyDown}
+        onClick={handleClick}
+        tabIndex={0}
       >
         {availableTechTags.map((tech) => {
           const techIcon = techIcons[tech];
