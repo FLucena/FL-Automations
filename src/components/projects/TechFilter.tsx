@@ -1,7 +1,6 @@
 "use client";
 
 import { availableTechTags, techIcons } from "@/data/techIcons";
-import { useLanguage } from "@/contexts/LanguageContext";
 import useTooltip from "@/hooks/useTooltip";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -12,60 +11,100 @@ interface TechFilterProps {
 }
 
 const TechFilter = ({ activeTechFilters, toggleTechFilter }: TechFilterProps) => {
-  const { language } = useLanguage();
   const { Tooltip } = useTooltip();
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState("start");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [dragDistance, setDragDistance] = useState(0);
 
   // Check if scrolling is needed and update indicators
   useEffect(() => {
-    const checkScroll = () => {
-      const container = scrollContainerRef.current;
-      if (!container) return;
+    const container = containerRef.current;
+    if (container) {
+      const handleResize = () => {
+        setCanScrollLeft(container.scrollLeft > 0);
+        setCanScrollRight(container.scrollLeft + container.clientWidth < container.scrollWidth);
+      };
       
-      const hasHorizontalScroll = container.scrollWidth > container.clientWidth;
-      setShowScrollIndicator(hasHorizontalScroll);
-      
-      // Update scroll position
-      if (container.scrollLeft <= 10) {
-        setScrollPosition("start");
-      } else if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
-        setScrollPosition("end");
-      } else {
-        setScrollPosition("middle");
-      }
-    };
-    
-    // Check on mount and whenever the container might change
-    checkScroll();
-    
-    // Check on window resize
-    window.addEventListener('resize', checkScroll);
-    
-    // The container to listen for scroll events
-    const currentContainer = scrollContainerRef.current;
-    if (currentContainer) {
-      currentContainer.addEventListener('scroll', checkScroll);
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
     }
-    
-    return () => {
-      window.removeEventListener('resize', checkScroll);
-      if (currentContainer) {
-        currentContainer.removeEventListener('scroll', checkScroll);
-      }
-    };
   }, [activeTechFilters]);
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.pageX - (containerRef.current?.offsetLeft || 0));
+    setScrollLeft(containerRef.current?.scrollLeft || 0);
+    setDragDistance(0);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - (containerRef.current?.offsetLeft || 0);
+    const walk = (x - startX) * 2; // Adjust scroll speed
+    setDragDistance(Math.abs(walk));
+    if (containerRef.current) {
+      containerRef.current.scrollLeft = scrollLeft - walk;
+    }
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (dragDistance < 5) { // If drag distance is very small, treat it as a click
+      const target = e.target as HTMLElement;
+      const button = target.closest('button');
+      if (button) {
+        const tech = button.getAttribute('data-tech');
+        if (tech) {
+          toggleTechFilter(tech);
+        }
+      }
+    }
+    setIsDragging(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    setCanScrollLeft(container.scrollLeft > 0);
+    setCanScrollRight(container.scrollLeft + container.clientWidth < container.scrollWidth);
+  };
+
+  const handleScrollLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        left: containerRef.current.scrollLeft - containerRef.current.clientWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleScrollRight = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        left: containerRef.current.scrollLeft + containerRef.current.clientWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <div className="tech-filter relative">
-      <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-        {language === "en" ? "Filter by technology:" : "Filtrar por tecnología:"}
-      </h3>
-      
+    <div className="relative">
       <div 
-        ref={scrollContainerRef}
-        className="filter-tags-container flex gap-3 overflow-x-auto md:flex-wrap scrollbar-hide pb-2"
+        ref={containerRef}
+        className="flex gap-2 overflow-x-auto scrollbar-hide snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing transition-transform duration-300 ease-out"
+        onScroll={handleScroll}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
       >
         {availableTechTags.map((tech) => {
           const techIcon = techIcons[tech];
@@ -74,13 +113,22 @@ const TechFilter = ({ activeTechFilters, toggleTechFilter }: TechFilterProps) =>
           return (
             <Tooltip key={tech} label={techIcon.name}>
               <button
-                onClick={() => toggleTechFilter(tech)}
-                className={`filter-tag flex-shrink-0 flex items-center justify-center rounded-lg p-2 transition-all ${
-                  activeTechFilters.includes(tech)
-                    ? "bg-accent text-white shadow-md"
-                    : "bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
-                }`}
-                aria-label={`${language === "en" ? "Filter by" : "Filtrar por"} ${techIcon.name}`}
+                data-tech={tech}
+                onClick={(e) => {
+                  if (dragDistance >= 5) {
+                    e.preventDefault();
+                    return;
+                  }
+                }}
+                className={`
+                  flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium
+                  transition-colors duration-200
+                  ${activeTechFilters.includes(tech)
+                    ? 'bg-accent text-white'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                  }
+                  snap-start
+                `}
               >
                 <div className="w-8 h-8 flex items-center justify-center">
                   <div className="relative w-6 h-6">
@@ -99,17 +147,36 @@ const TechFilter = ({ activeTechFilters, toggleTechFilter }: TechFilterProps) =>
         })}
       </div>
       
-      {/* Scroll indicators */}
-      {showScrollIndicator && (
-        <>
-          {scrollPosition !== "start" && (
-            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white dark:from-gray-800 to-transparent" />
-          )}
-          {scrollPosition !== "end" && (
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white dark:from-gray-800 to-transparent" />
-          )}
-        </>
-      )}
+      {/* Navigation Buttons */}
+      <button
+        onClick={handleScrollLeft}
+        className={`
+          absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4
+          p-2 rounded-full bg-white dark:bg-gray-800 shadow-md
+          ${!canScrollLeft ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}
+          transition-opacity duration-200
+        `}
+        disabled={!canScrollLeft}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <button
+        onClick={handleScrollRight}
+        className={`
+          absolute right-0 top-1/2 -translate-y-1/2 translate-x-4
+          p-2 rounded-full bg-white dark:bg-gray-800 shadow-md
+          ${!canScrollRight ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}
+          transition-opacity duration-200
+        `}
+        disabled={!canScrollRight}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
     </div>
   );
 };
