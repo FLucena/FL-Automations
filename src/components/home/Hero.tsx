@@ -88,7 +88,7 @@ const Hero = () => {
             }
           </p>
           
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
             <a 
               href="#projects" 
               className="px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors shadow-md"

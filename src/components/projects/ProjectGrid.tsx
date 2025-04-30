@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import ProjectCard from "./ProjectCard";
 import TechFilter from "./TechFilter";
 import ProjectModal from "./ProjectModal";
@@ -32,6 +32,7 @@ const ProjectGrid = () => {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const filterContainerRef = useRef<HTMLDivElement>(null);
 
   // Check if device is mobile on mount and resize
@@ -62,41 +63,68 @@ const ProjectGrid = () => {
 
   // Mobile project slider navigation
   const goToPrevMobileProject = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentMobileIndex(prev => 
       prev === 0 ? filteredProjects.length - 1 : prev - 1
     );
+    setTimeout(() => {
+      setIsTransitioning(false);
+      setTouchStart(0);
+      setTouchEnd(0);
+    }, 100);
   };
 
   const goToNextMobileProject = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentMobileIndex(prev => 
       prev === filteredProjects.length - 1 ? 0 : prev + 1
     );
+    setTimeout(() => {
+      setIsTransitioning(false);
+      setTouchStart(0);
+      setTouchEnd(0);
+    }, 100);
   };
 
   // Touch handlers for swipe
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (isTransitioning) return;
     setIsTouching(true);
     setTouchStart(e.targetTouches[0].clientX);
     setTouchEnd(e.targetTouches[0].clientX);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isTouching) return;
+    if (!isTouching || isTransitioning) return;
     setTouchEnd(e.targetTouches[0].clientX);
   };
 
   const handleTouchEnd = () => {
+    if (isTransitioning) return;
     setIsTouching(false);
     
     // Minimum swipe distance required (in pixels)
     const minSwipeDistance = 50;
+    const swipeDistance = touchEnd - touchStart;
     
-    if (touchStart - touchEnd > minSwipeDistance) {
+    if (swipeDistance < -minSwipeDistance) {
       // Swiped left, go to next project
-      goToNextMobileProject();
-    } else if (touchEnd - touchStart > minSwipeDistance) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        goToNextMobileProject();
+      }, 0);
+    } else if (swipeDistance > minSwipeDistance) {
       // Swiped right, go to previous project
-      goToPrevMobileProject();
+      setIsTransitioning(true);
+      setTimeout(() => {
+        goToPrevMobileProject();
+      }, 0);
+    } else {
+      // Reset position if swipe wasn't far enough
+      setTouchStart(0);
+      setTouchEnd(0);
     }
   };
 
@@ -213,19 +241,88 @@ const ProjectGrid = () => {
           <div className={`md:hidden ${isTouching ? "transition-none" : "transition-opacity duration-300"}`}>
             {filteredProjects.length > 0 && (
               <div 
-                className="mobile-carousel-container relative mb-8"
+                className="mobile-carousel-container relative mb-8 overflow-hidden"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
               >
-                <div className="mobile-project-card w-full">
-                  <ProjectCard
-                    key={currentMobileProject.id}
-                    project={currentMobileProject}
-                    onClick={() => handleOpenProjectModal(currentMobileProject)}
-                  />
+                <div className="relative flex w-full">
+                  {/* Previous Project */}
+                  <div 
+                    className="absolute left-0 w-full"
+                    style={{
+                      transform: `translateX(${-100 + (touchEnd - touchStart) / 3}%)`,
+                      opacity: touchEnd - touchStart > 0 && !isTransitioning
+                        ? Math.max(0.3, 1 - Math.abs(touchEnd - touchStart) / 300)
+                        : 0,
+                      transition: 'none',
+                      pointerEvents: 'none',
+                      display: isTransitioning ? 'none' : 'block'
+                    }}
+                  >
+                    <Suspense fallback={<div className="w-full h-full bg-gray-900/50" />}>
+                      <ProjectCard
+                        key={`prev-${currentMobileIndex}`}
+                        project={filteredProjects[
+                          currentMobileIndex === 0 
+                            ? filteredProjects.length - 1 
+                            : currentMobileIndex - 1
+                        ]}
+                        onClick={() => handleOpenProjectModal(currentMobileProject)}
+                      />
+                    </Suspense>
+                  </div>
+
+                  {/* Current Project */}
+                  <div 
+                    className="w-full"
+                    style={{
+                      transform: isTouching || isTransitioning
+                        ? `translateX(${touchEnd - touchStart}px)`
+                        : 'translateX(0)',
+                      transition: 'none',
+                      position: 'relative',
+                      zIndex: 1
+                    }}
+                  >
+                    <Suspense fallback={<div className="w-full h-full bg-gray-900/50" />}>
+                      <ProjectCard
+                        key={`current-${currentMobileIndex}`}
+                        project={currentMobileProject}
+                        onClick={() => handleOpenProjectModal(currentMobileProject)}
+                      />
+                    </Suspense>
+                  </div>
+
+                  {/* Next Project */}
+                  <div 
+                    className="absolute right-0 w-full"
+                    style={{
+                      transform: `translateX(${100 + (touchEnd - touchStart) / 3}%)`,
+                      opacity: touchEnd - touchStart < 0 && !isTransitioning
+                        ? Math.max(0.3, 1 - Math.abs(touchEnd - touchStart) / 300)
+                        : 0,
+                      transition: 'none',
+                      pointerEvents: 'none',
+                      position: 'absolute',
+                      zIndex: 0,
+                      display: isTransitioning ? 'block' : 'none'
+                    }}
+                  >
+                    <Suspense fallback={<div className="w-full h-full bg-gray-900/50" />}>
+                      <ProjectCard
+                        key={`next-${currentMobileIndex}`}
+                        project={filteredProjects[
+                          currentMobileIndex === filteredProjects.length - 1 
+                            ? 0 
+                            : currentMobileIndex + 1
+                        ]}
+                        onClick={() => handleOpenProjectModal(currentMobileProject)}
+                      />
+                    </Suspense>
+                  </div>
                 </div>
-                
+
                 {/* Mobile navigation buttons */}
                 <div className="flex items-center justify-center gap-4 mt-4 bottom-4 z-10">
                   <button 
