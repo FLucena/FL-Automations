@@ -148,14 +148,18 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div 
+      {/* Mobile Menu - Always visible when open, regardless of scroll position */}
+      <div
         id="mobile-menu"
-        className={`md:hidden fixed inset-0 bg-white dark:bg-gray-900 z-40 transition-all duration-300 flex flex-col ${
+        className={`md:hidden fixed inset-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-40 transition-all duration-300 flex flex-col ${
           isMobileMenuOpen 
             ? "opacity-100 translate-x-0" 
             : "opacity-0 -translate-x-full pointer-events-none"
         }`}
+        style={{
+          top: isScrolled ? '48px' : '64px',
+          height: isScrolled ? 'calc(100vh - 48px)' : 'calc(100vh - 64px)'
+        }}
         onClick={handleCloseMobileMenu}
       >
         <div className="container mx-auto px-4 py-8 sm:py-12 flex-1 flex flex-col justify-center relative max-h-screen overflow-y-auto" onClick={(e) => e.stopPropagation()}>
@@ -172,7 +176,7 @@ const Navbar = () => {
             </svg>
           </button>
           
-          <div className="flex flex-col space-y-3 sm:space-y-4 mx-auto max-w-xs w-full">
+          <div className="flex flex-col gap-6 items-center">
             <Link 
               href="#about"
               className="text-xl py-1.5 text-gray-800 dark:text-gray-200 hover:text-primary transition-colors text-center"
@@ -195,35 +199,37 @@ const Navbar = () => {
               {language === "en" ? "Contact" : "Contacto"}
             </Link>
             
-            <div className="flex justify-center space-x-4 pt-3 mt-1 border-t border-gray-200 dark:border-gray-700">
-              {/* Theme Toggle */}
-              <button 
-                onClick={toggleTheme}
-                className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {theme === "dark" ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                )}
-              </button>
-              
-              {/* Language Toggle */}
-              <button 
-                onClick={toggleLanguage}
-                className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label={language === "en" ? "Switch to Spanish" : "Switch to English"}
-              >
-                <span className="font-medium">
-                  {language === "en" ? "ES" : "EN"}
-                </span>
-              </button>
-            </div>
+            {/* Theme Toggle */}
+            <button 
+              onClick={() => {
+                toggleTheme();
+                handleCloseMobileMenu();
+              }}
+              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {theme === "dark" ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
+            
+            {/* Language Toggle */}
+            <button 
+              onClick={() => {
+                toggleLanguage();
+                handleCloseMobileMenu();
+              }}
+              className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              aria-label={language === "en" ? "Switch to Spanish" : "Switch to English"}
+            >
+              {language === "en" ? "ES" : "EN"}
+            </button>
           </div>
         </div>
       </div>
