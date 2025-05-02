@@ -36,7 +36,7 @@ export const projects: Project[] = [
       es: "Sitio web moderno de dentista que ofrece tratamientos personalizados excepcionales."
     },
     url: "https://dental-start.vercel.app/",
-    featured: false,
+    featured: true,
     icon: "tooth",
     technologies: ["nextjs", "react", "tailwind"],
     hasPreview: false
@@ -196,7 +196,7 @@ export const projects: Project[] = [
       es: "Una API y toolkit poderosa para procesar modelos 3D, incluyendo conversión, optimización y generación de vista previa."
     },
     url: "https://modelflow.netlify.app/",
-    featured: true,
+    featured: false,
     icon: "3dshowcase",
     technologies: ["nodejs", "vite", "react", "tailwind"],
     hasPreview: false
