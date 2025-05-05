@@ -38,7 +38,7 @@ export const projects: Project[] = [
     url: "https://dental-start.vercel.app/",
     featured: true,
     icon: "tooth",
-    technologies: ["nextjs", "TypeScript", "react", "tailwind"],
+    technologies: ["nextjs", "typescript", "react", "tailwind"],
     hasPreview: false
   },
   {
