@@ -236,6 +236,20 @@ export const projects: Project[] = [
     url: "https://biztemplates.netlify.app/",
     featured: true,
     technologies: ["javascript", "html5", "css3"],
-    hasPreview: false
-  }
+      hasPreview: false
+    },
+    {
+      id: 19,
+      title: "Pokémon App",
+      description: {
+        en: "A React application that allows users to browse Pokémon and play a guessing game. Built with Vite and Bootstrap.",
+        es: "Una aplicación React que permite a los usuarios explorar Pokémon y jugar un juego de adivinanzas. Desarrollada con Vite y Bootstrap."
+      },
+      url: "https://pokemon-explorer-flautomations.netlify.app/",
+      featured: false,
+      icon: "game",
+      technologies: ["react", "vite", "bootstrap", "javascript"],
+      hasPreview: false
+    }
+
 ]; 
