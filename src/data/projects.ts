@@ -250,6 +250,29 @@ export const projects: Project[] = [
       icon: "game",
       technologies: ["react", "vite", "bootstrap", "javascript"],
       hasPreview: false
+    },
+    {
+      id: 20,
+      title: "Mi nuevo vicio",
+      description: {
+        en: "A platform to explore games and have a collection of them",
+        es: "Una plataforma para explorar juegos y tener una colección de ellos"
+      },
+      url: "https://miviciogame.netlify.app/",
+      featured: false,
+      technologies: ["vite", "react", "bootstrap", "javascript"],
+      hasPreview: false
+    },
+    {
+      id: 21,
+      title: "Mi nuevo vicio",
+      description: {
+        en: "A ecommerce platform to explore games and have a collection of them",
+        es: "Una plataforma ecommerce para explorar juegos y tener una colección de ellos"
+      },
+      url: "https://proyectofinalreact25017-fil.netlify.app/",
+      featured: false,
+      technologies: ["vite", "react", "bootstrap", "javascript"],
+      hasPreview: false
     }
-
 ]; 
