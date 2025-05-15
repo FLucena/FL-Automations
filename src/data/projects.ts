@@ -36,7 +36,7 @@ export const projects: Project[] = [
       es: "Sitio web moderno de dentista que ofrece tratamientos personalizados excepcionales."
     },
     url: "https://dental-start.vercel.app/",
-    featured: true,
+    featured: false,
     icon: "tooth",
     technologies: ["nextjs", "typescript", "react", "tailwind"],
     hasPreview: false
@@ -246,7 +246,7 @@ export const projects: Project[] = [
         es: "Una aplicación React que permite a los usuarios explorar Pokémon y jugar un juego de adivinanzas. Desarrollada con Vite y Bootstrap."
       },
       url: "https://pokemon-explorer-flautomations.netlify.app/",
-      featured: false,
+      featured: true,
       icon: "game",
       technologies: ["react", "vite", "bootstrap", "javascript"],
       hasPreview: false
