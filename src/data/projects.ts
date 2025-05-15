@@ -209,7 +209,7 @@ export const projects: Project[] = [
       es: "Una app de entrenamiento que conecta a los coaches con los clientes."
     },
     url: "https://mamuk.com.ar/",
-    featured: false,
+    featured: true,
     icon: "gym",
     technologies: ["nextjs", "nodejs", "express", "typescript", "tailwind"],
     hasPreview: false
@@ -234,7 +234,7 @@ export const projects: Project[] = [
       es: "Una colección de plantillas en Excel o Google Sheets para tu negocio, listas para utilizar en tu trabajo."
     },  
     url: "https://biztemplates.netlify.app/",
-    featured: true,
+    featured: false,
     technologies: ["javascript", "html5", "css3"],
       hasPreview: false
     },
