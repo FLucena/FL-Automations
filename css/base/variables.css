@@ -3,84 +3,77 @@
  */
 
 :root {
-    /* Dark mode (default) with improved contrast */
     --color-text-primary: #FFFFFF;
-    --color-text-secondary: #4A8CA0; /* Darker blue for better contrast */
+    --color-text-secondary: #4A8CA0;
     --color-background: #121212;
     --color-links: #FFFFFF;
-    --color-links-hover: #4A8CA0; /* Matched to secondary */
+    --color-links-hover: #4A8CA0;
     --color-btn: #FFFFFF;
-    --primaryColor: #4A8CA0; /* Darker for better contrast */
-    --secondaryColor: #2C5A6B; /* Even darker for secondary elements */
+    --primaryColor: #4A8CA0;
+    --secondaryColor: #2C5A6B;
     --navbar-bg: #1E1E1E;
     --navbar-text: #FFFFFF;
-    --color-button: #4A8CA0; /* Matched to primary */
-    --color-button-hover: #2C5A6B; /* Darker for hover state */
+    --color-button: #4A8CA0;
+    --color-button-hover: #2C5A6B;
     --color-card-bg: #1E1E1E;
     --color-card-text: #FFFFFF;
     --color-input-bg: #2A2A2A;
     --color-input-text: #FFFFFF;
-    --color-input-border: #4A8CA0; /* Matched to primary */
-    --color-icon: #4A8CA0; /* Matched to primary */
+    --color-input-border: #4A8CA0;
+    --color-icon: #4A8CA0;
     --box-shadow-color: rgba(0, 0, 0, 0.3);
-    --highlight-color: #4A8CA0; /* Matched to primary */
-    --color-card-border: #2C5A6B; /* Visible border for dark mode cards */
-    --color-bg-alt: #1E1E1E; /* Card/alt background for dark mode */
-
-    /* Focus states */
+    --highlight-color: #4A8CA0;
+    --color-card-border: #2C5A6B;
+    --color-bg-alt: #1E1E1E;
     --focus-ring-color: #4A8CA0;
     --focus-ring-width: 3px;
     --focus-ring-offset: 2px;
     --focus-ring-opacity: 0.5;
-
-    /* Transitions */
     --transition-duration: 0.2s;
     --transition-timing: ease-in-out;
 }
 
-/* Dark mode preferences match default */
 @media (prefers-color-scheme: dark) {
     :root {
         --color-text-primary: #FFFFFF;
-        --color-text-secondary: #4A8CA0; /* Darker blue for better contrast */
+        --color-text-secondary: #7BBFD9;
         --color-background: #121212;
         --color-links: #FFFFFF;
-        --color-links-hover: #4A8CA0; /* Matched to secondary */
+        --color-links-hover: #4A8CA0;
         --color-btn: #FFFFFF;
-        --primaryColor: #4A8CA0; /* Darker for better contrast */
-        --secondaryColor: #2C5A6B; /* Even darker for secondary elements */
-        --color-card-border: #7BBFD9; /* Lighter blue for more visible card border */
+        --primaryColor: #4A8CA0;
+        --secondaryColor: #2C5A6B;
+        --color-card-border: #7BBFD9;
         --color-bg-alt: #1E1E1E;
+        --color-card-bg: #23272f;
     }
 }
 
-/* Light mode theme override */
 .light_mode {
     --color-text-primary: #121212;
-    --color-text-secondary: #083142; /* Darker blue for better contrast */
+    --color-text-secondary: #083142;
     --color-background: #FFFFFF;
-    --color-links: #083142; /* Matched to secondary */
-    --color-links-hover: #051A21; /* Darker for hover */
+    --color-links: #083142;
+    --color-links-hover: #051A21;
     --color-btn: #121212;
-    --primaryColor: #083142; /* Darker for better contrast */
-    --secondaryColor: #051A21; /* Darker for secondary actions */
+    --primaryColor: #083142;
+    --secondaryColor: #051A21;
     --navbar-bg: #F5F5F5;
     --navbar-text: #121212;
-    --color-button: #083142; /* Matched to primary */
-    --color-button-hover: #051A21; /* Darker for hover */
+    --color-button: #083142;
+    --color-button-hover: #051A21;
     --color-card-bg: #F5F5F5;
     --color-card-text: #121212;
     --color-input-bg: #FFFFFF;
     --color-input-text: #121212;
-    --color-input-border: #083142; /* Matched to primary */
-    --color-icon: #083142; /* Matched to primary */
+    --color-input-border: #083142;
+    --color-icon: #083142;
     --box-shadow-color: rgba(0, 0, 0, 0.1);
-    --highlight-color: #083142; /* Matched to primary */
-    --color-card-border: #E0E0E0; /* Subtle border for light mode cards */
-    --color-bg-alt: #F5F5F5; /* Card/alt background for light mode */
+    --highlight-color: #083142;
+    --color-card-border: #E0E0E0;
+    --color-bg-alt: #F5F5F5;
 }
 
-/* High contrast mode */
 .high-contrast {
     --color-text-primary: #FFFFFF;
     --color-text-secondary: #FFFFFF;

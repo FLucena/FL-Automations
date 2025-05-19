@@ -150,16 +150,14 @@ const TechFilter = ({ activeTechFilters, toggleTechFilter }: TechFilterProps) =>
                   snap-start
                 `}
               >
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <div className="relative w-6 h-6">
-                    <Image
-                      src={techIcon.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-                      alt={techIcon.name || 'Technology icon'}
-                      width={24}
-                      height={24}
-                      className="object-contain"
-                    />
-                  </div>
+                <div className="w-8 h-8 flex items-center justify-center bg-transparent rounded-md overflow-hidden">
+                  <Image
+                    src={techIcon.icon || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
+                    alt={techIcon.name || 'Technology icon'}
+                    width={32}
+                    height={32}
+                    className="object-contain"
+                  />
                 </div>
               </button>
             </Tooltip>

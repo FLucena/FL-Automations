@@ -5,6 +5,7 @@ import CoinFlip from "@/components/ui/CoinFlip";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Typed from "typed.js";
+import { FaFolderOpen, FaEnvelope, FaDownload } from "react-icons/fa";
 
 const Hero = () => {
   const { language } = useLanguage();
@@ -91,15 +92,25 @@ const Hero = () => {
           <div className="flex flex-wrap gap-4 justify-center md:justify-start">
             <a 
               href="#projects" 
-              className="px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors shadow-md"
+              className="px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors shadow-md flex items-center justify-center"
+              title={language === "en" ? "View Projects" : "Ver Proyectos"}
             >
-              {language === "en" ? "View Projects" : "Ver Proyectos"}
+              <FaFolderOpen size={22} />
             </a>
             <a 
               href="#contact" 
-              className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm"
+              className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm flex items-center justify-center"
+              title={language === "en" ? "Contact Me" : "Contáctame"}
             >
-              {language === "en" ? "Contact Me" : "Contáctame"}
+              <FaEnvelope size={22} />
+            </a>
+            <a
+              href="/cv.pdf"
+              download
+              className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors shadow-md flex items-center justify-center"
+              title={language === "en" ? "Download Resume" : "Descargar CV"}
+            >
+              <FaDownload size={22} />
             </a>
           </div>
         </div>
