@@ -1,0 +1,81 @@
+/**
+ * Accessibility styles - Focus states and transitions
+ */
+
+/* Focus styles for interactive elements */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+    transition: box-shadow var(--transition-duration) var(--transition-timing);
+}
+
+/* Focus styles for custom elements */
+[role="button"]:focus,
+[tabindex="0"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+    transition: box-shadow var(--transition-duration) var(--transition-timing);
+}
+
+/* Smooth transitions for color changes */
+a,
+button,
+input,
+select,
+textarea,
+[role="button"],
+[tabindex="0"] {
+    transition: 
+        color var(--transition-duration) var(--transition-timing),
+        background-color var(--transition-duration) var(--transition-timing),
+        border-color var(--transition-duration) var(--transition-timing),
+        box-shadow var(--transition-duration) var(--transition-timing);
+}
+
+/* High contrast mode specific styles */
+.high-contrast {
+    /* Ensure all text is visible */
+    * {
+        text-shadow: none !important;
+    }
+
+    /* Make sure all interactive elements have visible focus */
+    a:focus,
+    button:focus,
+    input:focus,
+    select:focus,
+    textarea:focus,
+    [role="button"]:focus,
+    [tabindex="0"]:focus {
+        outline: 2px solid var(--focus-ring-color) !important;
+        outline-offset: 2px !important;
+        box-shadow: none !important;
+    }
+
+    /* Ensure images have alt text */
+    img:not([alt]) {
+        border: 2px solid var(--focus-ring-color) !important;
+    }
+}
+
+/* Skip to main content link */
+.skip-to-main {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1em;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    text-decoration: none;
+}
+
+.skip-to-main:focus {
+    left: 0;
+    top: 0;
+} 

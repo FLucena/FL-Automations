@@ -387,7 +387,7 @@ const About = () => {
                   <h4 className="font-medium text-gray-800 dark:text-white">
                     {language === "en" ? "Fiverr Freelancer" : "Freelancer en Fiverr"}
                   </h4>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">2020 - Present</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">2021 - Present</span>
                 </div>
                 <div className="flex items-center mb-2">
                   <div className="flex items-center mr-2">

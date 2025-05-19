@@ -5,61 +5,105 @@
 :root {
     /* Dark mode (default) with improved contrast */
     --color-text-primary: #FFFFFF;
-    --color-text-secondary: #7BBFD9; /* Lightened for better contrast on dark backgrounds */
+    --color-text-secondary: #4A8CA0; /* Darker blue for better contrast */
     --color-background: #121212;
     --color-links: #FFFFFF;
-    --color-links-hover: #7BBFD9; /* Matched to secondary */
+    --color-links-hover: #4A8CA0; /* Matched to secondary */
     --color-btn: #FFFFFF;
-    --primaryColor: #7BBFD9; /* Lightened for better contrast */
-    --secondaryColor: #4A8CA0;
+    --primaryColor: #4A8CA0; /* Darker for better contrast */
+    --secondaryColor: #2C5A6B; /* Even darker for secondary elements */
     --navbar-bg: #1E1E1E;
     --navbar-text: #FFFFFF;
-    --color-button: #4A8CA0; /* Darker for better contrast on light text */
-    --color-button-hover: #3A7080; /* Even darker for hover state */
+    --color-button: #4A8CA0; /* Matched to primary */
+    --color-button-hover: #2C5A6B; /* Darker for hover state */
     --color-card-bg: #1E1E1E;
     --color-card-text: #FFFFFF;
     --color-input-bg: #2A2A2A;
     --color-input-text: #FFFFFF;
-    --color-input-border: #7BBFD9; /* Matched to secondary */
-    --color-icon: #7BBFD9; /* Matched to secondary */
+    --color-input-border: #4A8CA0; /* Matched to primary */
+    --color-icon: #4A8CA0; /* Matched to primary */
     --box-shadow-color: rgba(0, 0, 0, 0.3);
-    --highlight-color: #7BBFD9; /* Matched to secondary */
+    --highlight-color: #4A8CA0; /* Matched to primary */
+    --color-card-border: #2C5A6B; /* Visible border for dark mode cards */
+    --color-bg-alt: #1E1E1E; /* Card/alt background for dark mode */
+
+    /* Focus states */
+    --focus-ring-color: #4A8CA0;
+    --focus-ring-width: 3px;
+    --focus-ring-offset: 2px;
+    --focus-ring-opacity: 0.5;
+
+    /* Transitions */
+    --transition-duration: 0.2s;
+    --transition-timing: ease-in-out;
 }
 
 /* Dark mode preferences match default */
 @media (prefers-color-scheme: dark) {
     :root {
         --color-text-primary: #FFFFFF;
-        --color-text-secondary: #7BBFD9; /* Lightened for better contrast */
+        --color-text-secondary: #4A8CA0; /* Darker blue for better contrast */
         --color-background: #121212;
         --color-links: #FFFFFF;
-        --color-links-hover: #7BBFD9; /* Matched to secondary */
+        --color-links-hover: #4A8CA0; /* Matched to secondary */
         --color-btn: #FFFFFF;
-        --primaryColor: #7BBFD9; /* Lightened for better contrast */
-        --secondaryColor: #4A8CA0;
+        --primaryColor: #4A8CA0; /* Darker for better contrast */
+        --secondaryColor: #2C5A6B; /* Even darker for secondary elements */
+        --color-card-border: #7BBFD9; /* Lighter blue for more visible card border */
+        --color-bg-alt: #1E1E1E;
     }
 }
 
 /* Light mode theme override */
 .light_mode {
     --color-text-primary: #121212;
-    --color-text-secondary: #0E5776; /* Darkened for better contrast on light backgrounds */
+    --color-text-secondary: #083142; /* Darker blue for better contrast */
     --color-background: #FFFFFF;
-    --color-links: #0E5776; /* Matched to secondary */
-    --color-links-hover: #083142; /* Darker for hover */
+    --color-links: #083142; /* Matched to secondary */
+    --color-links-hover: #051A21; /* Darker for hover */
     --color-btn: #121212;
-    --primaryColor: #0E5776; /* Darkened for better contrast */
-    --secondaryColor: #083142; /* Darker for secondary actions */
+    --primaryColor: #083142; /* Darker for better contrast */
+    --secondaryColor: #051A21; /* Darker for secondary actions */
     --navbar-bg: #F5F5F5;
     --navbar-text: #121212;
-    --color-button: #0E5776; /* Matched to secondary */
-    --color-button-hover: #083142; /* Darker for hover */
+    --color-button: #083142; /* Matched to primary */
+    --color-button-hover: #051A21; /* Darker for hover */
     --color-card-bg: #F5F5F5;
     --color-card-text: #121212;
     --color-input-bg: #FFFFFF;
     --color-input-text: #121212;
-    --color-input-border: #0E5776; /* Matched to secondary */
-    --color-icon: #0E5776; /* Matched to secondary */
+    --color-input-border: #083142; /* Matched to primary */
+    --color-icon: #083142; /* Matched to primary */
     --box-shadow-color: rgba(0, 0, 0, 0.1);
-    --highlight-color: #0E5776; /* Matched to secondary */
+    --highlight-color: #083142; /* Matched to primary */
+    --color-card-border: #E0E0E0; /* Subtle border for light mode cards */
+    --color-bg-alt: #F5F5F5; /* Card/alt background for light mode */
+}
+
+/* High contrast mode */
+.high-contrast {
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #FFFFFF;
+    --color-background: #000000;
+    --color-links: #FFFF00;
+    --color-links-hover: #FFFFFF;
+    --color-btn: #FFFFFF;
+    --primaryColor: #FFFF00;
+    --secondaryColor: #FFFFFF;
+    --navbar-bg: #000000;
+    --navbar-text: #FFFFFF;
+    --color-button: #FFFF00;
+    --color-button-hover: #FFFFFF;
+    --color-card-bg: #000000;
+    --color-card-text: #FFFFFF;
+    --color-input-bg: #000000;
+    --color-input-text: #FFFFFF;
+    --color-input-border: #FFFF00;
+    --color-icon: #FFFF00;
+    --box-shadow-color: rgba(255, 255, 0, 0.3);
+    --highlight-color: #FFFF00;
+    --focus-ring-color: #FFFF00;
+    --focus-ring-width: 4px;
+    --focus-ring-offset: 2px;
+    --focus-ring-opacity: 1;
 } 

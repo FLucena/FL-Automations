@@ -157,7 +157,7 @@ const TechFilter = ({ activeTechFilters, toggleTechFilter }: TechFilterProps) =>
                       alt={techIcon.name || 'Technology icon'}
                       width={24}
                       height={24}
-                      className="object-contain w-auto h-auto"
+                      className="object-contain"
                     />
                   </div>
                 </div>

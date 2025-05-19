@@ -1,3 +1,7 @@
+/* Import base styles */
+@import '../../css/base/variables.css';
+@import '../../css/base/accessibility.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -70,6 +74,21 @@
   ::selection {
     background-color: var(--accent-transparent);
     @apply text-gray-900 dark:text-white;
+  }
+
+  /* Ensure focus styles are visible */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  /* High contrast mode support */
+  .high-contrast {
+    @apply bg-black text-white;
+  }
+
+  .high-contrast * {
+    @apply border-yellow-400;
   }
 }
 

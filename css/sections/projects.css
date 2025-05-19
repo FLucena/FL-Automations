@@ -82,6 +82,7 @@
 
 .project-card {
     position: relative;
+    border: 2px solid var(--color-card-border, #7BBFD9);
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);

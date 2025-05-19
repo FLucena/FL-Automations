@@ -274,10 +274,10 @@ const Contact = () => {
                       {language === "en" ? "Email" : "Correo Electrónico"}
                     </h4>
                     <a 
-                      href="mailto:franciscolucena@gmail.com"
+                      href="mailto:franciscolucena90@gmail.com"
                       className="text-accent hover:underline"
                     >
-                      franciscolucena@gmail.com
+                      franciscolucena90@gmail.com
                     </a>
                   </div>
                 </div>
