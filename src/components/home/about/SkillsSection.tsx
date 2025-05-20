@@ -8,13 +8,13 @@ const SkillsSection = () => {
   const { Tooltip } = useTooltip();
 
   return (
-    <div className="md:w-1/2">
+    <div className="w-full md:w-full">
       <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
         {language === "en" ? "Skills & Expertise" : "Habilidades y Experiencia"}
       </h3>
       
-      <div className="flex gap-4 mb-6">
-        <div className="w-1/2 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
+      <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <div className="w-full md:w-1/2 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
           <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">Front End</h4>
           <ul className="text-gray-900 dark:text-white space-y-1">
             {[
@@ -50,8 +50,8 @@ const SkillsSection = () => {
           </ul>
         </div>
         
-        <div className="w-1/2">
-          <div className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm mb-4">
+        <div className="w-full md:w-1/2 flex flex-col gap-4">
+          <div className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm mb-0">
             <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">
               {language === "en" ? "Back End" : "Back End"}
             </h4>
@@ -85,13 +85,15 @@ const SkillsSection = () => {
 
           <div className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
             <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">
-              {language === "en" ? "Other Skills" : "Otras Habilidades"}
+              {language === "en" ? "Automation Skills" : "Habilidades de Automatización"}
             </h4>
             <ul className="text-gray-900 dark:text-white space-y-1">
               {[
-                { icon: techIcons.figma, name: "UI/UX Design" },
+                { icon: techIcons.n8n, name: "n8n" },
                 { icon: techIcons.appsscript, name: "Apps Script" },
                 { icon: techIcons.vba, name: "VBA" },
+                { icon: techIcons.make, name: "Make (Integromat)" },
+                { icon: techIcons.zapier, name: "Zapier" },
               ].map((tech, index) => (
                 <li key={index} className="flex items-center">
                   <svg className="w-3 h-3 mr-1 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">

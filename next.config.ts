@@ -27,7 +27,27 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.icon-icons.com',
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'n8n.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'make.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.iconscout.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.make.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.myqnap.org',
+      },
     ]
   }
 };

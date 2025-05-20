@@ -91,6 +91,18 @@ export const techIcons: TechIconsMap = {
   '3d': {
     icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHN0eWxlPnRleHQgeyBmb250LWZhbWlseTogQXJpYWw7IGZvbnQtd2VpZ2h0OiBib2xkOyBmb250LXNpemU6IDEycHg7IGZpbGw6ICMwMDA7IH0gPC9zdHlsZT48dGV4dCB4PSIxMiIgeT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjNEPC90ZXh0Pjwvc3ZnPg==',
     name: '3D'
+  },
+  n8n: {
+    icon: 'https://www.myqnap.org/wp-content/uploads/n8n-logo.png',
+    name: 'n8n'
+  },
+  make: {
+    icon: 'https://www.make.com/favicon.ico',
+    name: 'Make (Integromat)'
+  },
+  zapier: {
+    icon: 'https://cdn.iconscout.com/icon/free/png-256/free-zapier-282124.png',
+    name: 'Zapier'
   }
 };
 
