@@ -19,7 +19,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
 
   return (
     <div
-      className="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer md:h-auto h-[420px]"
+      className="project-card bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer md:h-auto h-[420px]"
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -84,7 +84,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent hover:underline text-sm"
+            className="text-gray-900 dark:text-white hover:underline text-sm"
             onClick={(e) => e.stopPropagation()}
           >
             {language === "en" ? "Visit Site" : "Visitar Sitio"}
@@ -92,7 +92,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
           
           <button
             className={`view-details-btn flex items-center text-sm ${
-              isHovered ? "text-accent" : "text-gray-500"
+              isHovered ? "text-accent" : "text-gray-900 dark:text-white"
             } transition-colors`}
             onClick={(e) => {
               e.stopPropagation();
