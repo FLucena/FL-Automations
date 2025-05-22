@@ -63,7 +63,7 @@ export const projects: Project[] = [
     },
     url: "https://cohere-aichat.streamlit.app/",
     featured: false,
-    technologies: ["python", "streamlit", "3d"],
+    technologies: ["python", "streamlit", "ai"],
     hasPreview: false
   },
   {
@@ -159,7 +159,7 @@ export const projects: Project[] = [
     },
     url: "https://threejs-demo-rho.vercel.app/",
     featured: false,
-    technologies: ["threejs", "javascript"],
+    technologies: ["threejs", "javascript", "3d"],
     hasPreview: false
   },
   {
