@@ -274,5 +274,18 @@ export const projects: Project[] = [
       featured: false,
       technologies: ["vite", "react", "bootstrap", "javascript"],
       hasPreview: false
+    },
+    {
+      id: 22,
+      title: "Buzzart",
+      description: {
+        en: "An eCommerce platform for 3D models tailored for games, advertising, and 3D printing.",
+        es: "Una plataforma de eCommerce de modelos 3D diseñados para videojuegos, publicidad e impresión 3D."
+      },
+      url: "https://buzzart.vercel.app/",
+      featured: false,
+      icon: "ecommerce",
+      technologies: ["nextjs", "3d", "react", "tailwind"],
+      hasPreview: false
     }
 ]; 
