@@ -287,5 +287,18 @@ export const projects: Project[] = [
       icon: "ecommerce",
       technologies: ["nextjs", "3d", "react", "tailwind"],
       hasPreview: false
+    },
+    {
+      id: 23,
+      title: "API RESTful - eCommerce",
+      description: {
+        en: "Functional RESTful API that allows you to manage the products of an online store (E-Commerce) with authorization",
+        es: "API RESTful funcional que permite gestionar los productos de una tienda en línea (E-Commerce) con autorización"
+      },
+      url: "https://proyecto-final-ecommerce-francisco.vercel.app/",
+      featured: false,
+      icon: "ecommerce",
+      technologies: ["nodejs", "express"],
+      hasPreview: false
     }
 ]; 
