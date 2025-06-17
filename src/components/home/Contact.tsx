@@ -17,6 +17,8 @@ const Contact = () => {
     success: boolean;
     message: string;
   } | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const MAX_RETRIES = 2;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -74,12 +76,27 @@ const Contact = () => {
     }
     
     setIsSubmitting(true);
+    setSubmitResult(null);
     
     try {
-      // Simulating API call with timeout
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Success case (in real app, this would be an actual API call)
+      // Convert form data to URL parameters
+      const params = new URLSearchParams({
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message
+      });
+
+      // Attempt to send the form
+      await fetch(`https://script.google.com/macros/s/AKfycbwubGGQp9LafhBIEX8Tzt3vITo-fjCd7Hmwjp9UR6ksLVcarwqRHxz7O2GDy0iqSg-PDQ/exec?${params.toString()}`, {
+        method: 'GET',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      // If we get here, the request was sent successfully
       setSubmitResult({
         success: true,
         message: language === "en" 
@@ -87,24 +104,55 @@ const Contact = () => {
           : "¡Tu mensaje ha sido enviado con éxito! Me pondré en contacto contigo pronto."
       });
       
-      // Reset form
+      // Reset form and retry count
       setFormData({
         name: "",
         email: "",
         subject: "",
         message: "",
       });
-    } catch {
-      // Error case
+      setRetryCount(0);
+    } catch (error) {
+      console.error('Error:', error);
+      
+      // If we haven't exceeded max retries, try again
+      if (retryCount < MAX_RETRIES) {
+        setRetryCount(prev => prev + 1);
+        setSubmitResult({
+          success: false,
+          message: language === "en"
+            ? `Attempting to send your message again (${retryCount + 1}/${MAX_RETRIES})...`
+            : `Intentando enviar tu mensaje nuevamente (${retryCount + 1}/${MAX_RETRIES})...`
+        });
+        
+        // Wait a bit before retrying
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        return handleSubmit(e);
+      }
+      
+      // If we've exceeded max retries, show error
       setSubmitResult({
         success: false,
         message: language === "en"
-          ? "There was an error sending your message. Please try again."
-          : "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo."
+          ? "Unable to send your message. Please try again later or contact me directly at franciscolucena90@gmail.com"
+          : "No se pudo enviar tu mensaje. Por favor, inténtalo más tarde o contáctame directamente a franciscolucena90@gmail.com"
       });
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // Add a function to handle form reset
+  const handleReset = () => {
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
+    setErrors({});
+    setSubmitResult(null);
+    setRetryCount(0);
   };
 
   return (
@@ -236,23 +284,35 @@ const Contact = () => {
                   )}
                 </div>
                 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors shadow-md disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      {language === "en" ? "Sending..." : "Enviando..."}
-                    </>
-                  ) : (
-                    language === "en" ? "Send Message" : "Enviar Mensaje"
+                <div className="flex space-x-4">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="flex-1 px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors shadow-md disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        {language === "en" ? "Sending..." : "Enviando..."}
+                      </>
+                    ) : (
+                      language === "en" ? "Send Message" : "Enviar Mensaje"
+                    )}
+                  </button>
+                  
+                  {submitResult && (
+                    <button
+                      type="button"
+                      onClick={handleReset}
+                      className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors shadow-md"
+                    >
+                      {language === "en" ? "New Message" : "Nuevo Mensaje"}
+                    </button>
                   )}
-                </button>
+                </div>
               </form>
             </div>
           </div>
