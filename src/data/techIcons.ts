@@ -103,13 +103,17 @@ export const techIcons: TechIconsMap = {
   zapier: {
     icon: 'https://cdn.iconscout.com/icon/free/png-256/free-zapier-282124.png',
     name: 'Zapier'
+  },
+  flask: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg',
+    name: 'Flask'
   }
 };
 
 export const availableTechTags: string[] = [
   'nextjs', 'react', 'javascript', 'typescript', 'python', 
   'flutter', 'streamlit', 'threejs', 'html5', 'css3', 'tailwind',
-  'nodejs', 'express', 'django', 'bootstrap', 'figma', 'appsscript', 'vba', 'vite', 'ai', '3d'
+  'nodejs', 'express', 'django', 'bootstrap', 'figma', 'appsscript', 'vba', 'vite', 'ai', '3d', 'flask'
 ];
 
 export const coinFlipIcons = [
