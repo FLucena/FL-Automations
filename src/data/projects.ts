@@ -300,5 +300,19 @@ export const projects: Project[] = [
       icon: "ecommerce",
       technologies: ["nodejs", "express"],
       hasPreview: false
+    },
+    {
+      id: 24,
+      title: "Model Swap",
+      description: {
+        en: "A 3d model converter that allows you to swap 3D models file types with a simple drag and drop interface",
+        es: "Un convertidor de modelos 3D que permite intercambiar tipos de archivos de modelos 3D con una interfaz simple de arrastrar y soltar"
+      },
+      url: "https://model-swap.onrender.com/",
+      featured: false,
+      icon: "3dshowcase",
+      technologies: ["flask", "python"],
+      hasPreview: false
+      
     }
 ]; 
