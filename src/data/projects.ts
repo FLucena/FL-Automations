@@ -258,25 +258,13 @@ export const projects: Project[] = [
         en: "A platform to explore games and have a collection of them",
         es: "Una plataforma para explorar juegos y tener una colección de ellos"
       },
-      url: "https://miviciogame.netlify.app/",
+      url: "https://proyecto-final-react25017-fil.vercel.app/",
       featured: false,
       technologies: ["vite", "react", "bootstrap", "javascript"],
       hasPreview: false
     },
     {
       id: 21,
-      title: "Mi nuevo vicio",
-      description: {
-        en: "A ecommerce platform to explore games and have a collection of them",
-        es: "Una plataforma ecommerce para explorar juegos y tener una colección de ellos"
-      },
-      url: "https://proyectofinalreact25017-fil.netlify.app/",
-      featured: false,
-      technologies: ["vite", "react", "bootstrap", "javascript"],
-      hasPreview: false
-    },
-    {
-      id: 22,
       title: "Buzzart",
       description: {
         en: "An eCommerce platform for 3D models tailored for games, advertising, and 3D printing.",
@@ -289,7 +277,7 @@ export const projects: Project[] = [
       hasPreview: false
     },
     {
-      id: 23,
+      id: 22,
       title: "API RESTful - eCommerce",
       description: {
         en: "Functional RESTful API that allows you to manage the products of an online store (E-Commerce) with authorization",
@@ -302,7 +290,7 @@ export const projects: Project[] = [
       hasPreview: false
     },
     {
-      id: 24,
+      id: 23,
       title: "Model Swap",
       description: {
         en: "A 3d model converter that allows you to swap 3D models file types with a simple drag and drop interface",
