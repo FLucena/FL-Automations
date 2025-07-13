@@ -185,7 +185,7 @@ const ProjectGrid = () => {
       <div className="filters-section bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md mb-8">
         <div className="flex flex-col md:flex-row justify-between gap-4 mb-6">
           {/* Search Box */}
-          <div className="search-container relative w-full md:w-64">
+          <div className="search-containr relative w-full md:w-64">
             <span className="search-icon absolute left-3 top-1/2 transform -translate-y-1/2">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
