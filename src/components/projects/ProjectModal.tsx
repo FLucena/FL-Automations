@@ -13,6 +13,14 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
+function getYouTubeEmbedUrl(url: string) {
+  // Handles both youtu.be and youtube.com links
+  const match = url.match(
+    /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([\w-]{11})/
+  );
+  return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+}
+
 const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
   const { language } = useLanguage();
   const modalRef = useRef<HTMLDivElement>(null);
@@ -58,10 +66,10 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm transition-opacity">
       <div
         ref={modalRef}
-        className="modal-content bg-white dark:bg-gray-900 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row"
+        className={`modal-content bg-white dark:bg-gray-900 rounded-xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex ${project.video ? 'flex-col md:flex-row' : 'flex-col'}`}
       >
-        {/* Project Details */}
-        <div className="modal-body flex-1 overflow-y-auto p-6 md:p-8">
+        {/* Project Details (Left) */}
+        <div className={`modal-body flex-1 overflow-y-auto p-6 md:p-8 ${project.video ? 'md:w-1/2' : 'w-full'}`}>
           <div className="flex justify-between items-start mb-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
               {project.title}
@@ -144,6 +152,21 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
             </a>
           </div>
         </div>
+        {/* Video (Right column, only if present) */}
+        {project.video && (
+          <div className="w-full md:w-1/2 flex items-stretch md:bg-black md:p-4 p-0 bg-transparent">
+            <div className="w-full h-64 md:h-full rounded-lg overflow-hidden flex">
+              <iframe
+                src={getYouTubeEmbedUrl(project.video)}
+                title="Project Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ const ExperienceSection = () => {
               <span className="text-sm font-medium text-gray-600 dark:text-gray-300 ml-1">4.9/5</span>
             </div>
             <span className="text-sm text-gray-600 dark:text-gray-300">
-              {language === "en" ? "Over 1300 completed projects" : "Más de 1300 proyectos completados"}
+              {language === "en" ? "Over 1400 completed projects" : "Más de 1400 proyectos completados"}
             </span>
           </div>
           <p className="text-gray-600 dark:text-gray-300 text-sm">

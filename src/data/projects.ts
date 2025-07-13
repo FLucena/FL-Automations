@@ -12,6 +12,8 @@ export interface Project {
   icon?: string;
   technologies: string[];
   hasPreview: boolean;
+  thumbnail?: string;
+  video?: string;
 }
 
 export const projects: Project[] = [
@@ -51,7 +53,7 @@ export const projects: Project[] = [
     url: "https://react-game-rock-paper-scissors.vercel.app/",
     featured: false,
     icon: "game",
-    technologies: ["react", "javascript", "css"],
+    technologies: ["react", "javascript", "css3"],
     hasPreview: false
   },
   {
@@ -183,7 +185,7 @@ export const projects: Project[] = [
       es: "Pet Connect es una plataforma que facilita la adopción responsable de mascotas, conectando refugios de animales con personas que buscan dar un hogar amoroso a un nuevo miembro de la familia."
     },
     url: "https://pet-connect-vite.netlify.app/",
-    featured: true,
+    featured: false,
     icon: "pet",
     technologies: ["vite", "typescript", "react", "bootstrap"],
     hasPreview: false
@@ -287,8 +289,9 @@ export const projects: Project[] = [
       url: "https://proyecto-final-ecommerce-francisco.vercel.app/",
       featured: false,
       icon: "api",
-      technologies: ["nodejs", "express", "jwt", "javascript"],
-      hasPreview: false
+      technologies: ["nodejs", "express", "javascript"],
+      hasPreview: false,
+      video: "https://www.youtube.com/watch?v=xhvVuHXaul0"
     },
     {
       id: 23,
@@ -312,7 +315,7 @@ export const projects: Project[] = [
         es: "Una aplicación web que usa IA para analizar grabaciones de audio y determinar la probabilidad de mentiras. Los usuarios pueden grabar declaraciones y recibir retroalimentación visual sobre la verdad. Se utiliza un sistema de puntuación similar a un juego."
       },
       url: "https://aichamuyo.vercel.app/",
-      featured: false,
+      featured: true,
       icon: "ai",
       technologies: ["vite", "react", "tailwind", "ai", "typescript"],
       hasPreview: false
