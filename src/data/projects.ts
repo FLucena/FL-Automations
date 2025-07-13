@@ -302,5 +302,47 @@ export const projects: Project[] = [
       technologies: ["flask", "python"],
       hasPreview: false
       
+    },
+    {
+      id: 24,
+      title: "AI Chamuyo",
+      description: {
+        en: "AI Lie Detection App",
+        es: "Una aplicación que detecta mentiras usando la IA"
+      },
+      url: "https://aichamuyo.vercel.app/",
+      featured: false,
+      icon: "3dshowcase",
+      technologies: ["vite", "react", "tailwind", "ai", "typescript"],
+      hasPreview: false
+      
+    },
+    {
+      id: 25,
+      title: "FRONTEND REACT 2025",
+      description: {
+        en: "AI Lie Detection App",
+        es: "Una aplicación que detecta mentiras usando la IA"
+      },
+      url: "https://aichamuyo.vercel.app/",
+      featured: false,
+      icon: "3dshowcase",
+      technologies: ["vite", "react", "tailwind", "ai", "typescript"],
+      hasPreview: false
+      
+    },
+    {
+      id: 26,
+      title: "BACKEND NODE 2025",
+      description: {
+        en: "AI Lie Detection App",
+        es: "Una aplicación que detecta mentiras usando la IA"
+      },
+      url: "https://ai-chamuyo.vercel.app/",
+      featured: false,
+      icon: "3dshowcase",
+      technologies: ["flask", "python"],
+      hasPreview: false
+      
     }
 ]; 
