@@ -291,7 +291,6 @@ export const projects: Project[] = [
       icon: "api",
       technologies: ["nodejs", "express", "javascript"],
       hasPreview: false,
-      video: "https://www.youtube.com/watch?v=xhvVuHXaul0"
     },
     {
       id: 23,
@@ -318,7 +317,8 @@ export const projects: Project[] = [
       featured: true,
       icon: "ai",
       technologies: ["vite", "react", "tailwind", "ai", "typescript"],
-      hasPreview: false
+      hasPreview: false,
+      video: "https://www.youtube.com/watch?v=xhvVuHXaul0"
       
     }
 ]; 

@@ -159,10 +159,9 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
               <iframe
                 src={getYouTubeEmbedUrl(project.video)}
                 title="Project Video"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                className="w-full h-full"
+                className="w-full h-full border-0"
               ></iframe>
             </div>
           </div>
