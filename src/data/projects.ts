@@ -260,6 +260,7 @@ export const projects: Project[] = [
       },
       url: "https://proyecto-final-react25017-fil.vercel.app/",
       featured: false,
+      icon: "game",
       technologies: ["vite", "react", "bootstrap", "javascript"],
       hasPreview: false
     },
@@ -285,7 +286,7 @@ export const projects: Project[] = [
       },
       url: "https://proyecto-final-ecommerce-francisco.vercel.app/",
       featured: false,
-      icon: "ecommerce",
+      icon: "api",
       technologies: ["nodejs", "express"],
       hasPreview: false
     },
@@ -307,41 +308,13 @@ export const projects: Project[] = [
       id: 24,
       title: "AI Chamuyo",
       description: {
-        en: "AI Lie Detection App",
-        es: "Una aplicación que detecta mentiras usando la IA"
+        en: "A gamified, mobile-first web application that uses AI to analyze audio recordings and determine the probability of deception. Users can record statements and receive visual feedback on truthfulness with a game-like scoring system.",
+        es: "Una aplicación web que usa IA para analizar grabaciones de audio y determinar la probabilidad de mentiras. Los usuarios pueden grabar declaraciones y recibir retroalimentación visual sobre la verdad. Se utiliza un sistema de puntuación similar a un juego."
       },
       url: "https://aichamuyo.vercel.app/",
       featured: false,
-      icon: "3dshowcase",
+      icon: "ai",
       technologies: ["vite", "react", "tailwind", "ai", "typescript"],
-      hasPreview: false
-      
-    },
-    {
-      id: 25,
-      title: "FRONTEND REACT 2025",
-      description: {
-        en: "AI Lie Detection App",
-        es: "Una aplicación que detecta mentiras usando la IA"
-      },
-      url: "https://aichamuyo.vercel.app/",
-      featured: false,
-      icon: "3dshowcase",
-      technologies: ["vite", "react", "tailwind", "ai", "typescript"],
-      hasPreview: false
-      
-    },
-    {
-      id: 26,
-      title: "BACKEND NODE 2025",
-      description: {
-        en: "AI Lie Detection App",
-        es: "Una aplicación que detecta mentiras usando la IA"
-      },
-      url: "https://ai-chamuyo.vercel.app/",
-      featured: false,
-      icon: "3dshowcase",
-      technologies: ["flask", "python"],
       hasPreview: false
       
     }
