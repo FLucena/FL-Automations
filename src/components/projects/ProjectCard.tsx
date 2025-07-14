@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+
 import { Project } from "@/data/projects";
 import { techIcons } from "@/data/techIcons";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -14,17 +14,12 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
   const { language } = useLanguage();
-  const [isHovered, setIsHovered] = useState(false);
   const { Tooltip } = useTooltip();
 
   return (
     <div
-      className="project-card bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer md:h-auto h-[420px]"
+      className="project-card bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer md:h-auto h-[420px] pointer-events-none"
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onFocus={() => setIsHovered(true)}
-      onBlur={() => setIsHovered(false)}
       tabIndex={0}
       onKeyDown={(e) => e.key === "Enter" && onClick()}
       aria-label={`Open ${project.title} project details`}
@@ -80,20 +75,18 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
         </div>
         
         <div className="flex items-center justify-between mt-4">
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 dark:text-white hover:underline text-sm"
-            onClick={(e) => e.stopPropagation()}
+          <button
+            className="text-gray-900 dark:text-white text-sm hover:!text-accent dark:hover:!text-accent transition-colors pointer-events-auto"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open(project.url, '_blank', 'noopener,noreferrer');
+            }}
           >
             {language === "en" ? "Visit Site" : "Visitar Sitio"}
-          </a>
+          </button>
           
           <button
-            className={`view-details-btn flex items-center text-sm ${
-              isHovered ? "text-accent" : "text-gray-900 dark:text-white"
-            } transition-colors`}
+            className="view-details-btn flex items-center text-sm text-gray-900 dark:text-white hover:!text-accent dark:hover:!text-accent transition-colors pointer-events-auto"
             onClick={(e) => {
               e.stopPropagation();
               onClick();
@@ -101,9 +94,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
           >
             {language === "en" ? "Details" : "Detalles"}
             <svg
-              className={`ml-1 w-4 h-4 transform transition-transform ${
-                isHovered ? "translate-x-1" : ""
-              }`}
+              className="ml-1 w-4 h-4 transform transition-transform hover:translate-x-1"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
