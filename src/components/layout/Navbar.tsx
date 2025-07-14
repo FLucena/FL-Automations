@@ -95,6 +95,12 @@ const Navbar = () => {
             {language === "en" ? "Projects" : "Proyectos"}
           </Link>
           <Link 
+            href="#certificates"
+            className="text-gray-800 dark:text-gray-200 hover:text-primary transition-colors"
+          >
+            {language === "en" ? "Certificates" : "Certificados"}
+          </Link>
+          <Link 
             href="#contact"
             className="text-gray-800 dark:text-gray-200 hover:text-primary transition-colors"
           >
@@ -190,6 +196,13 @@ const Navbar = () => {
               onClick={handleCloseMobileMenu}
             >
               {language === "en" ? "Projects" : "Proyectos"}
+            </Link>
+            <Link 
+              href="#certificates"
+              className="text-xl py-1.5 text-gray-800 dark:text-gray-200 hover:text-primary transition-colors text-center"
+              onClick={handleCloseMobileMenu}
+            >
+              {language === "en" ? "Certificates" : "Certificados"}
             </Link>
             <Link 
               href="#contact"

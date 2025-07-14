@@ -62,7 +62,7 @@ export const techIcons: TechIconsMap = {
   },
   django: {
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg',
-    name: 'Django'
+    name: 'django'
   },
   bootstrap: {
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg',
@@ -107,13 +107,21 @@ export const techIcons: TechIconsMap = {
   flask: {
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg',
     name: 'Flask'
+  },
+  git: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+    name: 'Git'
+  },
+  salesforce: {
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/salesforce/salesforce-original.svg',
+    name: 'Salesforce'
   }
 };
 
 export const availableTechTags: string[] = [
   'nextjs', 'react', 'javascript', 'typescript', 'python', 
   'flutter', 'streamlit', 'threejs', 'html5', 'css3', 'tailwind',
-  'nodejs', 'express', 'django', 'bootstrap', 'figma', 'appsscript', 'vba', 'vite', 'ai', '3d', 'flask'
+  'nodejs', 'express', 'django', 'bootstrap', 'figma', 'appsscript', 'vba', 'vite', 'ai', '3d', 'flask', 'git', 'salesforce'
 ];
 
 export const coinFlipIcons = [

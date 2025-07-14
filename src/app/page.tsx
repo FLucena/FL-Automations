@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
 import About from "@/components/home/About";
 import Projects from "@/components/home/Projects";
+import Certificates from "@/components/home/Certificates";
 import Contact from "@/components/home/Contact";
 import ProjectGrid from "@/components/projects/ProjectGrid";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <About />
       <Projects />
+      <Certificates />
       
       {/* All Projects Section */}
       <section id="all-projects" className="py-20 bg-gray-50 dark:bg-gray-800">
