@@ -8,8 +8,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 py-12">
-      <div className="container mx-auto px-6">
+    <footer className="bg-gray-100 dark:bg-gray-900 py-12 px-10">
+      <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="flex flex-col items-center md:items-start text-center md:text-left px-8 md:px-4">
             <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
