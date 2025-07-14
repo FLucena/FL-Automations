@@ -14,6 +14,7 @@ export interface Project {
   hasPreview: boolean;
   thumbnail?: string;
   video?: string;
+  github?: string;
 }
 
 export const projects: Project[] = [
@@ -28,7 +29,8 @@ export const projects: Project[] = [
     featured: false,
     icon: "blog",
     technologies: ["nextjs", "typescript", "react", "tailwind"],
-    hasPreview: false
+    hasPreview: false,
+    github: "https://github.com/FLucena/flautomations-next"
   },
   {
     id: 2,
@@ -54,7 +56,8 @@ export const projects: Project[] = [
     featured: false,
     icon: "game",
     technologies: ["react", "javascript", "css3"],
-    hasPreview: false
+    hasPreview: false,
+    github: "https://github.com/FLucena/React-Game-Rock-Paper-Scissors"
   },
   {
     id: 4,
@@ -78,7 +81,8 @@ export const projects: Project[] = [
     url: "https://apimanagement.vercel.app/",
     featured: false,
     technologies: ["nextjs", "react", "javascript", "tailwind"],
-    hasPreview: false
+    hasPreview: false,
+    github: "https://github.com/FLucena/apimanagement"
   },
   {
     id: 6,
@@ -291,6 +295,7 @@ export const projects: Project[] = [
       icon: "api",
       technologies: ["nodejs", "express", "javascript"],
       hasPreview: false,
+      github: "https://github.com/FLucena/proyecto-final-ecommerce-Francisco-Lucena"
     },
     {
       id: 23,

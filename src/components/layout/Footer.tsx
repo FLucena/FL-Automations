@@ -11,7 +11,7 @@ const Footer = () => {
     <footer className="bg-gray-100 dark:bg-gray-900 py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left px-4 md:px-0">
             <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
               FL <span className="text-accent">Automations</span>
             </h3>
@@ -57,7 +57,7 @@ const Footer = () => {
             </div>
           </div>
           
-          <div className="flex flex-col items-center md:items-end text-center md:text-right">
+          <div className="flex flex-col items-center md:items-end text-center md:text-right px-4 md:px-0">
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
               {language === "en" ? "Quick Links" : "Enlaces Rápidos"}
             </h3>
