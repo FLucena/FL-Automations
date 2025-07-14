@@ -10,8 +10,8 @@ const Footer = () => {
   return (
     <footer className="bg-gray-100 dark:bg-gray-900 py-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
               FL <span className="text-accent">Automations</span>
             </h3>
@@ -57,7 +57,7 @@ const Footer = () => {
             </div>
           </div>
           
-          <div>
+          <div className="flex flex-col items-center md:items-end text-center md:text-right">
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
               {language === "en" ? "Quick Links" : "Enlaces Rápidos"}
             </h3>
@@ -85,33 +85,6 @@ const Footer = () => {
                 >
                   {language === "en" ? "Contact" : "Contacto"}
                 </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
-              {language === "en" ? "Contact Info" : "Información de Contacto"}
-            </h3>
-            <ul className="space-y-2">
-              <li className="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <a 
-                  href="mailto:franciscolucena90@gmail.com" 
-                  className="text-gray-600 dark:text-gray-400 hover:text-accent dark:hover:text-accent transition-colors"
-                >
-                  franciscolucena90@gmail.com 
-                </a>
-              </li>
-              <li className="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
-                <span className="text-gray-600 dark:text-gray-400">
-                  Buenos Aires, Argentina
-                </span>
               </li>
             </ul>
           </div>
