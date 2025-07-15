@@ -20,7 +20,7 @@ const certificates: Certificate[] = [
     title: "React JS",
     issuer: "Talento Tech",
     date: "2025",
-    pdfUrl: "/cert-react-talento-tech.pdf",
+    pdfUrl: "/certificates/cert-react-talento-tech.pdf",
     techIcon: "react",
   },
   {
@@ -28,7 +28,7 @@ const certificates: Certificate[] = [
     title: "Front End JavaScript",
     issuer: "Buenos Aires Aprende",
     date: "2024",
-    pdfUrl: "/cert-front-end-js-buenos-aires-aprende.pdf",
+    pdfUrl: "/certificates/cert-front-end-js-buenos-aires-aprende.pdf",
     techIcon: "javascript",
   },
   {
@@ -36,7 +36,7 @@ const certificates: Certificate[] = [
     title: "TypeScript",
     issuer: "Open Bootcamp",
     date: "2023",
-    pdfUrl: "/cert-typescript-open-bootcamp.pdf",
+    pdfUrl: "/certificates/cert-typescript-open-bootcamp.pdf",
     techIcon: "typescript",
   },
   {
@@ -44,7 +44,7 @@ const certificates: Certificate[] = [
     title: "Python Programming",
     issuer: "DataCamp",
     date: "2022",
-    pdfUrl: "/cert-python-datacamp.pdf",
+    pdfUrl: "/certificates/cert-python-datacamp.pdf",
     techIcon: "python",
   },
   {
@@ -52,7 +52,7 @@ const certificates: Certificate[] = [
     title: "Full Stack Python",
     issuer: "Codo a Codo",
     date: "2022",
-    pdfUrl: "/cert-full-stack-python-codo-a-codo.pdf",
+    pdfUrl: "/certificates/cert-full-stack-python-codo-a-codo.pdf",
     techIcon: "python",
   },
   {
@@ -60,7 +60,7 @@ const certificates: Certificate[] = [
     title: "Django Framework",
     issuer: "Codo a Codo",
     date: "2022",
-    pdfUrl: "/cert-django-codo-a-codo.pdf",
+    pdfUrl: "/certificates/cert-django-codo-a-codo.pdf",
     techIcon: "django",
   },
   {
@@ -68,7 +68,7 @@ const certificates: Certificate[] = [
     title: "Git & GitHub",
     issuer: "Open Bootcamp",
     date: "2022",
-    pdfUrl: "/cert-git-open-bootcamp.pdf",
+    pdfUrl: "/certificates/cert-git-open-bootcamp.pdf",
     techIcon: "git",
   },
   {
@@ -76,8 +76,24 @@ const certificates: Certificate[] = [
     title: "Programming Fundamentals",
     issuer: "Open Bootcamp",
     date: "2022",
-    pdfUrl: "/cert-programacion-open-bootcamp.pdf",
+    pdfUrl: "/certificates/cert-programacion-open-bootcamp.pdf",
     techIcon: "javascript",
+  },
+  {
+    id: "desarrollador-salesforce-talento-tech",
+    title: "Salesforce Developer",
+    issuer: "Talento Tech",
+    date: "2024",
+    pdfUrl: "/certificates/cert-desarrollador-salesforce-talento-tech.pdf",
+    techIcon: "salesforce",
+  },
+  {
+    id: "python-for-data-science-solo-learn",
+    title: "Python for Data Science",
+    issuer: "SoloLearn",
+    date: "2022",
+    pdfUrl: "/certificates/cert-python-for-data-science-solo-learn.jpg",
+    techIcon: "python",
   },
 ];
 
@@ -88,6 +104,11 @@ const Certificates = () => {
     window.open(certificate.pdfUrl, '_blank', 'noopener,noreferrer');
   };
 
+  // Sort certificates by date (newest first)
+  const sortedCertificates = [...certificates].sort((a, b) => {
+    return parseInt(b.date) - parseInt(a.date);
+  });
+
   return (
     <section id="certificates" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
@@ -96,7 +117,7 @@ const Certificates = () => {
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {certificates.map((certificate) => (
+          {sortedCertificates.map((certificate) => (
             <div
               key={certificate.id}
               className="certificate-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-gray-700 relative"
