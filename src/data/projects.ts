@@ -70,7 +70,8 @@ export const projects: Project[] = [
     featured: false,
     technologies: ["python", "streamlit", "ai"],
     hasPreview: false,
-    video: "https://www.youtube.com/watch?v=L05q5qEdTGI"
+    video: "https://www.youtube.com/watch?v=L05q5qEdTGI",
+    github: "https://github.com/FLucena/cohere-aichat"
   },
   {
     id: 5,
