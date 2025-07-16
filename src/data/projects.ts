@@ -69,7 +69,8 @@ export const projects: Project[] = [
     url: "https://cohere-aichat.streamlit.app/",
     featured: false,
     technologies: ["python", "streamlit", "ai"],
-    hasPreview: false
+    hasPreview: false,
+    video: "https://www.youtube.com/watch?v=L05q5qEdTGI"
   },
   {
     id: 5,
