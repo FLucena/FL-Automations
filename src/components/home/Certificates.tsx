@@ -88,6 +88,14 @@ const certificates: Certificate[] = [
     techIcon: "salesforce",
   },
   {
+    id: "node-talento-tech",
+    title: "Node.js",
+    issuer: "Talento Tech",
+    date: "2025",
+    pdfUrl: "/certificates/cert-node-talento-tech.pdf",
+    techIcon: "nodejs",
+  },
+  {
     id: "python-for-data-science-solo-learn",
     title: "Python for Data Science",
     issuer: "SoloLearn",
