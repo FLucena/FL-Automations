@@ -11,15 +11,15 @@ const AboutContent = () => {
       
       <p className="text-gray-600 dark:text-gray-300 mb-4">
         {language === "en" 
-          ? "I'm a passionate Front-End Developer and automation expert with a strong foundation in web technologies. I specialize in creating modern, responsive, and user-friendly web applications."
-          : "Soy un Desarrollador Front-End apasionado y experto en automatización con una sólida base en tecnologías web. Me especializo en crear aplicaciones web modernas, responsivas y amigables para el usuario."
+          ? "I'm a passionate Full-Stack Developer and automation expert with a strong foundation in web technologies. I specialize in creating modern, responsive, and user-friendly web applications."
+          : "Soy un Desarrollador Full-Stack apasionado y experto en automatización con una sólida base en tecnologías web. Me especializo en crear aplicaciones web modernas, responsivas y amigables para el usuario."
         }
       </p>
       
       <p className="text-gray-600 dark:text-gray-300 mb-6">
         {language === "en"
-          ? "With expertise in React, Next.js, JavaScript, TypeScript and modern CSS frameworks like Tailwind, I build solutions that are not only visually appealing but also performant and accessible."
-          : "Con experiencia en React, Next.js, JavaScript, TypeScript y frameworks modernos de CSS como Tailwind, construyo soluciones que no solo son visualmente atractivas sino también eficientes y accesibles."
+          ? "With expertise in React, Next.js, Node.js, Express, JavaScript, TypeScript and modern CSS frameworks like Tailwind, I build complete solutions that are not only visually appealing but also performant and accessible."
+          : "Con experiencia en React, Next.js, Node.js, Express, JavaScript, TypeScript y frameworks modernos de CSS como Tailwind, construyo soluciones completas que no solo son visualmente atractivas sino también eficientes y accesibles."
         }
       </p>
       

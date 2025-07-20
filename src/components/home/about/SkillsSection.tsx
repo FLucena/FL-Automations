@@ -15,7 +15,7 @@ const SkillsSection = () => {
       
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="w-full md:w-1/2 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
-          <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">Front End</h4>
+          <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">Frontend & UI</h4>
           <ul className="text-gray-900 dark:text-white space-y-1">
             {[
               { icon: techIcons.react, name: "React.js" },
@@ -53,7 +53,7 @@ const SkillsSection = () => {
         <div className="w-full md:w-1/2 flex flex-col gap-4">
           <div className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm mb-0">
             <h4 className="font-medium text-gray-800 dark:text-white mb-2 text-sm">
-              {language === "en" ? "Back End" : "Back End"}
+              {language === "en" ? "Backend & APIs" : "Backend & APIs"}
             </h4>
             <ul className="text-gray-900 dark:text-white space-y-1">
               {[

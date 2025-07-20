@@ -18,14 +18,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "FL Automations - Francisco Lucena | Web Developer",
-  description: "Professional portfolio website for Francisco Lucena showcasing modern web development projects and skills. Frontend developer specializing in React, Next.js, and UI/UX design.",
-  keywords: ["Francisco Lucena", "web developer", "frontend developer", "UI/UX designer", "React", "Next.js", "portfolio"],
+  title: "FL Automations - Francisco Lucena | Full-Stack Developer",
+  description: "Professional portfolio website for Francisco Lucena showcasing modern web development projects and skills. Full-Stack developer specializing in React, Next.js, Node.js, Express, and UI/UX design.",
+  keywords: ["Francisco Lucena", "web developer", "full-stack developer", "UI/UX designer", "React", "Next.js", "Node.js", "Express", "portfolio"],
   authors: [{ name: "Francisco Lucena" }],
   creator: "Francisco Lucena",
   publisher: "Francisco Lucena",
   openGraph: {
-    title: "FL Automations - Francisco Lucena | Web Developer",
+    title: "FL Automations - Francisco Lucena | Full-Stack Developer",
     description: "Professional portfolio website for Francisco Lucena showcasing modern web development projects and skills.",
     url: "https://flucena.com",
     siteName: "FL Automations",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "FL Automations - Francisco Lucena | Web Developer",
+    title: "FL Automations - Francisco Lucena | Full-Stack Developer",
     description: "Professional portfolio website for Francisco Lucena showcasing modern web development projects and skills.",
     creator: "@flucena_dev",
   },

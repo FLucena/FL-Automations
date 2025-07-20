@@ -84,8 +84,8 @@ const Hero = () => {
           
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg">
             {language === "en" 
-              ? "I build modern, responsive web applications using the latest technologies and best practices."
-              : "Construyo aplicaciones web modernas y responsivas utilizando las últimas tecnologías y mejores prácticas."
+              ? "I build modern, responsive full-stack web applications using the latest technologies and best practices."
+              : "Construyo aplicaciones web full-stack modernas y responsivas utilizando las últimas tecnologías y mejores prácticas."
             }
           </p>
           
