@@ -3,6 +3,14 @@
 import { useState, useEffect, useMemo } from "react";
 import { Project, projects } from "@/data/projects";
 
+// Function to normalize accents and special characters
+const normalizeText = (text: string): string => {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, ""); // Remove diacritics (accents)
+};
+
 export const useProjects = () => {
   const [activeTechFilters, setActiveTechFilters] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,11 +31,11 @@ export const useProjects = () => {
     
     // Apply search query
     if (searchQuery.trim() !== "") {
-      const query = searchQuery.toLowerCase().trim();
+      const normalizedQuery = normalizeText(searchQuery.trim());
       filtered = filtered.filter(project => 
-        project.title.toLowerCase().includes(query) || 
-        project.description.en.toLowerCase().includes(query) || 
-        project.description.es.toLowerCase().includes(query)
+        normalizeText(project.title).includes(normalizedQuery) || 
+        normalizeText(project.description.en).includes(normalizedQuery) || 
+        normalizeText(project.description.es).includes(normalizedQuery)
       );
     }
     
