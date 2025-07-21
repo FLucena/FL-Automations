@@ -327,5 +327,18 @@ export const projects: Project[] = [
       hasPreview: false,
       video: "https://www.youtube.com/watch?v=xhvVuHXaul0"
       
+    },
+    {
+      id: 25,
+      title: "Médicos en Farma",
+      description: {
+        en: "A modern web platform to help doctors develop in the pharmaceutical industry. Features responsive design, custom color palette, reusable components, TypeScript, Next.js 15 with App Router, Tailwind CSS, image optimization, and Vercel deployment.",
+        es: "Una plataforma web moderna para ayudar a médicos a desarrollarse en la industria farmacéutica. Características: diseño responsivo, paleta de colores personalizada, componentes reutilizables, TypeScript, Next.js 15 con App Router, Tailwind CSS, optimización de imágenes y despliegue en Vercel."
+      },
+      url: "https://medicos-en-farma.vercel.app/",
+      featured: false,
+      icon: "medical",
+      technologies: ["nextjs", "typescript", "react", "tailwind"],
+      hasPreview: false
     }
 ]; 
