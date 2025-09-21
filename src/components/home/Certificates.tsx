@@ -103,6 +103,14 @@ const certificates: Certificate[] = [
     pdfUrl: "/certificates/cert-python-for-data-science-solo-learn.jpg",
     techIcon: "python",
   },
+  {
+    id: "ia-talento-tech",
+    title: "Artificial Intelligence",
+    issuer: "Talento Tech",
+    date: "2025",
+    pdfUrl: "/certificates/cert-ia-talento-tech.pdf",
+    techIcon: "ai",
+  },
 ];
 
 const Certificates = () => {
